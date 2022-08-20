@@ -1,0 +1,2 @@
+FLASK_APP=emotionapp.py
+FLASK_DEBUG=1
