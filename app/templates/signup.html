@@ -16,7 +16,7 @@
         <div class = 'container'>
             <p>
                 <div class = 'label'>{{ form.firstname.label }} </div>
-                {{ form.firstname(size=32) }} <br>
+                {{ form.firstname(size=40) }} <br>
                 {% for error in form.firstname.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
@@ -24,21 +24,21 @@
             </p>
             <p>
                 <div class = 'label'>{{ form.lastname.label }}</div>
-                {{ form.lastname(size=32) }}<br>
+                {{ form.lastname(size=40) }}<br>
                 {% for error in form.lastname.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 <div class = 'label'>{{ form.username.label }}</div>
-                {{ form.username(size=32) }}<br>
+                {{ form.username(size=40) }}<br>
                 {% for error in form.username.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 <div class = 'label'>{{ form.orcid.label }}</div>
-                {{ form.orcid(size=32) }}<br>
+                {{ form.orcid(size=40) }}<br>
                 {% for error in form.orcid.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
@@ -46,35 +46,35 @@
 
             <p>
                 <div class = 'label'>{{ form.institution.label }}</div>
-                {{ form.institution(size=32) }}<br>
+                {{ form.institution(size=40) }}<br>
                 {% for error in form.institution.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 <div class = 'label'>{{ form.email.label }}</div>
-                {{ form.email(size=32) }}<br>
+                {{ form.email(size=40) }}<br>
                 {% for error in form.email.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 <div class = 'label'>{{ form.email2.label }}</div>
-                {{ form.email2(size=32) }}<br>
+                {{ form.email2(size=40) }}<br>
                 {% for error in form.email2.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 <div class = 'label'>{{ form.password.label }}</div>
-                {{ form.password(size=32) }}<br>
+                {{ form.password(size=40) }}<br>
                 {% for error in form.password.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 <div class = 'label'>{{ form.password2.label }}</div>
-                {{ form.password2(size=32) }}<br>
+                {{ form.password2(size=40) }}<br>
                 {% for error in form.password2.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
