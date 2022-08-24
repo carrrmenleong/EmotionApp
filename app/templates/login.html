@@ -1,25 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Login</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <head>
+        <link rel = 'stylesheet' href = '../static/css/signup_login.css'>
+    </head>
+    <body>
+        <div id = 'headings'>
+            <h1>EmotionApp</h1>
+            <h2> Not Yet Registered? <a href = '{{ url_for('signup') }}'> Sign Up </a></h2>
+            <h3> Login </h3>
+        </div>
 
-    <p>New User? <a href="{{ url_for('signup') }}">Click to Sign Up!</a></p>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class = 'container'>
+                <p>
+                    <div class = 'label'>{{ form.email.label }}</div>
+                    {{ form.email(size=32) }}
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    <div class = 'label'>{{ form.password.label }}</div>
+                    {{ form.password(size=32) }}
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p><div class = 'submit'>{{ form.submit() }}</div></p>
+            </form>
+        </div>
+    </body>
 {% endblock %}
