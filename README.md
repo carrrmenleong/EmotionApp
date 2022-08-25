@@ -30,7 +30,7 @@ $ venv\Scripts\activate
 ### 3. Install requirements
 
 ```
-$ pip install -r 'examples/auth/requirements.txt'
+$ pip install -r 'requirements.txt'
 ```
 
 ### 4. Setup database
