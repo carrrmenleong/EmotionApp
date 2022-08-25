@@ -36,7 +36,6 @@ $ pip install -r 'requirements.txt'
 ### 4. Setup database
 
 ```
-$ flask db init
 $ flask db upgrade
 ```
 
