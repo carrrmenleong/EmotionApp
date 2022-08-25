@@ -11,20 +11,36 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+img{
+    height: 100px;
+    float: left;
+    padding-right: 0.5%;
+}
+
+
 .topnav{
-    background-color: #634f50;
+    background-color: white;
     overflow: hidden;
     padding: 1%;
 }
 
 .topnav a {
+    padding-left: 1%;
     float: left;
     text-align: center;
     font-weight: bold;
+    text-decoration: none;
+    
 }
 
-.topnav a.split {
+.topnav a.right {
     float: right;
+}
+
+.topnav a.rightActive{
+    float:right;
+    background-color: lightgrey;
+    border-radius:  25px;
 }
 
 ul{
@@ -33,12 +49,4 @@ ul{
 
 li{
     display: inline;
-}
-
-.active{
-    color: #ffcc53;
-}
-
-.inactive, .split{
-    color: white;
 }
