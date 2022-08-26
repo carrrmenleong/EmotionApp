@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>session cration</p>
+<p>{{current_user.username}}</p>
+<button onclick="submitSession()"></button>
+
+<script>
+
+    function submitSession() {
+        console.log('submitted?')
+        var mydata = { sessionTitle: 'session1', consent: 'consent mtfk', preQuestions: { 1: 'question1', 2: 'question2' }, emotions: 'happy\nsad', intensity: 10, postQuestions: { 1: 'idk1', 2: 'idk2' } }
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            console.log(this.responseText)
+            console.log('submitted!')
+        }
+        xhttp.open('POST', '/createsession', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(mydata));
+    }
+
+</script>
+{% endblock %}
