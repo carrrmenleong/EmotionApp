@@ -24,7 +24,7 @@ def signup():
         db.session.commit()
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
-    return render_template('signup.html', title='Login', form=form)
+    return render_template('signup.html', title='Login', form=form, is_signup ='yes')
 
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
@@ -41,7 +41,7 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('user')
         return redirect(next_page)
-    return render_template('login.html',title='Login', form=form)
+    return render_template('login.html',title='Login', form=form, is_signin ='yes')
 
 @app.route('/logout')
 def logout():
