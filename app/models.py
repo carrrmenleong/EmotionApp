@@ -37,6 +37,7 @@ class User(UserMixin, db.Model):
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     published = db.Column(db.Boolean)
+    session_title = db.Column(db.String(128))
     consent = db.Column(db.String()) 
     emotions = db.Column(db.String(128)) # Represent all emotion options separated by '\n'
     intensity = db.Column(db.Integer)
@@ -47,13 +48,14 @@ class Session(db.Model):
     participants = db.relationship('Participant', backref='session',lazy='dynamic')
 
     def __repr__(self):
-        return '<Id: {}, published: {}, consent: {}, emotions: {}, intensity: {}, pre_ques: {}, post_ques: {}, user_id: {}>' \
-            .format(self.id,self.published, self.consent,self.emotions,self.intensity,self.pre_ques,self.post_ques,self.user_id)
+        return '<Id: {}, published: {}, session_title: {}, consent: {}, emotions: {}, intensity: {}, pre_ques: {}, post_ques: {}, user_id: {}>' \
+            .format(self.id,self.published,self.session_title,self.consent,self.emotions,self.intensity,self.pre_ques,self.post_ques,self.user_id)
 
     def to_dict(self):
         data = {
             'id': self.id,
             'published': self.published,
+            'session_title':self.session_title,
             'consent':self.consent,
             'emotions':self.emotions,
             'intensity':self.intensity,
