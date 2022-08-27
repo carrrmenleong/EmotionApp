@@ -17,6 +17,13 @@ img{
     padding-right: 0.5%;
 }
 
+ul{
+    list-style-type: none;
+}
+
+li{
+    display: inline;
+}
 
 .topnav{
     background-color: white;
@@ -24,13 +31,14 @@ img{
     padding: 1%;
 }
 
-.topnav a {
+a {
     padding-left: 1%;
-    float: left;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-    
+    font-size: 35px;
+    color:black;
+    padding:1%;
 }
 
 .topnav a.right {
@@ -43,17 +51,15 @@ img{
     border-radius:  25px;
 }
 
+.topnav a.left{
+    float: left;
+}
+
 .topnav a.leftActive{
     float:left;
     background-color: lightgrey;
     border-radius: 25px;
 }
 
-ul{
-    list-style-type: none;
-}
 
-li{
-    display: inline;
-}
 
