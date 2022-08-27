@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- @Mandeal, Feel free to remove unwanted stuff in here and the comments, it's just an example template to hopefully guide you-->
+<p>session creation</p>
+<p>{{current_user.username}}</p>
+<button onclick="submitSession()">Submit</button>
+
+<script>
+
+// POST REQUEST JSON DATA FORMAT
+// {sessionTitle:'',consent:'',preQuestions:['',''],emotions:'',intensity:'',postQuestions:['','']}
+// ----------------------------------------------------------
+    function submitSession() {
+        console.log('submitted?')
+        // Dummy data
+        var mydata = { sessionTitle:'HEHE', consent: 'consent mtfk', preQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'], emotions: 'happy\nsad', intensity: 10, postQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'] }
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                const status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    // The request has been completed successfully
+                    console.log('Submitted!')
+                    console.log(xhttp.responseText);
+                } else {
+                    console.log(xhttp.responseText);
+                    // Oh no! There has been an error with the request!
+                }
+            }
+        }
+        xhttp.open('POST', '/createsession', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(mydata));
+    }
+
+</script>
+{% endblock %}

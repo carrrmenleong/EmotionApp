@@ -37,55 +37,46 @@ class User(UserMixin, db.Model):
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     published = db.Column(db.Boolean)
+    session_title = db.Column(db.String(128))
     consent = db.Column(db.String()) 
     emotions = db.Column(db.String(128)) # Represent all emotion options separated by '\n'
     intensity = db.Column(db.Integer)
+    pre_ques = db.Column(db.JSON)
+    post_ques = db.Column(db.JSON)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) # Foreign key. Represent the reseacher that created this session
 
-    questions = db.relationship('Question', backref='session',lazy='dynamic')
     participants = db.relationship('Participant', backref='session',lazy='dynamic')
 
     def __repr__(self):
-        return '<Id: {}, published: {}>'.format(self.id,self.published)
+        return '<Id: {}, published: {}, session_title: {}, consent: {}, emotions: {}, intensity: {}, pre_ques: {}, post_ques: {}, user_id: {}>' \
+            .format(self.id,self.published,self.session_title,self.consent,self.emotions,self.intensity,self.pre_ques,self.post_ques,self.user_id)
 
-
-# Each row in this table represent a question (either pre-measuring and post-measuring quesiton)
-class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String()) # Represent the question (for multiple choice question, the question & it's options will be separated with '\n')
-    is_open_ended = db.Column(db.Boolean) # Represent whether the question is open ended (True) or multiple choice (False)
-    sequence_num = db.Column(db.Integer) # Represent the seqence number of the question in the pre-measuring questions or post-measuring questions
-    is_pre = db.Column(db.Boolean) # Represent whether the question is pre-measuring (True) or post-measuring (False) question
-    session_id = db.Column(db.Integer, db.ForeignKey('session.id')) # Foreign key. Represent the session that the question belongs to
-
-    answers = db.relationship('Answer', backref='question',lazy='dynamic')
-
-    def __repr__(self):
-        return '<Id: {}, question: {}>'.format(self.id,self.question)
-
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'published': self.published,
+            'session_title':self.session_title,
+            'consent':self.consent,
+            'emotions':self.emotions,
+            'intensity':self.intensity,
+            'pre_ques':self.pre_ques,
+            'post_ques':self.post_ques,
+            'user_id':self.user_id
+            }
+        return data
 
 # Each row in this table represent a participant of a survey session
 class Participant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     stage_num = db.Column(db.Integer) # Represent the stage that the participant has reached thorughout the session
     session_id = db.Column(db.Integer, db.ForeignKey('session.id')) # Foreign key. Represent the session that the participant participate in
+    pre_ques_ans = db.Column(db.JSON)
+    post_ques_ans = db.Column(db.JSON)
 
-    answers = db.relationship('Answer', backref='participant',lazy='dynamic')
     responses = db.relationship('Response', backref='participant',lazy='dynamic')
 
     def __repr__(self):
         return '<Id: {}, stage_num: {}, session_id:{}>'.format(self.id,self.stage_num, self.session_id)
-
-
-# Each row in this table represent an answer of a participant to a question
-class Answer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    answer = db.Column(db.String())
-    participant_id = db.Column(db.Integer, db.ForeignKey('participant.id'))
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
-    
-    def __repr__(self):
-        return '<Id: {}, answer: {}, participant_id: {}, question_id: {}>'.format(self.id,self.answer, self.participant_id, self.question_id)
 
 
 # Each row in this table represent an emotion response of a participant
@@ -97,6 +88,5 @@ class Response(db.Model):
     participant_id = db.Column(db.Integer, db.ForeignKey('participant.id'))
     session_id = db.Column(db.Integer, db.ForeignKey('session.id'))
 
-    
     def __repr__(self):
         return '<Id: {}, emotion: {}, timestamp:{}, intensity:{}>'.format(self.id,self.emotion,self.timestamp, self.intensity)
