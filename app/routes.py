@@ -1,6 +1,6 @@
 from app import app,db
 from flask import render_template, flash, redirect, url_for, request, jsonify
-from flask_login import current_user, login_user,login_required
+from flask_login import current_user, login_user,login_required,logout_user
 from app.models import User, Session, Participant, Response
 from werkzeug.urls import url_parse
 from app.forms import SignupForm, LoginForm
@@ -16,26 +16,30 @@ def user():
 # Session Creation
 #----------------------------------------------------------
 # POST REQUEST JSON DATA FORMAT
-# {sessionTitle:'',consent:'',preQuestions:{1:'',2:''},emotions:'',intensity:'',postQuestions:{1:'',2:''}}
+# {sessionTitle:'',consent:'',preQuestions:['',''],emotions:'',intensity:'',postQuestions:['','']}
 #----------------------------------------------------------
 @app.route('/createsession', methods=['GET', 'POST'])
+@login_required
 def createsession():
     if request.method == 'GET':
         return render_template("createsession.html", title='Create Session')
     else:
         userId = current_user.id
         data = request.get_json() or {}
+        # Check data
+        if 'sessionTitle' not in data or 'consent' not in data or 'emotions' not in data or 'preQuestions' not in data or 'postQuestions' not in data:
+            return bad_request('Must include consent, emotions, preQuestions and postQuestions')
 
         # Insert into session table
         sessionid = 0
         lastSession = Session.query.order_by(Session.id.desc()).first()
         if lastSession is not None:
             sessionid = lastSession.id + 1
-        session = Session(id=sessionid,published=False,consent=data['consent'],emotions=data['emotions'],user_id=userId,pre_ques=data['preQuestions'],post_ques=data['postQuestions'])
+        session = Session(id=sessionid,published=False,session_title=data['sessionTitle'],consent=data['consent'],emotions=data['emotions'],user_id=userId,pre_ques=data['preQuestions'],post_ques=data['postQuestions'])
         db.session.add(session)
         db.session.commit()
 
-        # Retun response
+        # Return response
         response = jsonify(session.to_dict())
         response.status_code = 201 
         response.headers['Location'] = url_for('createsession')

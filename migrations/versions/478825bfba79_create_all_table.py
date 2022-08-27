@@ -1,8 +1,8 @@
-"""remove question table
+"""create all table
 
-Revision ID: 9198a05fb0be
+Revision ID: 478825bfba79
 Revises: 
-Create Date: 2022-08-26 14:59:38.659109
+Create Date: 2022-08-27 16:30:01.218439
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9198a05fb0be'
+revision = '478825bfba79'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,6 +35,7 @@ def upgrade():
     op.create_table('session',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('published', sa.Boolean(), nullable=True),
+    sa.Column('session_title', sa.String(length=128), nullable=True),
     sa.Column('consent', sa.String(), nullable=True),
     sa.Column('emotions', sa.String(length=128), nullable=True),
     sa.Column('intensity', sa.Integer(), nullable=True),
