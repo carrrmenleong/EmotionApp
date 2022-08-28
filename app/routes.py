@@ -22,7 +22,7 @@ def user():
 @login_required
 def createsession():
     if request.method == 'GET':
-        return render_template("createsession.html", title='Create Session')
+        return render_template("createsession.html", title='Create Session', is_create=True)
     else:
         userId = current_user.id
         data = request.get_json() or {}
@@ -60,9 +60,9 @@ def signup():
         db.session.commit()
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
-    return render_template('signup.html', title='Sign up', form=form)
+    return render_template('signup.html', title='Sign up', form=form, is_signup=True)
 
-# Login 
+# Login/Sign In
 #----------------------------------------------------------
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
@@ -80,7 +80,7 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('createsession')
         return redirect(next_page)
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login.html', title='Login', form=form, is_signin=True)
 
 # Logout
 #----------------------------------------------------------
