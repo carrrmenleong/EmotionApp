@@ -11,7 +11,6 @@ function add(){
     question = document.createElement('textarea')
     close = document.createElement('span')
 
-    console.log(counter)
     //setting attributes of elements
     close.textContent = 'X'
     close.setAttribute('class', 'del')
@@ -23,9 +22,10 @@ function add(){
     child.appendChild(question)
     child.appendChild(close)
     child.setAttribute('id', counter)
+    child.setAttribute('class', 'qblock')
 
+    //adding child to parent
     parent.appendChild(child)
-    
 }
 
 // delete question block
