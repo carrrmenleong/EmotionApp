@@ -45,6 +45,16 @@ def createsession():
         response.headers['Location'] = url_for('createsession')
         return response
 
+# View Session
+#----------------------------------------------------------
+@app.route('/viewsessions', methods=['GET'])
+@login_required
+def viewsessions():
+    userId = current_user.id
+    sessions = Session.query.filter_by(user_id = userId).all()
+
+    return render_template("viewsession.html", title='Create Session', is_view=True, sessions = sessions)
+
 # Signup
 #----------------------------------------------------------
 @app.route('/signup', methods=['GET', 'POST'])
