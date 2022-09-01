@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- @Mandeal, Feel free to remove unwanted stuff in here and the comments, it's just an example template to hopefully guide you-->
+<p>View session page</p>
+<p>User: {{current_user.username}}</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col border ">
+            Session Id
+        </div>
+        <div class="col border ">
+            Session Name
+        </div>
+        <div class="col border">
+            Link and QR
+        </div>
+        <div class="col border">
+            Publish Session
+        </div>
+        <div class="col border">
+            Copy Session
+        </div>
+        <div class="col border">
+            Edit/Delete Session
+        </div>
+    </div>
+
+    {% for session in sessions %}
+    <div>
+    </div>
+
+    <div class="row">
+        <div class="col border">
+            {{ session.id }}
+        </div>
+        <div class="col border">
+            {{ session.session_title }}
+        </div>
+        <div class="col border">
+            <a class="fs-6" href="#">Dummy Link</a>
+        </div>
+        <div class="col border">
+            {% if session.published %}
+            published
+            {% else %}
+            <button>publish</button>
+            {% endif%}
+        </div>
+        <div class="col border">
+            <button>copy</button>
+        </div>
+        <div class="col border">
+            <button>edit</button>
+            <button>delete</button>
+        </div>
+        
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
