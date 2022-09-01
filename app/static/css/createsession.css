@@ -18,6 +18,10 @@ h1{
     padding-bottom:1% ;
 }
 
+.sub{
+    margin-bottom: 3%;
+}
+
 .block{
     margin-top: 5%;
     text-align: center;
@@ -25,6 +29,7 @@ h1{
     padding: 3%;
     border-radius: 10px;
 }
+
 
 label{
     text-align: justify;
@@ -47,20 +52,26 @@ textarea{
     border-radius: 10px;
 }
 
-#q1{
-    position: relative;
 
-}
 
 .del{
-    position: absolute;
+    position:absolute;
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.qblock{
+    position: relative;
+    padding-right: 2%;
 }
 
 #add{
-    margin-top: 2%;
+    cursor: pointer;
     padding: 1%;
-    width: 100%;
     border-radius: 10px;
+    background-color: silver;
+
 }
 
 #create{
