@@ -9,8 +9,9 @@
  @Mandeal, Feel free to remove unwanted stuff in here and the comments, it's just an example template to hopefully guide you
 <p>session creation page</p>
 <p>User: {{current_user.username}}</p>
+<!--
 <button onclick="submitSession()">Submit Dummy Data</button>
-
+-->
 <script>
 
 // POST REQUEST JSON DATA FORMAT
@@ -50,7 +51,7 @@
             <!-- Session Title -->
             <div id = 'title_block' class = 'block'>
                 <label class = 'main'>Session Title</label><br>
-                <input type ='text' placeholder ='Please enter your session title here'></input><br>
+                <input id = 'title' type ='text' placeholder ='Please enter your session title here'></input><br>
             </div>
 
             <!-- Participant Consent -->
@@ -85,6 +86,7 @@
             </div>
 
             <button id = 'create'> Create Session </button>
+            <span onclick = 'submit()'> SUBMIT </submit>
             
         </form>    
     </div>

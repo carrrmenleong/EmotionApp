@@ -36,5 +36,12 @@ function del(x){
     parent = document.getElementById('questions')
 
     parent.removeChild(child)
+}
 
+//function to retrieve and submit results
+function submit(){
+    console.log("SUCCESS")
+
+    title = document.getElementById('title').value
+    console.log(title)
 }
