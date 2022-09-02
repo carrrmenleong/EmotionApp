@@ -47,16 +47,16 @@
                 
                 <!-- Create Session-->
                 {% if is_create is not defined %}
-                <li><a href="#" class = 'left'>Create Session</a></li>
+                <li><a href="{{url_for('createsession')}}" class = 'left'>Create Session</a></li>
                 {% else %}
-                <li><a href="#" class = 'leftActive'>Create Session</a></li>
+                <li><a href="{{url_for('createsession')}}" class = 'leftActive'>Create Session</a></li>
                 {% endif %}
 
                 <!-- View Session(s)-->
                 {% if is_view is not defined %}
-                <li><a href="#" class = 'left'>View Sessions</a></li>
+                <li><a href="{{url_for('viewsessions')}}" class = 'left'>View Sessions</a></li>
                 {% else %}
-                <li><a href="#" class ="leftActive" >View Sessions</a></li>
+                <li><a href="{{url_for('viewsessions')}}" class ="leftActive" >View Sessions</a></li>
                 {% endif %}
             {% endif %}
 
