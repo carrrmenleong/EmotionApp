@@ -1,3 +1,4 @@
+from re import S
 from app import app,db
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from flask_login import current_user, login_user,login_required,logout_user
@@ -44,6 +45,51 @@ def createsession():
         response.status_code = 201 
         response.headers['Location'] = url_for('createsession')
         return response
+
+
+# View Sessions
+#----------------------------------------------------------
+@app.route('/viewsessions', methods=['GET'])
+@login_required
+def viewsessions():
+    userId = current_user.id
+    sessions = Session.query.filter_by(user_id = userId).all()
+
+    return render_template("viewsession.html", title='Create Session', is_view=True, sessions = sessions)
+
+
+# Publish Session
+#----------------------------------------------------------
+@app.route('/publishsession', methods=['POST'])
+@login_required
+def publishsession():
+    userId = current_user.id
+    data = request.get_json() or {}
+    session = Session.query.filter_by(id = data['sessionId']).first()
+
+    # Return error if session doesn't exist or user is deleting other user's session 
+    if not session:
+        return bad_request('Session',data['sessionId'], "doesn't exists")
+
+    if session.user_id != userId:
+        return bad_request("Unauthorised action")
+    
+    # Publish the session
+    session.published = True
+    db.session.commit()
+
+    # Return success
+    response = jsonify(success=True)
+    return response
+
+
+# Start Session
+#----------------------------------------------------------
+@app.route('/session/<int:id>', methods=['GET'])
+def session(id):
+    session = Session.query.filter_by(id = id).first()
+    return render_template('session.html', title='Session', session = session)
+
 
 # Signup
 #----------------------------------------------------------
