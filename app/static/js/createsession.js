@@ -3,6 +3,7 @@ var counter = 1
 //adding question block
 function add(){
     counter ++
+    var close
 
     //retrieving parent div container
     parent = document.getElementById('questions')
@@ -12,6 +13,7 @@ function add(){
     close = document.createElement('span')
 
     //setting attributes of elements
+    question.setAttribute('class', 'question')
     close.textContent = 'X'
     close.setAttribute('class', 'del')
     close.setAttribute('id', 'd'+counter)
@@ -40,8 +42,31 @@ function del(x){
 
 //function to retrieve and submit results
 function submit(){
-    console.log("SUCCESS")
 
+    var prequestions = []
+
+    // retrieving title
     title = document.getElementById('title').value
-    console.log(title)
+
+    // retrieving consent
+    consent = document.getElementById('consent').value
+
+    // retrieving all prequestions
+    all = document.getElementsByClassName('question')
+    for(let i = 0; i< all.length; i ++){
+        //if question is mcq
+        if(all[i].value.includes('\n')){
+            temp = all[i].value.split('\n')
+            question = temp[0]
+            temp.shift()
+            option = temp.join('\n')
+            final = question + '\n' + option
+        }
+        //if question is open ended
+        else{
+            final = all[i].value
+        }
+        prequestions.push(final)
+    }
+
 }
