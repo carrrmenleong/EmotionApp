@@ -66,7 +66,7 @@ textarea{
     padding-right: 2%;
 }
 
-#add{
+.add{
     cursor: pointer;
     padding: 1%;
     border-radius: 10px;
@@ -74,7 +74,7 @@ textarea{
 
 }
 
-#create{
+button{
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 2px;
