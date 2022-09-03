@@ -60,19 +60,20 @@ function del(x){
     parent.removeChild(child)
 }
 
-//function to retrieve and submit results
-function submit(){
-
-    var prequestions = []
-    var postquestions = []
-
-    // retrieving title
+//function to retrieve results
+//title
+function retrieve_title(){
     var title = document.getElementById('title').value
-
-    // retrieving consent
+    return title
+}
+//consent
+function retrieve_consent(){
     var consent = document.getElementById('consent').value
-
-    // retrieving all prequestions
+    return consent
+}
+//prequestions
+function retrieve_prequestions(){
+    var prequestions = []
     var all = document.getElementsByClassName('preQ')
     //if there are no prequestions
     if (all == null){
@@ -80,37 +81,40 @@ function submit(){
     }
     else{
         for(let i = 0; i< all.length; i ++){
-            //if question is mcq
-            if(all[i].value.includes('\n')){
-                var temp = all[i].value.split('\n')
-                var question = temp[0]
-                temp.shift()
-                option = temp.join('\n')
-                final = question + '\n' + option
-            }
-            //if question is open ended
-            else{
-                final = all[i].value
-            }
-            prequestions.push(final)
+            prequestions.push(all[i].value)
         }
     }
-    console.log(typeof prequestions)
-
-
-    // retrieving all emotions
+    return prequestions
+}
+//emotions
+function retrieve_emotions(){
     emotion = document.getElementById('emotion').value
-
-    // retrieving all intensity
+    return emotion
+}
+//intensity
+function retrieve_intensity(){
     intensity = parseInt(document.getElementById('intensity').value)
-    console.log(Number.isInteger(intensity))
-
-    // retrieving all post questions
-    all = document.getElementsByClassName('postQ')
+    return intensity
+}
+//post questions
+function retrieve_postquestions(){
+    var postquestions = []
+    var all = document.getElementsByClassName('postQ')
     for(let i = 0; i< all.length; i ++){
         postquestions.push(all[i].value)
     }
-    console.log(postquestions)
+    return postquestions
+}
+//function to retrieve and submit results
+function submit(){
+
+    //retrieving results
+    var title = retrieve_title()
+    var consent = retrieve_consent()
+    var prequestions = retrieve_prequestions()
+    var emotion = retrieve_emotions()
+    var intensity = retrieve_intensity()
+    var postquestions = retrieve_postquestions()
 
     //combining the data
     mydata =  {
@@ -121,9 +125,8 @@ function submit(){
         intensity:intensity, 
         postQuestions:postquestions
     }
-    console.log("DATA:",mydata)
 
-    
+    //submiting data
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
 
@@ -142,6 +145,5 @@ function submit(){
     xhttp.open('POST', '/createsession', true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(mydata));
-
 }
 
