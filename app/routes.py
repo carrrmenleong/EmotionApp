@@ -115,7 +115,7 @@ def signup():
         db.session.commit()
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
-    return render_template('signup.html', title='Sign up', form=form, is_signup=True)
+    return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
 
 # Login/Sign In
 #----------------------------------------------------------

@@ -4,6 +4,7 @@
 
 <head>
     <link rel = 'stylesheet' href = '../static/css/signup_login.css'>
+    <script src='../static/js/signup.js'></script>
 </head>
 <body>
     <div id = 'headings'>
@@ -87,8 +88,26 @@
                 {% endfor %}
             </p>
         
-            <p><div class = 'submit'>{{ form.submit()}} </div></p>
+            <p><div onclick = 'display(test)' class = 'submit'> {{ form.submit()}} </div></p>
         </div>
     </form>
+    
+    <!-- modal-->
+    <div id = "myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Sign Up Request Sent</h5>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p> Your sign up request has successfully been sent to the admin, an email will be sent to "example@gmail.com" once the request is approved. Thank you.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id = 'closeModal' onclick ='hide()'>Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
 </body>
 {% endblock %}
