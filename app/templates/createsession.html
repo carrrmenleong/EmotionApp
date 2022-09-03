@@ -60,9 +60,25 @@
             </div>  
             <button class = 'add' onclick ="add('post')"> Add New Question </button>
         </div>
-
         <button onclick="submit()" id = 'submit'>Create Session</button>
-        
+    </div>
+
+    <!-- modal-->
+    <div id = "myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Session Created</h5>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p> Please head to view session page to checkout the session created.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id = 'closeModal' onclick ='hide()'>Close</button>
+            </div>
+          </div>
+        </div>
     </div>
 </body>
 

@@ -124,7 +124,6 @@ function submit(){
         intensity:intensity, 
         postQuestions:postquestions
     }
-
     //submiting data
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -144,5 +143,11 @@ function submit(){
     xhttp.open('POST', '/createsession', true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(mydata));
+    
+    //displaying modal
+    $('#myModal').modal('show')
 }
 
+function hide(){
+    $('#myModal').modal('hide')
+}
