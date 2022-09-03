@@ -4,42 +4,10 @@
 
 <head> 
     <link rel = 'stylesheet' href = '../static/css/createsession.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
     <script src='../static/js/createsession.js'></script>
 </head>
- @Mandeal, Feel free to remove unwanted stuff in here and the comments, it's just an example template to hopefully guide you
-<p>session creation page</p>
-<p>User: {{current_user.username}}</p>
-<button onclick="submitSession()">Submit Dummy Data</button>
-<script>
-// POST REQUEST JSON DATA FORMAT
-// {sessionTitle:'',consent:'',preQuestions:['',''],emotions:'',intensity:'',postQuestions:['','']}
-// ----------------------------------------------------------
-    function submitSession() {
-        console.log('submitted?')
-        // Dummy data
-        var mydata = { sessionTitle:'HEHE', consent: 'consent mtfk', preQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'], emotions: 'happy\nsad', intensity: 10, postQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'] }
-        console.log('TEST:',mydata)
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
 
-            if (xhttp.readyState === XMLHttpRequest.DONE) {
-                const status = xhttp.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    // The request has been completed successfully
-                    console.log('Submitted!')
-                    console.log(xhttp.responseText);
-                } else {
-                    console.log(xhttp.responseText);
-                    // Oh no! There has been an error with the request!
-                }
-            }
-        }
-        xhttp.open('POST', '/createsession', true);
-        xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(mydata));
-    }
-
-</script>
 <body>
     <div class = 'parent'>
         <h1> Create Session </h1>
@@ -64,10 +32,10 @@
                 <div id = 'pre_questions'>
                     <div id = '1' class = 'qblock'>
                         <textarea id = 't1' class = 'preQ'> </textarea>
-                        <span id = 'preqD1' class="del" onclick = 'del(this)'>X</span>
+                        <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'preqD1' onclick ='del(this)'></i>
                     </div>
                 </div>
-            <br><span class = 'add' onclick = "add('pre')"> Add New Question </span><br>
+            <button class = 'add' onclick = "add('pre')"> Add New Question </button>
         </div>
 
         <!--Emotions -->
@@ -87,14 +55,13 @@
             <div id = 'post_questions'>
                 <div id = '2' class = 'qblock'>
                     <textarea id = 't2' class = 'postQ'> </textarea>
-                    <span id = 'postD2' class="del" onclick = 'del(this)'>X</span>
+                    <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'postD2' onclick ='del(this)'></i>
                 </div>
             </div>  
-            <br><span class = 'add' onclick ="add('post')"> Add New Question </span><br>
+            <button class = 'add' onclick ="add('post')"> Add New Question </button>
         </div>
 
-        <button onclick="submit()">Create Session</button>
-        <span onclick = 'submit()'> SUBMIT </span>
+        <button onclick="submit()" id = 'submit'>Create Session</button>
         
     </div>
 </body>
