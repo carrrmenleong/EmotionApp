@@ -43,62 +43,59 @@
 <body>
     <div class = 'parent'>
         <h1> Create Session </h1>
-        <form action = "" method = 'post'>
-            <!-- Session Title -->
-            <div id = 'title_block' class = 'block'>
-                <label class = 'main'>Session Title</label><br>
-                <input id = 'title' type ='text' placeholder ='Please enter your session title here'></input><br>
-            </div>
+        <!-- Session Title -->
+        <div id = 'title_block' class = 'block'>
+            <label class = 'main'>Session Title</label><br>
+            <input id = 'title' type ='text' placeholder ='Please enter your session title here'></input><br>
+        </div>
 
-            <!-- Participant Consent -->
-            <div id = 'consent_block' class = 'block'>
-                <label class = 'main'> Participant Information and Consent </label><br>
-                <label class = 'sub'> Fill in the terms and condition that is required for participants to agree on before undertaking this session. </label><br>
-                <textarea  id = 'consent'> </textarea>
-            </div>
+        <!-- Participant Consent -->
+        <div id = 'consent_block' class = 'block'>
+            <label class = 'main'> Participant Information and Consent </label><br>
+            <label class = 'sub'> Fill in the terms and condition that is required for participants to agree on before undertaking this session. </label><br>
+            <textarea  id = 'consent'> </textarea>
+        </div>
 
-            <!-- Pre-measuring Questions-->
-            <div id = 'pre_block' class = 'block'>
-                <label class = 'main'> Pre-Measuring Questions </label><br>
-                <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
-                    <!-- where new questions will be added-->
-                    <div id = 'pre_questions'>
-                        <div id = '1' class = 'qblock'>
-                            <textarea id = 't1' class = 'preQ'> </textarea>
-                            <span id = 'preqD1' class="del" onclick = 'del(this)'>X</span>
-                        </div>
-                    </div>
-                <br><span class = 'add' onclick = "add('pre')"> Add New Question </span><br>
-            </div>
-
-            <!--Emotions -->
-            <div id = 'emotion_block' class = 'block'>
-                <label class = 'main'> Emotions </label><br>
-                <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
-                <label class = 'main'> Emotion Options </label><br>
-                <textarea id = 'emotion'> </textarea><br>
-                <label class = 'main'> Max Intensity </label><br>
-                <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
-            </div>
-
-            <!-- Post Measuring Question -->
-            <div id = 'post_block' class = 'block'>
-                <label class = 'main'> Post-measuring Questions </label><br>
+        <!-- Pre-measuring Questions-->
+        <div id = 'pre_block' class = 'block'>
+            <label class = 'main'> Pre-Measuring Questions </label><br>
+            <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
                 <!-- where new questions will be added-->
-                <div id = 'post_questions'>
-                    <div id = '2' class = 'qblock'>
-                        <textarea id = 't2' class = 'postQ'> </textarea>
-                        <span id = 'postD2' class="del" onclick = 'del(this)'>X</span>
+                <div id = 'pre_questions'>
+                    <div id = '1' class = 'qblock'>
+                        <textarea id = 't1' class = 'preQ'> </textarea>
+                        <span id = 'preqD1' class="del" onclick = 'del(this)'>X</span>
                     </div>
-                </div>  
-                <br><span class = 'add' onclick ="add('post')"> Add New Question </span><br>
-            </div>
+                </div>
+            <br><span class = 'add' onclick = "add('pre')"> Add New Question </span><br>
+        </div>
 
+        <!--Emotions -->
+        <div id = 'emotion_block' class = 'block'>
+            <label class = 'main'> Emotions </label><br>
+            <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
+            <label class = 'main'> Emotion Options </label><br>
+            <textarea id = 'emotion'> </textarea><br>
+            <label class = 'main'> Max Intensity </label><br>
+            <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
+        </div>
 
-            <button onclick="submit()">Create Session</button>
-            <span onclick = 'submit()'> SUBMIT </submit>
-            
-        </form>    
+        <!-- Post Measuring Question -->
+        <div id = 'post_block' class = 'block'>
+            <label class = 'main'> Post-measuring Questions </label><br>
+            <!-- where new questions will be added-->
+            <div id = 'post_questions'>
+                <div id = '2' class = 'qblock'>
+                    <textarea id = 't2' class = 'postQ'> </textarea>
+                    <span id = 'postD2' class="del" onclick = 'del(this)'>X</span>
+                </div>
+            </div>  
+            <br><span class = 'add' onclick ="add('post')"> Add New Question </span><br>
+        </div>
+
+        <button onclick="submit()">Create Session</button>
+        <span onclick = 'submit()'> SUBMIT </span>
+        
     </div>
 </body>
 
