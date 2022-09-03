@@ -11,7 +11,6 @@
 <p>User: {{current_user.username}}</p>
 <button onclick="submitSession()">Submit Dummy Data</button>
 <script>
-
 // POST REQUEST JSON DATA FORMAT
 // {sessionTitle:'',consent:'',preQuestions:['',''],emotions:'',intensity:'',postQuestions:['','']}
 // ----------------------------------------------------------
@@ -19,7 +18,7 @@
         console.log('submitted?')
         // Dummy data
         var mydata = { sessionTitle:'HEHE', consent: 'consent mtfk', preQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'], emotions: 'happy\nsad', intensity: 10, postQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'] }
-
+        console.log('TEST:',mydata)
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
 
@@ -41,7 +40,6 @@
     }
 
 </script>
-
 <body>
     <div class = 'parent'>
         <h1> Create Session </h1>
@@ -64,13 +62,13 @@
                 <label class = 'main'> Pre-Measuring Questions </label><br>
                 <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
                     <!-- where new questions will be added-->
-                    <div id = 'questions'>
+                    <div id = 'pre_questions'>
                         <div id = '1' class = 'qblock'>
-                            <textarea id = 't1' class = 'question'> </textarea>
-                            <span id = 'd1' class="del" onclick = 'del(this)'>X</span>
+                            <textarea id = 't1' class = 'preQ'> </textarea>
+                            <span id = 'preqD1' class="del" onclick = 'del(this)'>X</span>
                         </div>
                     </div>
-                <br><span id = 'add' onclick = 'add()'> Add New Question </span><br>
+                <br><span class = 'add' onclick = "add('pre')"> Add New Question </span><br>
             </div>
 
             <!--Emotions -->
@@ -78,12 +76,26 @@
                 <label class = 'main'> Emotions </label><br>
                 <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
                 <label class = 'main'> Emotion Options </label><br>
-                <textarea> </textarea><br>
+                <textarea id = 'emotion'> </textarea><br>
                 <label class = 'main'> Max Intensity </label><br>
-                <input type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
+                <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
             </div>
 
-            <button id = 'create'> Create Session </button>
+            <!-- Post Measuring Question -->
+            <div id = 'post_block' class = 'block'>
+                <label class = 'main'> Post-measuring Questions </label><br>
+                <!-- where new questions will be added-->
+                <div id = 'post_questions'>
+                    <div id = '2' class = 'qblock'>
+                        <textarea id = 't2' class = 'postQ'> </textarea>
+                        <span id = 'postD2' class="del" onclick = 'del(this)'>X</span>
+                    </div>
+                </div>  
+                <br><span class = 'add' onclick ="add('post')"> Add New Question </span><br>
+            </div>
+
+
+            <button onclick="submit()">Create Session</button>
             <span onclick = 'submit()'> SUBMIT </submit>
             
         </form>    
