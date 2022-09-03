@@ -15,7 +15,7 @@ function add(target){
     
     //creating necessary elements
     question = document.createElement('textarea')
-    close = document.createElement('span')
+    close = document.createElement('i')
 
     //setting attributes of elements
     if (target == 'pre'){
@@ -26,10 +26,7 @@ function add(target){
         question.setAttribute('class', 'postQ')
         close.setAttribute('id', 'postD'+counter)
     }
-    //question.setAttribute('class', 'question')
-    close.textContent = 'X'
-    close.setAttribute('class', 'del')
-    //close.setAttribute('id', 'd'+counter)
+    close.setAttribute('class', 'fas fa-trash fa-2x')
     close.setAttribute('onclick', 'del(this)')
 
     //creating child to be appended into parent
@@ -96,6 +93,7 @@ function retrieve_intensity(){
     intensity = parseInt(document.getElementById('intensity').value)
     return intensity
 }
+
 //post questions
 function retrieve_postquestions(){
     var postquestions = []
@@ -105,6 +103,7 @@ function retrieve_postquestions(){
     }
     return postquestions
 }
+
 //function to retrieve and submit results
 function submit(){
 
