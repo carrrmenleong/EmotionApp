@@ -1,0 +1,98 @@
+body{
+    text-align: center;
+}
+
+h1{
+    font-size: 100px;
+}
+
+.parent{
+    margin: auto;
+    width: 34%;
+}
+.main{
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    padding-bottom:1% ;
+}
+
+.sub{
+    margin-bottom: 3%;
+}
+
+.block{
+    margin-top: 5%;
+    text-align: center;
+    background-color: #a1a9fe;
+    padding: 3%;
+    border-radius: 10px;
+}
+
+
+label{
+    text-align: justify;
+    clear: left;
+    float: left;
+}
+
+input{
+    margin-top: 1%;
+    padding: 1%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+textarea{
+    padding: 1%;
+    margin-top: 1%;
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+i{
+    position:absolute;
+    cursor: pointer; 
+    padding:1%;
+    padding-top: 2%;
+}
+
+.qblock{
+    position: relative;
+    padding-right: 2%;
+}
+
+.add{
+    margin-top: 2%;
+    border-radius: 10px;
+    background-color: lightgrey;
+    width: 98%;
+    padding: 1%;
+
+}
+
+#submit{
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-color: #f3b06a;
+    background-color: #f3b06a;
+    color:white;
+    padding: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    border-radius: 10px;
+}
+
+#closeModal{
+    margin: auto;
+    border-color: #f3b06a;
+    background-color: #f3b06a;
+    color:white;
+    padding: 2%;
+    width: 60%;
+    border-radius: 10px;
+}

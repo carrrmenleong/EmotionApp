@@ -36,7 +36,16 @@ def createsession():
         lastSession = Session.query.order_by(Session.id.desc()).first()
         if lastSession is not None:
             sessionid = lastSession.id + 1
-        session = Session(id=sessionid,published=False,session_title=data['sessionTitle'],consent=data['consent'],emotions=data['emotions'],user_id=userId,pre_ques=data['preQuestions'],post_ques=data['postQuestions'])
+        session = Session(
+            id=sessionid,
+            user_id=userId,
+            published=False,
+            session_title=data['sessionTitle'],
+            consent=data['consent'],
+            emotions=data['emotions'],
+            intensity =data['intensity'],
+            pre_ques=data['preQuestions'],
+            post_ques=data['postQuestions'])
         db.session.add(session)
         db.session.commit()
 
@@ -106,7 +115,7 @@ def signup():
         db.session.commit()
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
-    return render_template('signup.html', title='Sign up', form=form, is_signup=True)
+    return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
 
 # Login/Sign In
 #----------------------------------------------------------
