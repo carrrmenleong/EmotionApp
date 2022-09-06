@@ -31,6 +31,13 @@ h3{
     letter-spacing: 2px;
 }
 
+.label_resetpw{
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
 textarea,input{
     width: 100%;
     border-width:0px;
