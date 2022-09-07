@@ -8,6 +8,8 @@ from app.forms import SignupForm, LoginForm
 from sqlalchemy import func 
 from app.api.errors import bad_request
 
+import json
+
 
 @app.route('/user')
 @login_required
@@ -143,3 +145,16 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+# Delete Session
+#----------------------------------------------------------------
+@app.route('/deleteSession', methods =['post'])
+def deleteSession():
+    temp = request.get_json()
+    selectedId = json.loads(temp)
+    target = Session.query.get(selectedId)
+    db.session.delete(target)
+    db.session.commit()
+    
+    session = Session.query.filter_by(id = id).first()
+    return render_template("viewsession.html", title='Create Session', is_view=True, sessions = session)
