@@ -64,7 +64,7 @@
             {% else %}
             <button class="edit">edit</button>
             {% endif%}
-            <button class="delete">delete</button>
+            <button class="delete" onclick = 'delSession({{session.id}})'>delete</button>
         </div>
     </div>
     {% endfor %}
@@ -134,6 +134,18 @@
         $(".modal-body").append('<p>' + linkUrl + '</p>')
 
         new QRCode(document.getElementById("qrcode"), linkUrl);
+    }
+
+    // Delete Session
+    function delSession(sessionid){
+        console.log(sessionid)
+        var target = JSON.stringify(sessionid)
+        $.ajax({
+            url:'deleteSession',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(target)
+        })
     }
 </script>
 
