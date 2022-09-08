@@ -5,7 +5,7 @@
 <p>View session page</p>
 <p>User: {{current_user.username}}</p>
 
-<div class="container">
+<div class="container" id = 'container'>
     <div class="row">
         <div class="col border ">
             Session Id
@@ -138,7 +138,13 @@
 
     // Delete Session
     function delSession(sessionid){
-        console.log(sessionid)
+
+        //removing session on front end using DOM
+        deletedSession = document.getElementById(sessionid)
+        parent = document.getElementById('container')
+        parent.removeChild(deletedSession)
+
+
         var target = JSON.stringify(sessionid)
         $.ajax({
             url:'deleteSession',
