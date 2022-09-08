@@ -152,9 +152,9 @@ def logout():
 def deleteSession():
     temp = request.get_json()
     selectedId = json.loads(temp)
+    
     target = Session.query.get(selectedId)
     db.session.delete(target)
     db.session.commit()
     
-    session = Session.query.filter_by(id = id).first()
-    return render_template("viewsession.html", title='Create Session', is_view=True, sessions = session)
+    return redirect(url_for('viewsessions'))
