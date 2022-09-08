@@ -1,40 +1,85 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- @Mandeal, Feel free to remove unwanted stuff in here and the comments, it's just an example template to hopefully guide you-->
-<p>session creation page</p>
-<p>User: {{current_user.username}}</p>
-<button onclick="submitSession()">Submit Dummy Data</button>
 
-<script>
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/createsession.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
+    <script src='../static/js/createsession.js'></script>
+</head>
 
-// POST REQUEST JSON DATA FORMAT
-// {sessionTitle:'',consent:'',preQuestions:['',''],emotions:'',intensity:'',postQuestions:['','']}
-// ----------------------------------------------------------
-    function submitSession() {
-        console.log('submitted?')
-        // Dummy data
-        var mydata = { sessionTitle:'HEHE', consent: 'consent mtfk', preQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'], emotions: 'happy\nsad', intensity: 10, postQuestions: ['q1(open ended)','q2(mult choice)\noption1\noption2'] }
+<body>
+    <div class = 'parent'>
+        <h1> Create Session </h1>
+        <!-- Session Title -->
+        <div id = 'title_block' class = 'block'>
+            <label class = 'main'>Session Title</label><br>
+            <input id = 'title' type ='text' placeholder ='Please enter your session title here'></input><br>
+        </div>
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
+        <!-- Participant Consent -->
+        <div id = 'consent_block' class = 'block'>
+            <label class = 'main'> Participant Information and Consent </label><br>
+            <label class = 'sub'> Fill in the terms and condition that is required for participants to agree on before undertaking this session. </label><br>
+            <textarea  id = 'consent'> </textarea>
+        </div>
 
-            if (xhttp.readyState === XMLHttpRequest.DONE) {
-                const status = xhttp.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    // The request has been completed successfully
-                    console.log('Submitted!')
-                    console.log(xhttp.responseText);
-                } else {
-                    console.log(xhttp.responseText);
-                    // Oh no! There has been an error with the request!
-                }
-            }
-        }
-        xhttp.open('POST', '/createsession', true);
-        xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(mydata));
-    }
+        <!-- Pre-measuring Questions-->
+        <div id = 'pre_block' class = 'block'>
+            <label class = 'main'> Pre-Measuring Questions </label><br>
+            <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
+                <!-- where new questions will be added-->
+                <div id = 'pre_questions'>
+                    <div id = '1' class = 'qblock'>
+                        <textarea id = 't1' class = 'preQ'> </textarea>
+                        <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'preqD1' onclick ='del(this)'></i>
+                    </div>
+                </div>
+            <button class = 'add' onclick = "add('pre')"> Add New Question </button>
+        </div>
 
-</script>
+        <!--Emotions -->
+        <div id = 'emotion_block' class = 'block'>
+            <label class = 'main'> Emotions </label><br>
+            <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
+            <label class = 'main'> Emotion Options </label><br>
+            <textarea id = 'emotion'> </textarea><br>
+            <label class = 'main'> Max Intensity </label><br>
+            <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
+        </div>
+
+        <!-- Post Measuring Question -->
+        <div id = 'post_block' class = 'block'>
+            <label class = 'main'> Post-measuring Questions </label><br>
+            <!-- where new questions will be added-->
+            <div id = 'post_questions'>
+                <div id = '2' class = 'qblock'>
+                    <textarea id = 't2' class = 'postQ'> </textarea>
+                    <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'postD2' onclick ='del(this)'></i>
+                </div>
+            </div>  
+            <button class = 'add' onclick ="add('post')"> Add New Question </button>
+        </div>
+        <button onclick="submit()" id = 'submit'>Create Session</button>
+    </div>
+
+    <!-- modal-->
+    <div id = "myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Session Created</h5>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p> Please head to view session page to checkout the session created.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id = 'closeModal' onclick ='hide()'>Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
+
 {% endblock %}

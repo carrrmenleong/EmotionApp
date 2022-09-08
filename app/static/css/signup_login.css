@@ -59,3 +59,13 @@ textarea,input{
     width: 80%;
     margin:auto;
 }
+
+#closeModal{
+    margin: auto;
+    border-color: #f3b06a;
+    background-color: #f3b06a;
+    color:white;
+    padding: 2%;
+    width: 60%;
+    border-radius: 10px;
+}
