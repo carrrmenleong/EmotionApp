@@ -48,7 +48,7 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     onclick="updatelink('{{session.id}}')">Link</button>
                 {% else %}
-                <button disabled aria-disabled="true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                <button disabled aria-disabled="true" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     onclick="updatelink('{{session.id}}')">Link</button>
                 {% endif%}
             </p>
@@ -58,7 +58,7 @@
                 {% if session.published %}
                 published
                 {% else %}
-                <button sessionid={{session.id}} onclick="publish(this)">publish</button>
+                <button class="btn btn-success" sessionid={{session.id}} onclick="publish(this)">publish</button>
                 {% endif%}
             </p>
         </div>
@@ -70,7 +70,7 @@
         <div class="col border d-flex">
             <p style="margin:auto">
                 {% if session.published %}
-                <button disabled aria-disabled="true" class="edit btn btn-info">edit</button>
+                <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
                 {% else %}
                 <button class="edit btn btn-info">edit</button>
                 {% endif%}
