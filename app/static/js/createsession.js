@@ -68,7 +68,7 @@ function retrieve_consent(){
     var consent = document.getElementById('consent').value
     return consent
 }
-//prequestions
+//prequestionsx`x
 function retrieve_prequestions(){
     var prequestions = []
     var all = document.getElementsByClassName('preQ')

@@ -158,3 +158,11 @@ def deleteSession():
     db.session.commit()
     
     return redirect(url_for('viewsessions'))
+
+# Edit Session
+#---------------------------------------------------------------
+@app.route('/editSession/<int:id>', methods= ['GET', 'POST'])
+def editSession(id):
+    session = Session.query.get(id)
+    flash(session)
+    return render_template('createsession.html', session = session, edit = True)
