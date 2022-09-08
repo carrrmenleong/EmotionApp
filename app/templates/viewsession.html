@@ -9,7 +9,7 @@
 <p>View session page</p>
 <p>User: {{current_user.username}}</p>
 
-<div class="container">
+<div class="container text-center">
     <div class="row">
         <div class="col border ">
             Session Id
@@ -35,14 +35,16 @@
     <div>
     </div>
 
-    <div id={{session.id}} class="row">
-        <div class="col border">
+    <div id={{session.id}} class="row align-items-center mt-3">
+        <div class="col">
             {{ session.id }}
         </div>
-        <div class="col border">
-            {{ session.session_title }}
+        <div class="col">
+            <div>
+                {{ session.session_title }}
+            </div>
         </div>
-        <div class="col border">
+        <div class="col">
             {% if session.published %}
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 onclick="updatelink('{{session.id}}')">Link</button>
@@ -52,23 +54,23 @@
             {% endif%}
 
         </div>
-        <div class="col border">
+        <div class="col">
             {% if session.published %}
             published
             {% else %}
             <button sessionid={{session.id}} onclick="publish(this)">publish</button>
             {% endif%}
         </div>
-        <div class="col border">
-            <button>copy</button>
+        <div class="col">
+            <button class="btn btn-warning">copy</button>
         </div>
-        <div class="col border">
+        <div class="col">
             {% if session.published %}
-            <button disabled aria-disabled="true" class="edit">edit</button>
+            <button disabled aria-disabled="true" class="edit btn btn-info">edit</button>
             {% else %}
-            <button class="edit">edit</button>
+            <button class="edit btn btn-info">edit</button>
             {% endif%}
-            <button class="delete">delete</button>
+            <button class="delete btn btn-danger">delete</button>
         </div>
     </div>
     {% endfor %}
