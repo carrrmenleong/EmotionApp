@@ -126,13 +126,17 @@
     function update(sessionid) {
         // Replace publish button with "Published"
         $('#' + sessionid + ' div:nth-child(4)').empty();
-        $('#' + sessionid + ' div:nth-child(4)').append("<p>published</p>");
+        $('#' + sessionid + ' div:nth-child(4)').append("<p style='margin:auto'>published</p>");
 
         // Disable edit button
         $('#' + sessionid + ' div:nth-child(6) .edit').prop('disabled', true);
+        $('#' + sessionid + ' div:nth-child(6) .edit').prop('aria-disabled', true);
+        $('#' + sessionid + ' div:nth-child(6) .edit').prop('class', "edit btn btn-secondary");
 
         // Activate link button
         $('#' + sessionid + ' div:nth-child(3) button').prop('disabled', false);
+        $('#' + sessionid + ' div:nth-child(3) button').prop('aria-disabled', false);
+        $('#' + sessionid + ' div:nth-child(3) button').prop('class', "edit btn btn-primary");
     }
 
     // Update the link and QR Code in the popup
