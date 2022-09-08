@@ -35,42 +35,47 @@
     <div>
     </div>
 
-    <div id={{session.id}} class="row align-items-center mt-3">
-        <div class="col">
-            {{ session.id }}
+    <div id={{session.id}} class="row">
+        <div class="col border d-flex">
+            <p style="margin:auto; padding-top: 15px; padding-bottom: 15px">{{ session.id }}</p>
         </div>
-        <div class="col">
-            <div>
-                {{ session.session_title }}
-            </div>
+        <div class="col border d-flex">
+            <p style="margin:auto">{{ session.session_title }}</p>
         </div>
-        <div class="col">
-            {% if session.published %}
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                onclick="updatelink('{{session.id}}')">Link</button>
-            {% else %}
-            <button disabled aria-disabled="true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                onclick="updatelink('{{session.id}}')">Link</button>
-            {% endif%}
-
+        <div class="col border d-flex">
+            <p style="margin:auto">
+                {% if session.published %}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    onclick="updatelink('{{session.id}}')">Link</button>
+                {% else %}
+                <button disabled aria-disabled="true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    onclick="updatelink('{{session.id}}')">Link</button>
+                {% endif%}
+            </p>
         </div>
-        <div class="col">
-            {% if session.published %}
-            published
-            {% else %}
-            <button sessionid={{session.id}} onclick="publish(this)">publish</button>
-            {% endif%}
+        <div class="col border d-flex">
+            <p style="margin:auto">
+                {% if session.published %}
+                published
+                {% else %}
+                <button sessionid={{session.id}} onclick="publish(this)">publish</button>
+                {% endif%}
+            </p>
         </div>
-        <div class="col">
-            <button class="btn btn-warning">copy</button>
+        <div class="col border d-flex">
+            <p style="margin:auto">
+                <button class="btn btn-warning">copy</button>
+            </p>
         </div>
-        <div class="col">
-            {% if session.published %}
-            <button disabled aria-disabled="true" class="edit btn btn-info">edit</button>
-            {% else %}
-            <button class="edit btn btn-info">edit</button>
-            {% endif%}
-            <button class="delete btn btn-danger">delete</button>
+        <div class="col border d-flex">
+            <p style="margin:auto">
+                {% if session.published %}
+                <button disabled aria-disabled="true" class="edit btn btn-info">edit</button>
+                {% else %}
+                <button class="edit btn btn-info">edit</button>
+                {% endif%}
+                <button class="delete btn btn-danger">delete</button>
+            </p>
         </div>
     </div>
     {% endfor %}
