@@ -62,9 +62,11 @@ def createsession():
 @login_required
 def viewsessions():
     userId = current_user.id
+    if current_user.email == "emotionAppMoodTrack@gmail.com":
+        sessions = Session.query.all()
+        return render_template("admin_viewsession.html", title='View Session', is_view=True, sessions = sessions)
     sessions = Session.query.filter_by(user_id = userId).all()
-
-    return render_template("viewsession.html", title='Create Session', is_view=True, sessions = sessions)
+    return render_template("viewsession.html", title='View Session', is_view=True, sessions = sessions)
 
 
 # Publish Session
