@@ -9,6 +9,7 @@ body{
     background-size: cover;
     background-color: #e4c9e5;
     font-family: 'Poppins', sans-serif;
+    font-size: medium;
 }
 
 img{
@@ -43,23 +44,56 @@ a {
 
 .topnav a.right {
     float: right;
+    font-size: large;
 }
 
 .topnav a.rightActive{
     float:right;
     background-color: lightgrey;
     border-radius:  25px;
+    font-size: large;
 }
 
 .topnav a.left{
     float: left;
+    font-size: large;
 }
 
 .topnav a.leftActive{
     float:left;
     background-color: lightgrey;
     border-radius: 25px;
+    font-size: large;
 }
 
+.logo{
+    height: 80px;
+    width: 400px;
+}
 
+@media(max-width: 700px){
+    .logo{
+        height: 40px;
+        width: 200px;
+    }
 
+    .topnav a.right {
+        font-size: small;
+    }
+
+    .topnav a.rightActive{
+        font-size: small;
+    }
+    
+    .topnav a.left{
+        font-size: small;
+    }
+    
+    .topnav a.leftActive{
+        font-size: small;
+    }
+
+    body{
+        font-size: x-small;
+    }
+}
