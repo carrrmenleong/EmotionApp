@@ -62,7 +62,7 @@
             {% if session.published %}
             <button disabled class="edit">edit</button>
             {% else %}
-            <button class="edit">edit</button>
+            <button class="edit" onclick = 'editSession({{session.id}})'>edit</button>
             {% endif%}
             <button class="delete" onclick = 'delSession({{session.id}})'>delete</button>
         </div>
@@ -144,7 +144,6 @@
         parent = document.getElementById('container')
         parent.removeChild(deletedSession)
 
-
         var target = JSON.stringify(sessionid)
         $.ajax({
             url:'deleteSession',
@@ -152,6 +151,19 @@
             contentType: 'application/json',
             data: JSON.stringify(target)
         })
+    }
+
+    //Edit Session
+    function editSession(sessionid){
+        console.log(sessionid)
+        
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open('GET', '/createsession', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(sessionid));
+        
+
     }
 </script>
 
