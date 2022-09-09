@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>View user page</p>
+<p>User: {{current_user.username}}</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col border ">
+            User Id
+        </div>
+        <div class="col border ">
+            Username
+        </div>
+        <div class="col border">
+            ORCID
+        </div>
+        <div class="col border">
+            Firstname
+        </div>
+        <div class="col border">
+            Lastname
+        </div>
+        <div class="col border">
+            Institution
+        </div>
+        <div class="col border">
+            Email
+        </div>
+        <div class="col border">
+            Reason for using the app
+        </div>
+        <div class="col border">
+            Delete user
+        </div>
+    </div>
+
+    {% for user in users %}
+
+
+    <div id={{user.id}} class="row">
+        <div class="col border">
+            {{ user.id }}
+        </div>
+        <div class="col border">
+            {{ users.username }}
+        </div>
+        <div class="col border">
+            {{user.ORCID}}
+        </div>
+        <div class="col border">
+            {{user.first_name}}
+        </div>
+        <div class="col border">
+            {{user.last_name}}
+        </div>
+        <div class="col border">
+            {{user.institution}}
+        </div>
+        <div class="col border">
+            {{user.email}}
+        </div>
+        <div class="col border">
+            {{user.reason}}
+        </div>
+        <div class="col border">
+            <button class="delete">delete</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Link and QR Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+     function remove(userid){
+        
+     }
+</script>
+
+
+{% endblock %}

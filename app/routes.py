@@ -23,6 +23,8 @@ def user():
 @login_required
 def createsession():
     if request.method == 'GET':
+        if current_user.email == "emotionappmoodtrack@gmail.com":
+            return redirect(url_for('viewusers'))
         return render_template("createsession.html", title='Create Session', is_create=True)
     else:
         userId = current_user.id
@@ -61,10 +63,23 @@ def createsession():
 @app.route('/viewsessions', methods=['GET'])
 @login_required
 def viewsessions():
+    if current_user.email == "emotionappmoodtrack@gmail.com":
+        sessions = Session.query.all()
+        return render_template("admin_viewsession.html", title='View Session', is_view=True, sessions = sessions)
     userId = current_user.id
     sessions = Session.query.filter_by(user_id = userId).all()
+    return render_template("viewsession.html", title='View Session', is_view=True, sessions = sessions)
 
-    return render_template("viewsession.html", title='Create Session', is_view=True, sessions = sessions)
+
+# View Users
+#----------------------------------------------------------
+@app.route('/viewusers', methods=['GET'])
+@login_required
+def viewusers():
+    sessions = Session.query.all()
+    users = User.query.all()
+    return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users)
+
 
 
 # Publish Session
