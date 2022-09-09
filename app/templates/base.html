@@ -52,6 +52,13 @@
                 <li><a href="{{url_for('createsession')}}" class = 'leftActive'>Create Session</a></li>
                 {% endif %}
 
+                <!--View Users-->
+                {% if is_viewuser is not defined %} 
+                <li><a href="{{url_for('viewusers')}}" class = 'left'>View Users</a></li>
+                {% else %}
+                <li><a href="{{url_for('viewusers')}}" class ="leftActive" >View Users</a></li>
+                {% endif %}
+                
                 <!-- View Session(s)-->
                 {% if is_view is not defined %}
                 <li><a href="{{url_for('viewsessions')}}" class = 'left'>View Sessions</a></li>
