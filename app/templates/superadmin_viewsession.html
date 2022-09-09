@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p>Admin view session page</p>
+<p>SuperAdmin view session page</p>
 <p>User: {{current_user.username}}</p>
 
 <div class="container">
@@ -28,18 +28,18 @@
     <div>
     </div>
 
-    <div id={{session.id}} class="row">
+    <div id={{session[0].id}} class="row">
         <div class="col border">
-            {{ session.id }}
+            {{ session[0].id }}
         </div>
         <div class="col border">
-            {{ session.session_title }}
+            {{ session[0].session_title }}
         </div>
         <div class="col border">
-            {{ current_user.id}}
+            {{ session[0].user_id }}
         </div>
         <div class="col border">
-            {{ current_user.username }}
+            {{ session[1].username }}
         </div>
         <div class="col border">
             <button class="delete">delete</button>
