@@ -25,7 +25,9 @@ def user():
 @login_required
 def createsession():
     if request.method == 'GET':
-        return render_template("createsession.html", title='Create Session', is_create=True)
+        test = Session()
+        flash(test)
+        return render_template("createsession.html", title='Create Session', is_create=True, test = test)
     else:
         userId = current_user.id
         data = request.get_json() or {}
@@ -164,5 +166,4 @@ def deleteSession():
 @app.route('/editSession/<int:id>', methods= ['GET', 'POST'])
 def editSession(id):
     session = Session.query.get(id)
-    flash(session)
-    return render_template('createsession.html', session = session, edit = True)
+    return render_template('editsession.html', session = session, edit = True)

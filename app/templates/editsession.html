@@ -5,25 +5,22 @@
 <head> 
     <link rel = 'stylesheet' href = '../static/css/createsession.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
-    <script src='../static/js/createsession.js'></script>
-    <script>
-    </script>
+    
 </head>
-
 <body>
     <div class = 'parent'>
-        <h1> Create Session </h1>
-        <!-- Session Title -->
+        <h1> Edit Session </h1>
+        <!-- Session Title -->  
         <div id = 'title_block' class = 'block'>
-            <label class = 'main'>Session Title</label><br>
-            <input id = 'title' type ='text' placeholder ='Please enter your session title here'></input><br>
+            <label class = 'main'>Title</label><br>
+            <input id = 'title' type ='text' value = '{{session.session_title}}'>  </input><br>
         </div>
 
         <!-- Participant Consent -->
         <div id = 'consent_block' class = 'block'>
             <label class = 'main'> Participant Information and Consent </label><br>
             <label class = 'sub'> Fill in the terms and condition that is required for participants to agree on before undertaking this session. </label><br>
-            <textarea  id = 'consent'></textarea>
+            <textarea  id = 'consent'>{{session.consent}} </textarea>
         </div>
 
         <!-- Pre-measuring Questions-->
@@ -32,10 +29,12 @@
             <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
                 <!-- where new questions will be added-->
                 <div id = 'pre_questions'>
+                    <!-- 
                     <div id = '1' class = 'qblock'>
-                        <textarea id = 't1' class = 'preQ'></textarea>
+                        <textarea id = 't1' class = 'preQ'>{{session.pre_ques}} </textarea>
                         <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'preqD1' onclick ='del(this)'></i>
                     </div>
+                    -->
                 </div>
             <button class = 'add' onclick = "add('pre')"> Add New Question </button>
         </div>
@@ -45,7 +44,7 @@
             <label class = 'main'> Emotions </label><br>
             <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
             <label class = 'main'> Emotion Options </label><br>
-            <textarea id = 'emotion'></textarea><br>
+            <textarea id = 'emotion'> </textarea><br>
             <label class = 'main'> Max Intensity </label><br>
             <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
         </div>
@@ -56,7 +55,7 @@
             <!-- where new questions will be added-->
             <div id = 'post_questions'>
                 <div id = '2' class = 'qblock'>
-                    <textarea id = 't2' class = 'postQ'></textarea>
+                    <textarea id = 't2' class = 'postQ'> </textarea>
                     <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'postD2' onclick ='del(this)'></i>
                 </div>
             </div>  
@@ -83,5 +82,57 @@
         </div>
     </div>
 </body>
+
+<script>
+    // global variable
+    var counter = 0
+
+    // function to generate question blocks and delete option using document object model (DOM)
+    function gen_block(all_questions, target){
+
+
+        if (target == 'pre_questions'){
+            var type = 'preq'
+        }
+        else{
+            var type = 'post'
+        }
+
+        // creating parent and child blocks
+        var parent = document.getElementById(target)
+        var child = document.createElement('div')
+
+        // 
+        for (var i = 0; i <all_questions.length; i++){
+            
+            // creating question and delete 
+            var question = document.createElement('textarea')
+            var del = document.createElement('i')
+
+            // setting attributes of question and del
+            question.value = all_questions[i]
+
+            // appending created things to child
+            child.appendChild(question)
+            child.appendChild(del)
+
+            // appending back into parent block
+            parent.appendChild(child)
+
+        }
+
+    }
+
+    // retrieving pre and post questions
+    
+    var preQ_all = '{{session.pre_ques}}'.split(',')
+    //var postQ_all = '{{session.post_ques}}'.split(',')
+
+    
+
+    gen_block(preQ_all, 'pre_questions')
+   
+    
+</script>
 
 {% endblock %}
