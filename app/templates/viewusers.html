@@ -2,74 +2,41 @@
 
 {% block content %}
 
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/viewusers.css'>
+</head>
+
 <p>View user page</p>
 <p>User: {{current_user.username}}</p>
 
-<div class="container">
-    <div class="row">
-        <div class="col border ">
-            User Id
-        </div>
-        <div class="col border ">
-            Username
-        </div>
-        <div class="col border">
-            ORCID
-        </div>
-        <div class="col border">
-            Firstname
-        </div>
-        <div class="col border">
-            Lastname
-        </div>
-        <div class="col border">
-            Institution
-        </div>
-        <div class="col border">
-            Email
-        </div>
-        <div class="col border">
-            Reason for using the app
-        </div>
-        <div class="col border">
-            Delete user
-        </div>
-    </div>
+<table class="users_table">
+    <tr>
+        <th>User Id</th>
+        <th>Username</th>
+        <th>ORCID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Institution</th>
+        <th>Email</th>
+        <th>Reason for using the app</th>
+        <th>Delete user</th>
+    </tr>
 
     {% for user in users %}
-
-
-    <div id={{user.id}} class="row">
-        <div class="col border">
-            {{ user.id }}
-        </div>
-        <div class="col border">
-            {{ users.username }}
-        </div>
-        <div class="col border">
-            {{user.ORCID}}
-        </div>
-        <div class="col border">
-            {{user.first_name}}
-        </div>
-        <div class="col border">
-            {{user.last_name}}
-        </div>
-        <div class="col border">
-            {{user.institution}}
-        </div>
-        <div class="col border">
-            {{user.email}}
-        </div>
-        <div class="col border">
-            {{user.reason}}
-        </div>
-        <div class="col border">
-            <button class="delete">delete</button>
-        </div>
-    </div>
+    
+    <tr id={{user.id}}>
+        <td>{{ user.id }}</td>
+        <td>{{ users.username }}</td>
+        <td>{{user.ORCID}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.institution}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.reason}}</td>
+        <td><button class="delete">delete</button></td>
+    </tr>
     {% endfor %}
-</div>
+</table>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
