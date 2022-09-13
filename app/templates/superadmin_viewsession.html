@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p>Admin view session page</p>
+<p>SuperAdmin view session page</p>
 <p>User: {{current_user.username}}</p>
 
 <div class="container">
@@ -28,39 +28,20 @@
     <div>
     </div>
 
-    <div id={{session.id}} class="row">
+    <div id={{session[0].id}} class="row">
         <div class="col border">
-            {{ session.id }}
+            {{ session[0].id }}
         </div>
         <div class="col border">
-            {{ session.session_title }}
+            {{ session[0].session_title }}
         </div>
         <div class="col border">
-            {% if session.published %}
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                onclick="updatelink('{{session.id}}')">Link</button>
-            {% else %}
-            <button disabled type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                onclick="updatelink('{{session.id}}')">Link</button>
-            {% endif%}
-
+            {{ session[0].user_id }}
         </div>
         <div class="col border">
-            {% if session.published %}
-            published
-            {% else %}
-            <button sessionid={{session.id}} onclick="publish(this)">publish</button>
-            {% endif%}
+            {{ session[1].username }}
         </div>
         <div class="col border">
-            <button>copy</button>
-        </div>
-        <div class="col border">
-            {% if session.published %}
-            <button disabled class="edit">edit</button>
-            {% else %}
-            <button class="edit">edit</button>
-            {% endif%}
             <button class="delete">delete</button>
         </div>
     </div>
