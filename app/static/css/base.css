@@ -71,7 +71,7 @@ a {
     width: 400px;
 }
 
-@media(max-width: 700px){}
+@media(max-width: 700px){
     .logo{
         height: 40px;
         width: 200px;
@@ -99,9 +99,9 @@ a {
 }
 
 .delete{
-    background-color: salmon;
+    background-color: #f85c70;
     color: white;
     border: none;
     border-radius: 8px;
-    width: 95px;
+    width: 85px;
 }
