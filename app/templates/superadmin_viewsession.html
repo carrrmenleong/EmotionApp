@@ -2,50 +2,57 @@
 
 {% block content %}
 
-<p>SuperAdmin view session page</p>
-<p>User: {{current_user.username}}</p>
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/viewsession.css'>
+</head>
 
-<div class="container">
-    <div class="row">
-        <div class="col border ">
-            Session Id
-        </div>
-        <div class="col border ">
-            Session Name
-        </div>
-        <div class="col border">
-            Session Created By (UserID)
-        </div>
-        <div class="col border">
-            Session Created By (Username)
-        </div>
-        <div class="col border">
-            Delete Session
-        </div>
-    </div>
+<h1 class="display-4 pagetitle">View Sessions</h1>
 
-    {% for session in sessions %}
-    <div>
-    </div>
+<div class="container-holder">
+    <div class="container-fluid text-center bg-white">
+        <div class="row bg-dark text-white">
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Session ID</strong></h5>
+            </div>
+            <div class="col-3 d-flex">
+                <h5 style="margin:auto"><strong>Session Name</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Session Created By (UserID)</strong></h5>
+            </div>
+            <div class="col-3 d-flex">
+                <h5 style="margin:auto"><strong>Session Created By (Username)</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Delete Session</strong></h5>
+            </div>
+        </div>
 
-    <div id={{session[0].id}} class="row">
-        <div class="col border">
-            {{ session[0].id }}
+        {% for session in sessions %}
+        <div>
         </div>
-        <div class="col border">
-            {{ session[0].session_title }}
+
+        <div id={{session[0].id}} class="row">
+            <div class="col-2 border d-flex">
+                <p style="margin:auto; padding-top: 15px; padding-bottom: 15px">{{ session[0].id }}</p>
+            </div>
+            <div class="col-3 border d-flex">
+                <p style="margin:auto">{{ session[0].session_title }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">{{ session[0].user_id }}</p>
+            </div>
+            <div class="col-3 border d-flex">
+                <p style="margin:auto">{{ session[1].username }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">
+                    <button class="delete btn btn-danger">delete</button>
+                </p>
+            </div>
         </div>
-        <div class="col border">
-            {{ session[0].user_id }}
-        </div>
-        <div class="col border">
-            {{ session[1].username }}
-        </div>
-        <div class="col border">
-            <button class="delete">delete</button>
-        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
