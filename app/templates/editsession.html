@@ -5,7 +5,7 @@
 <head> 
     <link rel = 'stylesheet' href = '../static/css/createsession.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
-    
+    <script src='../static/js/createsession.js'></script>
 </head>
 <body>
     <div class = 'parent'>
@@ -28,14 +28,7 @@
             <label class = 'main'> Pre-Measuring Questions </label><br>
             <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
                 <!-- where new questions will be added-->
-                <div id = 'pre_questions'>
-                    <!-- 
-                    <div id = '1' class = 'qblock'>
-                        <textarea id = 't1' class = 'preQ'>{{session.pre_ques}} </textarea>
-                        <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'preqD1' onclick ='del(this)'></i>
-                    </div>
-                    -->
-                </div>
+                <div id = 'pre_questions'></div>
             <button class = 'add' onclick = "add('pre')"> Add New Question </button>
         </div>
 
@@ -44,24 +37,19 @@
             <label class = 'main'> Emotions </label><br>
             <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
             <label class = 'main'> Emotion Options </label><br>
-            <textarea id = 'emotion'> </textarea><br>
+            <textarea id = 'emotion'>{{session.emotions}}</textarea><br>
             <label class = 'main'> Max Intensity </label><br>
-            <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
+            <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12' value = '{{session.intensity}}'></input><br>
         </div>
 
         <!-- Post Measuring Question -->
         <div id = 'post_block' class = 'block'>
             <label class = 'main'> Post-measuring Questions </label><br>
             <!-- where new questions will be added-->
-            <div id = 'post_questions'>
-                <div id = '2' class = 'qblock'>
-                    <textarea id = 't2' class = 'postQ'> </textarea>
-                    <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'postD2' onclick ='del(this)'></i>
-                </div>
-            </div>  
+            <div id = 'post_questions'></div>  
             <button class = 'add' onclick ="add('post')"> Add New Question </button>
         </div>
-        <button onclick="submit()" id = 'submit'>Create Session</button>
+        <button onclick="update()" id = 'update'>Update Session</button>
     </div>
 
     <!-- modal-->
@@ -69,7 +57,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Session Created</h5>
+              <h5 class="modal-title">Session Updated</h5>
               </button>
             </div>
             <div class="modal-body">
@@ -84,13 +72,8 @@
 </body>
 
 <script>
-    // global variable
-    var counter = 0
-
     // function to generate question blocks and delete option using document object model (DOM)
     function gen_block(all_questions, target){
-
-
         if (target == 'pre_questions'){
             var type = 'preq'
         }
@@ -100,39 +83,71 @@
 
         // creating parent and child blocks
         var parent = document.getElementById(target)
-        var child = document.createElement('div')
 
-        // 
+        //adding 
         for (var i = 0; i <all_questions.length; i++){
+            
+            var child = document.createElement('div')
             
             // creating question and delete 
             var question = document.createElement('textarea')
             var del = document.createElement('i')
 
             // setting attributes of question and del
+            if (type == 'preq'){
+                question.setAttribute('class', 'preQ')
+            }
+            else{
+                question.setAttribute('class', 'postQ')
+            }
+            question.setAttribute('id', 't' + counter.toString())
             question.value = all_questions[i]
+            del.setAttribute('id', type + 'd' + counter.toString())
+            del.setAttribute('class', "fas fa-trash fa-2x")
+            del.setAttribute('aria-hidden', "true")
+            del.setAttribute('onclick', 'del(this)')
 
             // appending created things to child
+            child.setAttribute('id', counter)
+            child.setAttribute('class', 'qblock')
             child.appendChild(question)
             child.appendChild(del)
 
             // appending back into parent block
             parent.appendChild(child)
 
+            counter++
         }
-
     }
 
     // retrieving pre and post questions
+    var preQ_all = JSON.parse('{{session.pre_ques|safe}}')
+    var postQ_all = JSON.parse('{{session.post_ques|safe}}')
     
-    var preQ_all = '{{session.pre_ques}}'.split(',')
-    //var postQ_all = '{{session.post_ques}}'.split(',')
-
-    
-
+    // generating pre and post questions
     gen_block(preQ_all, 'pre_questions')
-   
-    
+    gen_block(postQ_all, 'post_questions')
+
+    // function to collate and update db
+    function update(){
+        //retrieving results
+        var title = retrieve_title()
+        var consent = retrieve_consent()
+        var prequestions = retrieve_prequestions()
+        var emotion = retrieve_emotions()
+        var intensity = retrieve_intensity()
+        var postquestions = retrieve_postquestions()
+        //combining the data
+        mydata =  {
+            sessionTitle:title, 
+            consent: consent, 
+            preQuestions: prequestions, 
+            emotions: emotion, 
+            intensity:intensity, 
+            postQuestions:postquestions
+        }
+        console.log(mydata)
+    }
 </script>
 
 {% endblock %}

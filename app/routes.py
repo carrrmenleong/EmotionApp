@@ -28,7 +28,6 @@ def user():
 def createsession():
     if request.method == 'GET':
         test = Session()
-        flash(test)
         return render_template("createsession.html", title='Create Session', is_create=True, test = test)
     else:
         userId = current_user.id
@@ -204,4 +203,5 @@ def deleteSession():
 @app.route('/editSession/<int:id>', methods= ['GET', 'POST'])
 def editSession(id):
     session = Session.query.get(id)
-    return render_template('editsession.html', session = session, edit = True)
+    
+    return render_template('editsession.html', session = session,edit = True)

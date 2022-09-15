@@ -68,7 +68,7 @@ function retrieve_consent(){
     var consent = document.getElementById('consent').value
     return consent
 }
-//prequestionsx`x
+//prequestions
 function retrieve_prequestions(){
     var prequestions = []
     var all = document.getElementsByClassName('preQ')
@@ -78,10 +78,12 @@ function retrieve_prequestions(){
     }
     else{
         for(let i = 0; i< all.length; i ++){
-            prequestions.push(all[i].value)
+            var question = all[i].value.replace(/\n/g, "\\n")
+            prequestions.push(question)
         }
     }
-    return prequestions
+    jsonPreQ =JSON.stringify(prequestions)
+    return jsonPreQ
 }
 //emotions
 function retrieve_emotions(){
@@ -99,9 +101,11 @@ function retrieve_postquestions(){
     var postquestions = []
     var all = document.getElementsByClassName('postQ')
     for(let i = 0; i< all.length; i ++){
-        postquestions.push(all[i].value)
+        var question = all[i].value.replace(/\n/g, "\\n")
+        postquestions.push(question)
     }
-    return postquestions
+    jsonPostq = JSON.stringify(postquestions)
+    return jsonPostq
 }
 
 //function to retrieve and submit results
@@ -114,7 +118,6 @@ function submit(){
     var emotion = retrieve_emotions()
     var intensity = retrieve_intensity()
     var postquestions = retrieve_postquestions()
-
     //combining the data
     mydata =  {
         sessionTitle:title, 
