@@ -2,75 +2,85 @@
 
 {% block content %}
 
-<p>View session page</p>
-<p>User: {{current_user.username}}</p>
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/viewsession.css'>
+</head>
 
-<div class="container" id = 'container'>
-    <div class="row">
-        <div class="col border ">
-            Session Id
+<h1 class="display-4 pagetitle">View Sessions</h1>
+
+<div class="container-holder">
+    <div class="container-fluid text-center bg-white">
+        <div class="row bg-dark text-white">
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Session ID</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Session Name</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Link and QR</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Publish Session</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Copy Session</strong></h5>
+            </div>
+            <div class="col-3 d-flex">
+                <h5 style="margin:auto"><strong>Edit/Delete Session</strong></h5>
+            </div>
         </div>
-        <div class="col border ">
-            Session Name
+
+        {% for session in sessions %}
+        <div>
         </div>
-        <div class="col border">
-            Link and QR
+
+        <div id={{session.id}} class="row">
+            <div class="col-1 border d-flex">
+                <p style="margin:auto; padding-top: 15px; padding-bottom: 15px">{{ session.id }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">{{ session.session_title }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">
+                    {% if session.published %}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        onclick="updatelink('{{session.id}}','{{session.session_title}}')">Link</button>
+                    {% else %}
+                    <button disabled aria-disabled="true" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        onclick="updatelink('{{session.id}}','{{session.session_title}}')">Link</button>
+                    {% endif%}
+                </p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">
+                    {% if session.published %}
+                    published
+                    {% else %}
+                    <button class="btn btn-success" sessionid={{session.id}} onclick="publish(this)">publish</button>
+                    {% endif%}
+                </p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">
+                    <button class="btn btn-warning">copy</button>
+                </p>
+            </div>
+            <div class="col-3 border d-flex">
+                <p style="margin:auto">
+                    {% if session.published %}
+                    <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
+                    {% else %}
+                    <button class="edit btn btn-info">edit</button>
+                    <a href = "{{url_for('editSession', id = session.id)}}"> edit </a>
+                    {% endif%}
+                    <button class="delete btn btn-danger" onclick = 'delSession({{session.id}})'>delete</button>
+                </p>
+            </div>
         </div>
-        <div class="col border">
-            Publish Session
-        </div>
-        <div class="col border">
-            Copy Session
-        </div>
-        <div class="col border">
-            Edit/Delete Session
-        </div>
+        {% endfor %}
     </div>
-
-    {% for session in sessions %}
-    <div>
-    </div>
-
-    <div id={{session.id}} class="row">
-        <div class="col border">
-            {{ session.id }}
-        </div>
-        <div class="col border">
-            {{ session.session_title }}
-        </div>
-        <div class="col border">
-            {% if session.published %}
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                onclick="updatelink('{{session.id}}')">Link</button>
-            {% else %}
-            <button disabled type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                onclick="updatelink('{{session.id}}')">Link</button>
-            {% endif%}
-
-        </div>
-        <div class="col border">
-            {% if session.published %}
-            published
-            {% else %}
-            <button sessionid={{session.id}} onclick="publish(this)">publish</button>
-            {% endif%}
-        </div>
-        <div class="col border">
-            <button>copy</button>
-        </div>
-        <div class="col border">
-            {% if session.published %}
-            <button disabled class="edit">edit</button>
-            {% else %}
-            <!--<button class="edit" onclick = 'editSession({{session.id}})'>edit</button>-->
-            <!--<button class="edit" href = "{{url_for('editSession', id = session.id)}}">edit</button>-->
-            <button onclick= "{{url_for('createsession')}}">edit</button>
-            <a href = "{{url_for('editSession', id = session.id)}}"> edit </a>
-            {% endif%}
-            <button class="delete" onclick = 'delSession({{session.id}})'>delete</button>
-        </div>
-    </div>
-    {% endfor %}
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,23 +128,29 @@
     function update(sessionid) {
         // Replace publish button with "Published"
         $('#' + sessionid + ' div:nth-child(4)').empty();
-        $('#' + sessionid + ' div:nth-child(4)').append("<p>published</p>");
+        $('#' + sessionid + ' div:nth-child(4)').append("<p style='margin:auto'>published</p>");
 
         // Disable edit button
         $('#' + sessionid + ' div:nth-child(6) .edit').prop('disabled', true);
+        $('#' + sessionid + ' div:nth-child(6) .edit').prop('aria-disabled', true);
+        $('#' + sessionid + ' div:nth-child(6) .edit').prop('class', "edit btn btn-secondary");
 
         // Activate link button
         $('#' + sessionid + ' div:nth-child(3) button').prop('disabled', false);
+        $('#' + sessionid + ' div:nth-child(3) button').prop('aria-disabled', false);
+        $('#' + sessionid + ' div:nth-child(3) button').prop('class', "edit btn btn-primary");
     }
 
     // Update the link and QR Code in the popup
-    function updatelink(sessionid) {
+    function updatelink(sessionid, sessiontitle) {
         $(".modal-body").empty()
         rootUrl = window.location.origin
         linkUrl = rootUrl + '/session/' + sessionid
 
+        $(".modal-body").append('<div><p>Session ID: ' + sessionid + '</p></div>')
+        $(".modal-body").append('<div><p>Session Name: ' + sessiontitle + '</p></div>')
         $(".modal-body").append("<div id='qrcode'></div>")
-        $(".modal-body").append('<p>' + linkUrl + '</p>')
+        $(".modal-body").append('<div><p>Session Link: <a id="link" href="' + linkUrl + '">' + linkUrl + '</a></p></div>')
 
         new QRCode(document.getElementById("qrcode"), linkUrl);
     }

@@ -116,7 +116,7 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         user = User(fist_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
-            email=form.email.data, reason=form.reason.data, approved=False)
+            email=form.email.data.lower(), reason=form.reason.data, approved=False)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -134,7 +134,7 @@ def login():
         return redirect(url_for('createsession'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -162,7 +162,7 @@ def reset_password_request():
         return redirect(url_for('login'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user:
             send_password_reset_email(user)
         flash("Check your email for the instructions to reset your password. If you couldn't find the email in your inbox, please check your spam/junk folder ")
