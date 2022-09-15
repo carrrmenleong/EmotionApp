@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>SuperAdmin view session page</p>
+<p>User: {{current_user.username}}</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col border ">
+            Session Id
+        </div>
+        <div class="col border ">
+            Session Name
+        </div>
+        <div class="col border">
+            Session Created By (UserID)
+        </div>
+        <div class="col border">
+            Session Created By (Username)
+        </div>
+        <div class="col border">
+            Delete Session
+        </div>
+    </div>
+
+    {% for session in sessions %}
+    <div>
+    </div>
+
+    <div id={{session[0].id}} class="row">
+        <div class="col border">
+            {{ session[0].id }}
+        </div>
+        <div class="col border">
+            {{ session[0].session_title }}
+        </div>
+        <div class="col border">
+            {{ session[0].user_id }}
+        </div>
+        <div class="col border">
+            {{ session[1].username }}
+        </div>
+        <div class="col border">
+            <button class="delete">delete</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Link and QR Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+<script>
+    function publish(ele) {
+        var sessionid = ele.getAttribute('sessionid')
+        var data = { sessionId: sessionid }
+        update(sessionid)
+
+        // Send HTTP request
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                const status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    console.log(xhttp.responseText);
+                    update(sessionid)
+                } else {
+                    console.log(xhttp.responseText);
+                }
+            }
+        }
+        xhttp.open('POST', '/publishsession', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(data));
+    }
+
+    // Update the link, disable edit button, remove publish button
+    function update(sessionid) {
+        // Replace publish button with "Published"
+        $('#' + sessionid + ' div:nth-child(4)').empty();
+        $('#' + sessionid + ' div:nth-child(4)').append("<p>published</p>");
+
+        // Disable edit button
+        $('#' + sessionid + ' div:nth-child(6) .edit').prop('disabled', true);
+
+        // Activate link button
+        $('#' + sessionid + ' div:nth-child(3) button').prop('disabled', false);
+    }
+
+    // Update the link and QR Code in the popup
+    function updatelink(sessionid) {
+        $(".modal-body").empty()
+        rootUrl = window.location.origin
+        linkUrl = rootUrl + '/session/' + sessionid
+
+        $(".modal-body").append("<div id='qrcode'></div>")
+        $(".modal-body").append('<p>' + linkUrl + '</p>')
+
+        new QRCode(document.getElementById("qrcode"), linkUrl);
+    }
+</script>
+
+
+{% endblock %}
