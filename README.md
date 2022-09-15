@@ -45,7 +45,7 @@ $ flask db upgrade
 $ flask run
 ```
 
-## Develpment Workflow
+## Development Workflow
 
 1. Choose the issue you want to work on.
 2. Assign yourselves to the relevant issue on GitHub.
@@ -57,3 +57,14 @@ $ flask run
 8. Get your peer to review your code and merge your change to main.
 9. Your feature is merged.
 10. Delete your local branch with `git branch -d <branch_name>`.
+
+## Development Practise
+### 1. Update requirements.txt
+After installing new pakage(s), run the following code in your virtual environment to update the requirements.txt file. 
+```
+$ pip freeze > requirements.txt
+```
+To download the pakages listed in the requirements.txt file, run the following code in your virtual environment.
+```
+$ pip install -r requirements.txt
+```
