@@ -2,8 +2,22 @@ table, th, td{
     border: 1px solid black;
 }
 
+
+td{
+    vertical-align:top;
+    text-align: center;
+    padding: 5px;
+}
+
+th{
+    text-align: center;
+    padding: 5px;
+}
+
+
 .users_table{
+    margin-left: auto;
+    margin-right: auto;
     table-layout: auto;
-    width: 60%;
-    
+    width: 90%;
 }
