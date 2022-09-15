@@ -46,10 +46,10 @@
                 <p style="margin:auto">
                     {% if session.published %}
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        onclick="updatelink('{{session.id}}')">Link</button>
+                        onclick="updatelink('{{session.id}}','{{session.session_title}}')">Link</button>
                     {% else %}
                     <button disabled aria-disabled="true" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        onclick="updatelink('{{session.id}}')">Link</button>
+                        onclick="updatelink('{{session.id}}','{{session.session_title}}')">Link</button>
                     {% endif%}
                 </p>
             </div>
@@ -141,13 +141,15 @@
     }
 
     // Update the link and QR Code in the popup
-    function updatelink(sessionid) {
+    function updatelink(sessionid, sessiontitle) {
         $(".modal-body").empty()
         rootUrl = window.location.origin
         linkUrl = rootUrl + '/session/' + sessionid
 
+        $(".modal-body").append('<div><p>Session ID: ' + sessionid + '</p></div>')
+        $(".modal-body").append('<div><p>Session Name: ' + sessiontitle + '</p></div>')
         $(".modal-body").append("<div id='qrcode'></div>")
-        $(".modal-body").append('<p>' + linkUrl + '</p>')
+        $(".modal-body").append('<div><p>Session Link: <a id="link" href="' + linkUrl + '">' + linkUrl + '</a></p></div>')
 
         new QRCode(document.getElementById("qrcode"), linkUrl);
     }

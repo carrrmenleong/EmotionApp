@@ -15,3 +15,24 @@
 	border-style: solid;
 	border-radius: 3px;
 }
+
+.modal-body div {
+	display: flex;
+	justify-content: center;
+	height: fit-content;
+}
+
+.modal-body div p {
+	margin: 0%;
+	font-size: large;
+}
+
+
+#qrcode {
+	padding: 10px;
+}
+
+#link {
+	font-size: medium;
+	padding: 0%;
+}
