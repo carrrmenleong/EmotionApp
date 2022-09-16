@@ -203,5 +203,28 @@ def deleteSession():
 @app.route('/editSession/<int:id>', methods= ['GET', 'POST'])
 def editSession(id):
     session = Session.query.get(id)
-    
     return render_template('editsession.html', session = session,edit = True)
+
+# Update Session
+#----------------------------------------------------------------
+@app.route('/updateSession', methods = ['POST'])
+def updateSession():
+    #getting json data
+    jsonData = request.get_json()
+    newData = json.loads(jsonData)
+    
+    #retrieving specific session
+    selectedSession = newData['id']
+    session = Session.query.get(selectedSession)
+    
+    #updating session
+    session.session_title = newData['sessionTitle']
+    session.consent = newData['consent']
+    session.emotions = newData['emotions']
+    session.intensity = newData['intensity']
+    session.pre_ques = newData['preQuestions']
+    session.post_ques = newData['postQuestions']
+    db.session.commit()
+    
+    
+    return redirect(url_for('viewsessions'))
