@@ -4,7 +4,7 @@ from flask import render_template, flash, redirect, url_for, request, jsonify
 from flask_login import current_user, login_user,login_required,logout_user
 from app.models import User, Session, Participant, Response
 from werkzeug.urls import url_parse
-from app.forms import SignupForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from sqlalchemy import func 
 from app.api.errors import bad_request
 from app.email import send_password_reset_email
