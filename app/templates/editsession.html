@@ -61,7 +61,8 @@
               </button>
             </div>
             <div class="modal-body">
-              <p> Please head to view session page to checkout the session created.</p>
+                <p> Session updated successfully! </p>
+                <p> Feel free to add more changes or head to the View Session Page</a> to checkout your session!</p>
             </div>
             <div class="modal-footer">
               <button type="button" id = 'closeModal' onclick ='hide()'>Close</button>
@@ -119,6 +120,7 @@
             counter++
         }
     }
+    
 
     // retrieving pre and post questions
     var preQ_all = JSON.parse('{{session.pre_ques|safe}}')
@@ -139,6 +141,7 @@
         var postquestions = retrieve_postquestions()
         //combining the data
         mydata =  {
+            id: '{{session.id}}',
             sessionTitle:title, 
             consent: consent, 
             preQuestions: prequestions, 
@@ -146,8 +149,18 @@
             intensity:intensity, 
             postQuestions:postquestions
         }
-        console.log(mydata)
+        jsonData = JSON.stringify(mydata)
+        $.ajax({
+            url:'/updateSession',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(jsonData)
+        })
+        //displaying modal
+        $('#myModal').modal('show')
+
     }
+
 </script>
 
 {% endblock %}
