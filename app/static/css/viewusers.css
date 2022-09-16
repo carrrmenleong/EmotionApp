@@ -1,25 +1,28 @@
-table, th, td{
-    border: 1px solid black;
-    font-size: 12px;
-    min-width: 70px;
+.pagetitle {
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 10px;
 }
 
-
-td{
-    vertical-align:top;
-    text-align: center;
-    padding: 5px;
+.container-holder {
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
-th{    
-    text-align: center;
-    padding: 5px;
+.container-fluid {
+	border-color: black;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 3px;
 }
 
+.modal-body div {
+	display: flex;
+	justify-content: center;
+	height: fit-content;
+}
 
-.users_table{
-    margin-left: auto;
-    margin-right: auto;
-    table-layout: auto;
-    width: 90%;
+.modal-body div p {
+	margin: 0%;
+	font-size: large;
 }

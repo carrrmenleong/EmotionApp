@@ -6,37 +6,77 @@
     <link rel = 'stylesheet' href = '../static/css/viewusers.css'>
 </head>
 
-<p>View user page</p>
-<p>User: {{current_user.username}}</p>
+<h1 class="display-4 pagetitle">View Users</h1>
 
-<table class="users_table">
-    <tr>
-        <th>User Id</th>
-        <th>Username</th>
-        <th>ORCID</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Institution</th>
-        <th>Email</th>
-        <th>Reason for using the app</th>
-        <th>Delete user</th>
-    </tr>
+<div class="container-holder">
+    <div class="container-fluid text-center bg-white">
+        <div class="row bg-dark text-white">
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>User ID</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Username</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>ORCID</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>First Name</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Last Name</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Institution</strong></h5>
+            </div>
+            <div class="col-3 d-flex">
+                <h5 style="margin:auto"><strong>Email</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Reason for using the app</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Delete</strong></h5>
+            </div>
+        </div>
 
-    {% for user in users %}
-    
-    <tr id={{user.id}}>
-        <td>{{ user.id }}</td>
-        <td>{{ users.username }}</td>
-        <td>{{user.ORCID}}</td>
-        <td>{{user.first_name}}</td>
-        <td>{{user.last_name}}</td>
-        <td>{{user.institution}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.reason}}</td>
-        <td><button class="delete">Delete</button></td>
-    </tr>
-    {% endfor %}
-</table>
+        {% for user in users %}
+
+        <div id={{user.id}} class="row">
+            <div class="col-1 border d-flex">
+                <p style="margin:auto; ">{{ user.id }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.username }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.orcid }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.fist_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.last_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.institution }}</p>
+            </div>
+            <div class="col-3 border d-flex">
+                <p style="margin:auto">{{ user.email }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">{{ user.reason }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">
+                    <button class="delete btn btn-danger">Delete</button>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
