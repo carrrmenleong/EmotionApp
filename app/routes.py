@@ -26,8 +26,7 @@ def user():
 @login_required
 def createsession():
     if request.method == 'GET':
-        test = Session()
-        return render_template("createsession.html", title='Create Session', is_create=True, test = test)
+        return render_template("createsession.html", title='Create Session', is_create=True)
     else:
         userId = current_user.id
         data = request.get_json() or {}
