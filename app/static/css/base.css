@@ -97,3 +97,11 @@ a {
         font-size: x-small;
     }
 }
+
+.delete{
+    background-color: #f85c70;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 85px;
+}
