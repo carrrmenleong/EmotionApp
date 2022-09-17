@@ -1,0 +1,118 @@
+{% extends "base_participant.html" %}
+{% block content %}
+<p>Session Name: {{session.session_title}}</p>
+<p>Stage Num: {{stage}}</p>
+<p>Participant stagenum: {{participant.stage_num}}</p>
+
+
+<p>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
+    the future.</p>
+<h2>ID Code: {{participant.id}}</h2>
+<hr>
+<h2>Personal Details</h2>
+
+<!-- Load pre-session quesitons if participant is in stage 2 -->
+{% if stage == 2 %}
+<div>
+    {{session.pre_ques}}
+    <button onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
+</div>
+<!-- Load post-session quesitons if participant is in stage 4 -->
+{% elif stage == 4 %}
+<div>
+    {{session.post_ques}}
+    <button onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
+</div>
+{% endif %}
+
+<!-- Load consent modal if participant is in stage 1 -->
+{% if stage == 1 %}
+<!-- Consent modal-->
+<div id="consentModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Participant Information and Consent</h5>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> {{session.consent}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id='closeModal'
+                    onclick="hide();agreeConsent('{{session.id}}','{{participant.id}}')">Agree</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
+<script>
+    window.onload = () => {
+        $('#consentModal').modal('show');
+    }
+
+    function hide() {
+        $('#consentModal').modal('hide')
+    }
+
+    function agreeConsent(sessionId, participantId) {
+        let mydata = { stage: 1, consent: true }
+        let targetUrl = `/session/${sessionId}/${participantId}`
+        //submiting data
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                const status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    // The request has been completed successfully
+                    console.log('Submitted!')
+                    console.log(xhttp.responseText);
+                    // Redirect to next stage
+                    targetUrl = `/session/${sessionId}/${participantId}`
+                    location.href = targetUrl;
+                } else {
+                    console.log(xhttp.responseText);
+                    // Oh no! There has been an error with the request!
+                }
+            }
+        }
+        xhttp.open('POST', targetUrl, true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(mydata));
+    }
+
+
+    function submitAns(sessionId, participantId, stage_num) {
+        console.log(stage_num)
+        let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
+        let targetUrl = `/session/${sessionId}/${participantId}`
+
+        //submiting data
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                const status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    // The request has been completed successfully
+                    console.log('Submitted!')
+                    console.log(xhttp.responseText);
+                    // Redirect to next stage
+                    targetUrl = `/session/${sessionId}/${participantId}`
+                    location.href = targetUrl;
+                } else {
+                    console.log(xhttp.responseText);
+                    // Oh no! There has been an error with the request!
+                }
+            }
+        }
+        xhttp.open('POST', targetUrl, true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(dummydata));
+    }
+
+</script>
+
+{% endblock %}
