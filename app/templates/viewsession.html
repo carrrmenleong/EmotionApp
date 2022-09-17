@@ -78,7 +78,7 @@
                     {% endif%}
                 </p>
                 <p style="margin:auto">
-                    <button class="delete btn btn-secondary" onclick="delSession(session.id)">delete</button>
+                    <button class="delete btn btn-secondary" onclick="delSession('{{session.id}}')">delete</button>
                 </p>
             </div>
         </div>
@@ -163,7 +163,6 @@
 
         //removing session on front end using DOM
         deletedSession = document.getElementById(sessionid)
-        console.log(deletedSession)
         parent = document.getElementById('container')
         parent.removeChild(deletedSession)
 
