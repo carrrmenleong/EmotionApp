@@ -9,7 +9,7 @@
 <h1 class="display-4 pagetitle">View Sessions</h1>
 
 <div class="container-holder">
-    <div class="container-fluid text-center bg-white">
+    <div class="container-fluid text-center bg-white" id = 'container'>
         <div class="row bg-dark text-white">
             <div class="col-1 d-flex">
                 <h5 style="margin:auto"><strong>Session ID</strong></h5>
@@ -72,9 +72,9 @@
                     {% if session.published %}
                     <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
                     {% else %}
-                    <button class="edit btn btn-info">edit</button>
+                    <a style="display: inline;" href = "{{url_for('editSession', id = session.id)}}"><button class="edit btn btn-info">edit</button></a>
                     {% endif%}
-                    <button class="delete btn btn-danger">delete</button>
+                    <button class="delete btn btn-danger" onclick = 'delSession({{session.id}})'>delete</button>
                 </p>
             </div>
         </div>
@@ -153,6 +153,25 @@
 
         new QRCode(document.getElementById("qrcode"), linkUrl);
     }
+
+    // Delete Session
+    function delSession(sessionid){
+
+        //removing session on front end using DOM
+        deletedSession = document.getElementById(sessionid)
+        console.log(deletedSession)
+        parent = document.getElementById('container')
+        parent.removeChild(deletedSession)
+
+        var target = JSON.stringify(sessionid)
+        $.ajax({
+            url:'deleteSession',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(target)
+        })
+    }
+
 </script>
 
 
