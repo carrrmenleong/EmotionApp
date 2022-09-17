@@ -70,6 +70,9 @@
                     // The request has been completed successfully
                     console.log('Submitted!')
                     console.log(xhttp.responseText);
+                    // Redirect to next stage
+                    targetUrl = `/session/${sessionId}/${participantId}`
+                    location.href = targetUrl;
                 } else {
                     console.log(xhttp.responseText);
                     // Oh no! There has been an error with the request!
