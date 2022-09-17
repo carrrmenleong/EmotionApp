@@ -73,10 +73,12 @@ def viewsessions():
 @app.route('/viewusers', methods=['GET'])
 @login_required
 def viewusers():
-    sessions = Session.query.all()
-    users = User.query.all()
-    return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users)
-
+    if current_user.email == "emotionappmoodtrack@gmail.com":
+        sessions = Session.query.all()
+        users = User.query.all()
+        return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users)
+    else:
+        return render_template("404.html")
 
 
 # Publish Session
@@ -121,6 +123,7 @@ def signup():
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
 
+
 # Login/Sign In
 #----------------------------------------------------------
 @app.route('/')
@@ -140,6 +143,7 @@ def login():
             next_page = url_for('createsession')
         return redirect(next_page)
     return render_template('login.html', title='Login', form=form, is_signin=True)
+
 
 # Logout
 #----------------------------------------------------------
