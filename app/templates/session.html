@@ -1,5 +1,48 @@
-<html>
-<!-- Prolly need another base.html -->
+{% extends "base_participant.html" %}
+{% block content %}
+
 <p>session page</p>
-{{session}}
-</html>
+<h1>Welcome to Emotion App!</h1>
+<h2>Session Name: {{session.session_title}}</h2>
+<p>{{stage}}</p>
+
+
+<div>
+    <button onclick="startSession('{{session.id}}')">Start Session</button>
+    <input id="participantId" type="text">
+    <button onclick="continueSession('{{session.id}}')">Continue Session</button>
+</div>
+
+<script>
+    // Get new participant ID
+    function getNewId(sessionId){
+        let targetUrl = `/session/${sessionId}/getid`
+        let newId
+        $.ajax({
+            async: false,
+            url: targetUrl,
+            success: function (data) {
+                newId = data
+            }
+        });
+        return newId
+    }
+
+    function startSession(sessionId) {
+        participantId = getNewId(sessionId)
+        targetUrl = `/session/${sessionId}/${participantId}`
+        location.href = targetUrl;
+    }
+
+    function continueSession(sessionId) {
+        participantId = $('#participantId').value
+        if(participantId){
+            console.log(participantId)
+            targetUrl = `/session/${sessionId}/${participantId}`
+            location.href = targetUrl;
+        }
+    }
+
+</script>
+
+{% endblock %}
