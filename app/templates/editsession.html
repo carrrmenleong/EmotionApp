@@ -9,7 +9,11 @@
 </head>
 <body>
     <div class = 'parent'>
+        {% if is_create is not defined %}
         <h1> Edit Session </h1>
+        {% else %}
+        <h1> Create Session </h1>
+        {% endif%}
         <!-- Session Title -->  
         <div id = 'title_block' class = 'block'>
             <label class = 'main'>Title</label><br>
@@ -49,7 +53,11 @@
             <div id = 'post_questions'></div>  
             <button class = 'add' onclick ="add('post')"> Add New Question </button>
         </div>
+        {% if is_create is not defined %}
         <button onclick="update()" id = 'update'>Update Session</button>
+        {% else %}
+        <button onclick="submit()" id = 'submit'>Create Session</button>
+        {% endif%}
     </div>
 
     <!-- modal-->
@@ -61,8 +69,13 @@
               </button>
             </div>
             <div class="modal-body">
+                {% if is_create is not defined %}
                 <p> Session updated successfully! </p>
                 <p> Feel free to add more changes or head to the View Session Page</a> to checkout your session!</p>
+                {% else %}
+                <p> Please head to view session page to checkout the session created.</p>
+                {% endif%}
+                
             </div>
             <div class="modal-footer">
               <button type="button" id = 'closeModal' onclick ='hide()'>Close</button>
