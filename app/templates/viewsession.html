@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<head> 
-    <link rel = 'stylesheet' href = '../static/css/viewsession.css'>
+<head>
+    <link rel='stylesheet' href='../static/css/viewsession.css'>
 </head>
 
 <h1 class="display-4 pagetitle">View Sessions</h1>
 
 <div class="container-holder">
-    <div class="container-fluid text-center bg-white" id = 'container'>
+    <div class="container-fluid text-center bg-white" id='container'>
         <div class="row bg-dark text-white">
             <div class="col-1 d-flex">
                 <h5 style="margin:auto"><strong>Session ID</strong></h5>
@@ -48,7 +48,8 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                         onclick="updatelink('{{session.id}}','{{session.session_title}}')">Link</button>
                     {% else %}
-                    <button disabled aria-disabled="true" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <button disabled aria-disabled="true" type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
                         onclick="updatelink('{{session.id}}','{{session.session_title}}')">Link</button>
                     {% endif%}
                 </p>
@@ -72,9 +73,12 @@
                     {% if session.published %}
                     <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
                     {% else %}
-                    <a style="display: inline;" href = "{{url_for('editSession', id = session.id)}}"><button class="edit btn btn-info">edit</button></a>
+                    <a style="display: inline;" href="{{url_for('editSession', id = session.id)}}"><button
+                            class="edit btn btn-info">edit</button></a>
                     {% endif%}
-                    <button class="delete btn btn-danger" onclick = 'delSession({{session.id}})'>delete</button>
+                </p>
+                <p style="margin:auto">
+                    <button class="delete btn btn-secondary" onclick="delSession(session.id)">delete</button>
                 </p>
             </div>
         </div>
@@ -155,7 +159,7 @@
     }
 
     // Delete Session
-    function delSession(sessionid){
+    function delSession(sessionid) {
 
         //removing session on front end using DOM
         deletedSession = document.getElementById(sessionid)
@@ -165,7 +169,7 @@
 
         var target = JSON.stringify(sessionid)
         $.ajax({
-            url:'deleteSession',
+            url: 'deleteSession',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(target)
