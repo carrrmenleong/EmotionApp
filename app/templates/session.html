@@ -15,7 +15,7 @@
 
 <script>
     // Get new participant ID
-    function getNewId(sessionId){
+    function getNewId(sessionId) {
         let targetUrl = `/session/${sessionId}/getid`
         let newId
         $.ajax({
@@ -35,11 +35,24 @@
     }
 
     function continueSession(sessionId) {
-        participantId = $('#participantId').value
-        if(participantId){
-            console.log(participantId)
+        // Check validity of participantID
+        participantId = $('#participantId').val()
+        let validity;
+        targetUrl = `/session/${sessionId}/${participantId}/checkid`
+        $.ajax({
+            async: false,
+            url: targetUrl,
+            success: function (data) {
+                validity = data
+            }
+        });
+
+        if (validity == "validId") {
             targetUrl = `/session/${sessionId}/${participantId}`
             location.href = targetUrl;
+        }
+        else {
+            console.log("This participant ID does not exists, Please try again.")
         }
     }
 
