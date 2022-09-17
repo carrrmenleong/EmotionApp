@@ -62,7 +62,7 @@ def createsession():
 def viewsessions():
     if current_user.email == "emotionappmoodtrack@gmail.com":
         sessions = db.session.query(Session, User).filter(Session.user_id == User.id).all()
-        return render_template("superadmin_viewsession.html", title='View Session', is_view=True, sessions = sessions)
+        return render_template("superadmin_viewsession.html", title='View Session', is_view=True, sessions = sessions, is_superadmin=True)
     userId = current_user.id
     sessions = Session.query.filter_by(user_id = userId).all()
     return render_template("viewsession.html", title='View Session', is_view=True, sessions = sessions)
@@ -76,7 +76,7 @@ def viewusers():
     if current_user.email == "emotionappmoodtrack@gmail.com":
         sessions = Session.query.all()
         users = User.query.all()
-        return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users)
+        return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users, is_superadmin=True)
     else:
         return render_template("404.html")
 
