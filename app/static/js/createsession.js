@@ -145,7 +145,7 @@ function submit(){
     }
     xhttp.open('POST', '/createsession', true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify(mydata));
+    xhttp.send(JSON.stringify(mydata)); 
 
     //displaying modal
     $('#myModal').modal('show')
