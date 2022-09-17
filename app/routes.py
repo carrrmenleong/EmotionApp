@@ -3,10 +3,9 @@ from flask import render_template, flash, redirect, url_for, request, jsonify
 from flask_login import current_user, login_user,login_required,logout_user
 from app.models import User, Session, Participant, Response
 from werkzeug.urls import url_parse
-from app.forms import SignupForm, LoginForm
+from app.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from sqlalchemy import func 
 from app.api.errors import bad_request
-from app.forms import ResetPasswordRequestForm, ResetPasswordForm
 from app.email import send_password_reset_email
 
 import json
@@ -26,6 +25,8 @@ def user():
 @login_required
 def createsession():
     if request.method == 'GET':
+        if current_user.email == "emotionappmoodtrack@gmail.com":
+            return redirect(url_for('viewusers'))
         return render_template("createsession.html", title='Create Session', is_create=True)
     else:
         userId = current_user.id
@@ -59,12 +60,25 @@ def createsession():
 @app.route('/viewsessions', methods=['GET'])
 @login_required
 def viewsessions():
-    userId = current_user.id
     if current_user.email == "emotionappmoodtrack@gmail.com":
         sessions = db.session.query(Session, User).filter(Session.user_id == User.id).all()
         return render_template("superadmin_viewsession.html", title='View Session', is_view=True, sessions = sessions)
+    userId = current_user.id
     sessions = Session.query.filter_by(user_id = userId).all()
     return render_template("viewsession.html", title='View Session', is_view=True, sessions = sessions)
+
+
+# View Users
+#----------------------------------------------------------
+@app.route('/viewusers', methods=['GET'])
+@login_required
+def viewusers():
+    if current_user.email == "emotionappmoodtrack@gmail.com":
+        sessions = Session.query.all()
+        users = User.query.all()
+        return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users)
+    else:
+        return render_template("404.html")
 
 
 # Publish Session

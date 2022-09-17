@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/viewusers.css'>
+</head>
+
+<h1 class="display-4 pagetitle">View Users</h1>
+
+<div class="container-holder">
+    <div class="container-fluid text-center bg-white">
+        <div class="row bg-dark text-white">
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>User ID</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Username</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>ORCID</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>First Name</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Last Name</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Institution</strong></h5>
+            </div>
+            <div class="col-3 d-flex">
+                <h5 style="margin:auto"><strong>Email</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Reason for using the app</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Delete</strong></h5>
+            </div>
+        </div>
+
+        {% for user in users %}
+
+        <div id={{user.id}} class="row">
+            <div class="col-1 border d-flex">
+                <p style="margin:auto; ">{{ user.id }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.username }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.orcid }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.fist_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.last_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.institution }}</p>
+            </div>
+            <div class="col-3 border d-flex">
+                <p class="text-break" style="margin:auto">{{ user.email }}</p>
+            </div>
+            <div class="col-2 border d-flex overflow-auto" style="height:120px;">
+                <p class="text-break" style="margin:auto">{{ user.reason }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">
+                    <button class="delete btn btn-danger">Delete</button>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Link and QR Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+     function remove(userid){
+        
+     }
+</script>
+
+
+{% endblock %}

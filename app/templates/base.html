@@ -45,13 +45,16 @@
                 <li><a href="#" class = 'right'>{{ current_user.username }}</a></li>
                 <li><a href="{{ url_for('logout') }}" class = 'right'>Logout</a></li>
                 
-                <!-- Create Session-->
-                {% if is_create is not defined %}
+                <!-- Create Session for admin / View Users for superadmin-->
+                {% if is_viewuser is defined %} 
+                <li><a href="{{url_for('viewusers')}}" class ="leftActive" >View Users</a></li>
+                {% elif is_create is not defined %}
                 <li><a href="{{url_for('createsession')}}" class = 'left'>Create Session</a></li>
                 {% else %}
                 <li><a href="{{url_for('createsession')}}" class = 'leftActive'>Create Session</a></li>
                 {% endif %}
 
+                
                 <!-- View Session(s)-->
                 {% if is_view is not defined %}
                 <li><a href="{{url_for('viewsessions')}}" class = 'left'>View Sessions</a></li>
