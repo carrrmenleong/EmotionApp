@@ -330,3 +330,10 @@ def updateSession():
     
     
     return redirect(url_for('viewsessions'))
+
+# Copy Session
+#---------------------------------------------------------------
+@app.route('/copySession/<int:id>', methods= ['GET', 'POST'])
+def copySession(id):
+    session = Session.query.get(id)
+    return render_template('editsession.html', session = session, is_create=True)

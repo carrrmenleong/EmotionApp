@@ -65,7 +65,7 @@
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
-                    <button class="btn btn-warning">copy</button>
+                    <a href = "{{url_for('copySession', id = session.id)}}"><button class="btn btn-warning">copy</button></a>
                 </p>
             </div>
             <div class="col-3 border d-flex">
@@ -78,7 +78,7 @@
                     {% endif%}
                 </p>
                 <p style="margin:auto">
-                    <button class="delete btn btn-secondary" onclick="delSession(session.id)">delete</button>
+                    <button class="delete btn btn-secondary" onclick="delSession('{{session.id}}')">delete</button>
                 </p>
             </div>
         </div>
@@ -137,6 +137,7 @@
         $('#' + sessionid + ' div:nth-child(6) .edit').prop('disabled', true);
         $('#' + sessionid + ' div:nth-child(6) .edit').prop('aria-disabled', true);
         $('#' + sessionid + ' div:nth-child(6) .edit').prop('class', "edit btn btn-secondary");
+        $('#' + sessionid + ' div:nth-child(6) .edit').prop('href', "#");
 
         // Activate link button
         $('#' + sessionid + ' div:nth-child(3) button').prop('disabled', false);
@@ -163,7 +164,6 @@
 
         //removing session on front end using DOM
         deletedSession = document.getElementById(sessionid)
-        console.log(deletedSession)
         parent = document.getElementById('container')
         parent.removeChild(deletedSession)
 
