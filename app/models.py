@@ -90,7 +90,7 @@ class Participant(db.Model):
     responses = db.relationship('Response', backref='participant',lazy='dynamic')
 
     def __repr__(self):
-        return '<Id: {}, stage_num: {}, session_id:{}>'.format(self.id,self.stage_num, self.session_id)
+        return '<Id: {}, stage_num: {}, session_id:{} pre_ques_ans:{}, post_ques_ans:{}>'.format(self.id,self.stage_num, self.session_id, self.pre_ques_ans, self.post_ques_ans)
 
 
 # Each row in this table represent an emotion response of a participant

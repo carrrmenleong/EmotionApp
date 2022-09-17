@@ -1,4 +1,3 @@
-from re import S
 from app import app,db
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from flask_login import current_user, login_user,login_required,logout_user
@@ -8,6 +7,8 @@ from app.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordReq
 from sqlalchemy import func 
 from app.api.errors import bad_request
 from app.email import send_password_reset_email
+
+import json
 
 
 @app.route('/user')
@@ -35,12 +36,7 @@ def createsession():
             return bad_request('Must include consent, emotions, preQuestions and postQuestions')
 
         # Insert into session table
-        sessionid = 0
-        lastSession = Session.query.order_by(Session.id.desc()).first()
-        if lastSession is not None:
-            sessionid = lastSession.id + 1
         session = Session(
-            id=sessionid,
             user_id=userId,
             published=False,
             session_title=data['sessionTitle'],
@@ -106,14 +102,6 @@ def publishsession():
     # Return success
     response = jsonify(success=True)
     return response
-
-
-# Start Session
-#----------------------------------------------------------
-@app.route('/session/<int:id>', methods=['GET'])
-def session(id):
-    session = Session.query.filter_by(id = id).first()
-    return render_template('session.html', title='Session', session = session)
 
 
 # Signup
@@ -191,3 +179,162 @@ def reset_password(token):
         flash('Your password has been reset.')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+
+# Get Session homepage
+#----------------------------------------------------------
+@app.route('/session/<int:sessionid>', methods=['GET','POST'])
+def session_home(sessionid):
+        session = Session.query.filter_by(id = sessionid).first_or_404()
+        return render_template('session.html', title='Session', session = session)
+
+
+# Get new participant ID
+#----------------------------------------------------------
+@app.route('/session/<int:sessionid>/getid', methods=['GET'])
+def get_participant_id(sessionid):
+    participant = Participant(
+    stage_num = 1,
+    session_id = sessionid)
+
+    db.session.add(participant)
+    db.session.commit()
+    return(str(participant.id))
+
+
+    # else:
+    #     data = request.get_json() or {}
+
+    #     if 'participantId' not in data:
+    #         participantId = 0
+    #         # Assign a new participantId
+    #         lastParticipant = Participant.query.order_by(id.desc()).first()
+    #         if lastParticipant is not None:
+    #             participantId = lastParticipant.id + 1
+            
+    #         participant = Participant(
+    #         id = participantId,
+    #         stage_num = 0,
+    #         session_id = sessionid)
+
+    #         db.session.add(participant)
+    #         db.session.commit()
+    #         return redirect(url_for(f'/session/{sessionid}/{participantId}'))
+
+    #     else:
+    #         participantId = data["participantId"]
+            
+    #     db.session.add(session)
+    #     db.session.commit()
+
+@app.route('/session/<int:sessionid>/<int:participantid>', methods=['GET','POST'])
+def session(sessionid,participantid):
+    participant = Participant.query.filter_by(id=participantid).first_or_404()
+    session = Session.query.filter_by(id = sessionid).first_or_404()
+    stage_num = participant.stage_num
+
+    if request.method == 'GET':
+        if stage_num == 1:
+            return render_template("session_124.html", session = session, participant = participant, stage=1)
+        elif stage_num == 2:
+            return render_template("session_124.html", session = session, participant = participant, stage=2)
+        elif stage_num == 3:
+            return render_template("session_3.html", session = session, participant = participant, stage=3)
+        elif stage_num == 4:
+            return render_template("session_124.html", session = session, participant = participant, stage=4)
+        else:
+            return render_template("session_5.html", session = session, participant = participant, stage=5)
+    
+    else:
+        data = request.get_json() or {}
+        if 'stage' not in data:
+            return bad_request('Must include stage number')
+
+        if data['stage'] == 1 and data['consent']:
+            participant.stage_num = 2
+            db.session.commit()
+            return ('Successfully recorded consent')
+
+        elif data['stage'] == 2:
+            if 'ans' not in data:
+                return bad_request('Must include ans')
+            participant.pre_ques_ans = data['ans']
+            participant.stage_num = 3
+            db.session.commit()
+            return ('Successfully recorded answers for pre-session questions')
+
+        elif data['stage'] == 3:
+            if 'emotions' not in data:
+                return bad_request('Must include emotions and endStage')
+            
+            # Add each emotion response to database
+            for emotion in data['emotions']:
+                response = Response(
+                emotion = emotion,
+                intensity = data['emotions'][emotion],
+                participant_id = participant.id,
+                session_id = session.id)
+                db.session.add(response)
+
+            if data['endStage']:
+                participant.stage_num = 4
+            
+            db.session.commit()
+            return ('Successfully recorded emotions response')
+
+        elif data['stage'] == 4:
+            if 'ans' not in data:
+                return bad_request('Must include ans')
+            participant.post_ques_ans = data['ans']
+            participant.stage_num = 5
+            db.session.commit()
+            return ('Successfully recorded answers for post-session questions')
+        
+        else:
+            return 'Error: No operation is done'
+        
+        
+
+# Delete Session
+#----------------------------------------------------------------
+@app.route('/deleteSession', methods =['post'])
+def deleteSession():
+    temp = request.get_json()
+    selectedId = json.loads(temp)
+    
+    target = Session.query.get(selectedId)
+    db.session.delete(target)
+    db.session.commit()
+    
+    return redirect(url_for('viewsessions'))
+
+# Edit Session
+#---------------------------------------------------------------
+@app.route('/editSession/<int:id>', methods= ['GET', 'POST'])
+def editSession(id):
+    session = Session.query.get(id)
+    return render_template('editsession.html', session = session,edit = True)
+
+# Update Session
+#----------------------------------------------------------------
+@app.route('/updateSession', methods = ['POST'])
+def updateSession():
+    #getting json data
+    jsonData = request.get_json()
+    newData = json.loads(jsonData)
+    
+    #retrieving specific session
+    selectedSession = newData['id']
+    session = Session.query.get(selectedSession)
+    
+    #updating session
+    session.session_title = newData['sessionTitle']
+    session.consent = newData['consent']
+    session.emotions = newData['emotions']
+    session.intensity = newData['intensity']
+    session.pre_ques = newData['preQuestions']
+    session.post_ques = newData['postQuestions']
+    db.session.commit()
+    
+    
+    return redirect(url_for('viewsessions'))
