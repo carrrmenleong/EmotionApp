@@ -1,0 +1,38 @@
+body{
+    text-align: center;
+}
+
+h1{
+    font-size: 100px;
+    padding: 1%;
+    margin-top: 10%;
+}
+
+h2{
+    margin-top: 10%;
+}
+
+#main{
+    margin: auto;
+    width: 70%;
+    margin-top: 15%;
+    background-color: white;
+    padding: 10%;
+    border-radius: 20px;
+}
+
+button{
+    font-size: larger;
+    background-color: #f3b06a;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    border-color: white;
+    letter-spacing: 2px;
+    padding: 6%;
+    border-radius: 15px;
+    width: 100%;
+}
+
+#btn2{
+    margin-top: 10%;
+}

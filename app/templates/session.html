@@ -1,19 +1,87 @@
 {% extends "base_participant.html" %}
 {% block content %}
+<head>
+    <link rel = 'stylesheet' href = '../static/css/session.css'>
+</head>
 
 <p>session page</p>
 <h1>Welcome to Emotion App!</h1>
 <h2>Session Name: {{session.session_title}}</h2>
 <p>{{stage}}</p>
 
-
-<div>
-    <button onclick="startSession('{{session.id}}')">Start Session</button>
-    <input id="participantId" type="text">
-    <button onclick="continueSession('{{session.id}}')">Continue Session</button>
+<div id = 'container'>
+    <div id = 'main'>
+        <button id = 'btn1' onclick="startSession('{{session.id}}')">Start Session</button><br>
+        <button id = 'btn2' onclick= 'genContinueBlk()'>Continue Session</button>
+    </div>
 </div>
 
 <script>
+    //fucntion to generate input for continuation of session
+    function genContinueBlk(){
+        
+        // initializing variables (DOM)
+        var parent = document.getElementById('main')
+        var btn1 = document.getElementById('btn1')
+        var btn2 = document.getElementById('btn2')
+        
+        //removing buttons
+        parent.removeChild(btn1)
+        parent.removeChild(btn2)
+
+        //creating input area and button
+        var btn3  = document.createElement('button')
+        var input = document.createElement('input')
+        var instruction = document.createElement('p')
+        var revert = document.createElement('span')
+
+        //setting attributes
+        instruction.setAttribute('id', 'instruction')
+        instruction.innerText = "enter your personal id code to continue session"
+        btn3.setAttribute('onclick', "continueSession('{{session.id}}')")
+        btn3.innerText = 'Continue'
+        input.setAttribute('id', 'input')
+        revert.innerText = '<< Back'
+        revert.setAttribute('onclick', 'revert()')
+        
+
+        parent.appendChild(instruction)
+        parent.appendChild(input)
+        parent.appendChild(btn3)
+        parent.appendChild(document.createElement('br'))
+        parent.appendChild(revert)
+
+    }
+
+    // function to return to original
+    function revert(){
+        //initializing parent and child
+        var parent = document.getElementById('container')
+        var child = document.getElementById('main')
+
+        // removing everything
+        parent.removeChild(child)
+
+        // creating elements to be added
+        var main = document.createElement('div')
+        var btn1 = document.createElement('button')
+        var btn2 = document.createElement('button')
+
+        // setting attributes of elements
+        main.setAttribute('id','main')
+        btn1.setAttribute('id', 'btn1')
+        btn1.setAttribute('onclick', "startSession('{{session.id}}')")
+        btn1.innerText = 'Start Session'
+        btn2.setAttribute('id', 'btn2')
+        btn2.setAttribute('onclick', 'genContinueBlk()')
+        btn2.innerText = 'Continue Session'
+
+        // appending back to main
+        main.appendChild(btn1)
+        main.appendChild(btn2)
+        parent.appendChild(main)
+    }
+
     // Get new participant ID
     function getNewId(sessionId) {
         let targetUrl = `/session/${sessionId}/getid`
