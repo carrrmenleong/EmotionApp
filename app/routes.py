@@ -206,35 +206,23 @@ def get_participant_id(sessionid):
     return(str(participant.id))
 
 
-    # else:
-    #     data = request.get_json() or {}
+# Check if participant ID is valid
+#----------------------------------------------------------
+@app.route('/session/<int:sessionid>/<int:participantid>/checkid', methods=['GET'])
+def check_id(sessionid,participantid):
+    participant = Participant.query.filter_by(id=participantid).first()
+    if participant:
+        return('validId')
+    else:
+        return('invalidId')
 
-    #     if 'participantId' not in data:
-    #         participantId = 0
-    #         # Assign a new participantId
-    #         lastParticipant = Participant.query.order_by(id.desc()).first()
-    #         if lastParticipant is not None:
-    #             participantId = lastParticipant.id + 1
-            
-    #         participant = Participant(
-    #         id = participantId,
-    #         stage_num = 0,
-    #         session_id = sessionid)
-
-    #         db.session.add(participant)
-    #         db.session.commit()
-    #         return redirect(url_for(f'/session/{sessionid}/{participantId}'))
-
-    #     else:
-    #         participantId = data["participantId"]
-            
-    #     db.session.add(session)
-    #     db.session.commit()
 
 @app.route('/session/<int:sessionid>/<int:participantid>', methods=['GET','POST'])
 def session(sessionid,participantid):
     participant = Participant.query.filter_by(id=participantid).first_or_404()
     session = Session.query.filter_by(id = sessionid).first_or_404()
+    if participant is None:
+        return bad_request("Participant Id doesn't exists")
     stage_num = participant.stage_num
 
     if request.method == 'GET':
