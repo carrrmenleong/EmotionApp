@@ -87,7 +87,7 @@ function retrieve_prequestions(){
 }
 //emotions
 function retrieve_emotions(){
-    emotion = document.getElementById('emotion').value
+    emotion = document.getElementById('emotion').value.replace(/\n/g, "\\n")
     return emotion
 }
 //intensity

@@ -1,3 +1,7 @@
+body{
+    text-align: center;
+}
+
 #personalDetails{
     padding-top: 5%;
     padding-left: 10%;
@@ -12,4 +16,10 @@
 h2{
     padding:2%;
     font-size: 40px;
+}
+
+#instruction{
+    margin-top: 2%;
+    padding: 5%;
+    font-size: 20px;
 }
