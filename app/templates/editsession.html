@@ -41,7 +41,7 @@
             <label class = 'main'> Emotions </label><br>
             <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
             <label class = 'main'> Emotion Options </label><br>
-            <textarea id = 'emotion'>{{session.emotions}}</textarea><br>
+            <textarea id = 'emotion'></textarea><br>
             <label class = 'main'> Max Intensity </label><br>
             <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12' value = '{{session.intensity}}'></input><br>
         </div>
@@ -138,6 +138,9 @@
     // retrieving pre and post questions
     var preQ_all = JSON.parse('{{session.pre_ques|safe}}')
     var postQ_all = JSON.parse('{{session.post_ques|safe}}')
+    var emotions = '{{session.emotions}}'.replace('/\\n/g, "\n")')
+    
+    document.getElementById('emotion').value = emotions
     
     // generating pre and post questions
     gen_block(preQ_all, 'pre_questions')
