@@ -3,15 +3,19 @@
 <head>
     <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_124.css') }}">
 </head>
+<!--
 <p>Session Name: {{session.session_title}}</p>
 <p>Stage Num: {{stage}}</p>
 <p>Participant stagenum: {{participant.stage_num}}</p>
+-->
 
-<p>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
-    the future.</p>
-<h2>ID Code: {{participant.id}}</h2>
-<hr>
-<h2>Personal Details</h2>
+<div id = 'personalDetails'>
+    <p id = 'reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
+        the future.</p>
+    <h2 id = 'id'>ID Code: {{participant.id}}</h2>
+    <hr>
+    <h2>Personal Details</h2>
+</div>
 
 <!-- Load pre-session quesitons if participant is in stage 2 -->
 {% if stage == 2 %}
@@ -52,6 +56,7 @@
 
 
 <script>
+    
     window.onload = () => {
         $('#consentModal').modal({
             backdrop: 'static',
@@ -88,8 +93,8 @@
         xhttp.open('POST', targetUrl, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(mydata));
-    }
 
+    }
 
     function submitAns(sessionId, participantId, stage_num) {
         console.log(stage_num)
