@@ -66,7 +66,33 @@
         genBlock(stage)
     }
 
-    // generating prequestions
+    // function to collate results
+    function genAnswer(){
+        var ans = []
+        var all_ques = document.getElementsByClassName('questionBlk')
+
+        for (var i = 0; i<all_ques.length; i++){
+            var ques = all_ques[i]
+
+            // if question is mcq
+            if (ques.classList.contains('Mcq')){
+                var radios = document.getElementsByName('radio')
+                
+                for( let j = 0; j<radios.length; j++){
+                    // retrieving selected option
+                    if (radios[j].checked){
+                        ans.push(radios[j].value)
+                    }
+                }
+            }
+            else if (ques.classList.contains('Open')){
+                ans.push(document.getElementById('openQ').value)
+            }
+        }
+        return ans
+    }
+
+    // function to generate prequestions / postquestions
     function genBlock(stage){
         
         if (stage == 2){
@@ -83,7 +109,6 @@
             var indiv_ques = all_ques[i] // each question
             var child = document.createElement('div')  //creating child container to be appended
             child.setAttribute('id', 'q' + counter)
-            child.setAttribute('class', 'questionBlk')
 
             //checking if question is mcq
             if (indiv_ques.includes('\n')){
@@ -105,17 +130,21 @@
                     var opt = document.createElement('input')
                     var label = document.createElement('label')
 
-                    opt.setAttribute('id', 'q'+ counter + 'o'+ counter)
-                    opt.setAttribute('name', 'q' + counter)
+                    //opt.setAttribute('id', 'q'+ counter + 'o'+ counter)
+                    opt.setAttribute('name', 'radio')
                     opt.setAttribute('type', 'radio')
                     opt.setAttribute('value', option)
 
-                    label.setAttribute('for', 'q'+ counter + 'o'+ counter)
+                    
+                    child.setAttribute('class', 'questionBlk Mcq')
+
+                    //label.setAttribute('for', 'q'+ counter + 'o'+ counter)
                     label.innerText = option
                     
                     child.appendChild(opt)
                     child.appendChild(label)
                     child.appendChild(document.createElement('br'))
+
                 }
             }
             // open ended questions
@@ -126,7 +155,8 @@
 
                 // setting attributes
                 ques.innerText = indiv_ques
-                text.setAttribute('id', 'q' + counter)
+                child.setAttribute('class', 'questionBlk Open')
+                text.setAttribute('id', 'openQ')
                 child.appendChild(ques)
                 child.appendChild(text)
             }
@@ -168,8 +198,10 @@
     }
 
     function submitAns(sessionId, participantId, stage_num) {
-        console.log(stage_num)
-        let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
+        let results = genAnswer()
+        //let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
+        let data = { stage: Number(stage_num), ans: results }
+        console.log(data)
         let targetUrl = `/session/${sessionId}/${participantId}`
 
         //submiting data
@@ -192,7 +224,8 @@
         }
         xhttp.open('POST', targetUrl, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(dummydata));
+        xhttp.send(JSON.stringify(data));
+
     }
 
 </script>
