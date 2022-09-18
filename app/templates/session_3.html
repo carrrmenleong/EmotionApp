@@ -19,6 +19,9 @@
     </div>
     <p id ='instruction'>Click on the emotion you are feeling right now and indicate it's intensity.<br>
         Maximum intensity is {{session.intensity}}</p>
+    <div id = 'bigContainer'>
+        <!-- Emotion Blocks will appear here-->
+    </div>
     <div>
         <button onclick="submitEmotions('{{session.id}}','{{participant.id}}')">Submit present emotion(s)</button>
         <button onclick="finishSession('{{session.id}}','{{participant.id}}')">Finish Session</button>
@@ -26,11 +29,105 @@
 </body>
 
 <script>
-    var emotions = "{{session.emotions}}"
+    var counter = 1
+    var emotions = "{{session.emotions}}".split('\n')
     var intensity = "{{session.intensity}}"
-    
-    console.log("emotion:", emotions)
-    console.log("intensity:", intensity)
+
+    genEmotion(emotions, intensity)
+
+    function genEmotion(emotions, intensity){
+
+        var bigContainer = document.getElementById('bigContainer')
+
+        // using for loop to generate all emotion blocks
+        for(let i = 0; i< emotions.length; i++){
+
+            var emotion = emotions[i]
+
+            var subParent = document.createElement('div')
+            var subContainer = document.createElement('div')
+            var blk = document.createElement('span')
+            var add = document.createElement('span')
+            var subtract = document.createElement('span')
+            var intensity = document.createElement('span')
+
+            blk.innerHTML = emotion
+            add.innerHTML = "+"
+            subtract.innerHTML = "-"
+            intensity.innerHTML = "-"
+
+            blk.setAttribute('class', 'emotion')
+
+            add.setAttribute('class', 'add')
+            add.setAttribute('id', 'a' + counter)
+            add.setAttribute('onclick', 'add(this.id)')
+            
+            subtract.setAttribute('class', 'subtract')
+            subtract.setAttribute('id', 's' + counter)
+            subtract.setAttribute('onclick', 'subtract(this.id')
+
+            intensity.setAttribute('class', 'intensity')
+            intensity.setAttribute('id', 'i'+ counter)
+            subParent.setAttribute('id', 'e' + counter)
+            subParent.setAttribute('class','emotionBlk')
+            subParent.setAttribute('onclick', 'select(this.id)')
+            subContainer.setAttribute('class', 'adjustBlk')
+
+
+            subContainer.appendChild(add)
+            subContainer.appendChild(intensity)
+            subContainer.appendChild(subtract)
+            subParent.appendChild(blk)
+            subParent.appendChild(subContainer)
+
+            if (counter % 2 == 1){
+                
+                var container = document.createElement('div')
+                container.setAttribute('id', counter)
+                container.setAttribute('class', 'container')
+                container.appendChild(subParent)
+            }
+            else{
+                container.appendChild(subParent)
+            }
+
+            bigContainer.appendChild(container)
+            
+            counter ++
+        }
+    }
+
+    function select(id){
+        var targetId = id.slice(1)
+        var targetEmotion = document.getElementById("e" + targetId)
+        var targetAdd = document.getElementById('a' + targetId)
+        var targetSubtract = document.getElementById('s' + targetId)
+
+        targetEmotion.classList.toggle('emotionBlkActive')
+        targetAdd.classList.toggle('addActive')
+        targetSubtract.classList.toggle('subtractActive')
+    }
+
+    function add(id){
+        var targetId = id.slice(1)
+        var targetIntensity = document.getElementById('i' + targetId)
+        var targetAdd = document.getElementById('a' + targetId)
+        var targetSubtract = document.getElementById('s' + targetId)
+        var intensity = targetIntensity.textContent
+        
+        targetSubtract.setAttribute('onclick', 'subtract(this.id)')
+
+        if (intensity == "-"){
+            intensity = 3
+        } 
+        else if (intensity == "{{session.intensity}}"){
+            targetAdd.setAttribute('onclick', '')
+        }
+        else{
+            intensity ++
+        }
+        targetIntensity.innerHTML = intensity
+    }
 
 
     function submitEmotions(sessionId, participantId) {
