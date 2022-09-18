@@ -1,9 +1,11 @@
 {% extends "base_participant.html" %}
 {% block content %}
+<head>
+    <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_124.css') }}">
+</head>
 <p>Session Name: {{session.session_title}}</p>
 <p>Stage Num: {{stage}}</p>
 <p>Participant stagenum: {{participant.stage_num}}</p>
-
 
 <p>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
     the future.</p>
@@ -36,11 +38,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p> {{session.consent}}</p>
+                <p id = 'consent'> {{session.consent}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id='closeModal'
-                    onclick="hide();agreeConsent('{{session.id}}','{{participant.id}}')">Agree</button>
+                    onclick="hide();agreeConsent('{{session.id}}','{{participant.id}}')">I Agree</button>
             </div>
         </div>
     </div>
@@ -51,6 +53,10 @@
 
 <script>
     window.onload = () => {
+        $('#consentModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        })
         $('#consentModal').modal('show');
     }
 

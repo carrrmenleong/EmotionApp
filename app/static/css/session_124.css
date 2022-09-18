@@ -1,0 +1,22 @@
+body{
+    text-align: center;
+}
+
+#consent{
+    text-align: justify;
+    text-justify: inter-word;
+    padding: 2%;
+}
+
+button{
+    font-size: larger;
+    background-color: #f3b06a;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    border-color: white;
+    letter-spacing: 2px;
+    padding: 2%;
+    border-radius: 15px;
+    width: 100%;
+    font-weight: bold;
+}
