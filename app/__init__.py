@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 import logging
 from logging.handlers import SMTPHandler
+import flask_excel as excel
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,5 +15,6 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 mail = Mail(app)
+excel.init_excel(app)
 
 from app import routes, models, errors
