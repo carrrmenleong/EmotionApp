@@ -3,32 +3,25 @@
 <head>
     <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_124.css') }}">
 </head>
-<!--
-<p>Session Name: {{session.session_title}}</p>
-<p>Stage Num: {{stage}}</p>
-<p>Participant stagenum: {{participant.stage_num}}</p>
--->
 
 <div id = 'personalDetails'>
     <p id = 'reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
         the future.</p>
     <h2 id = 'id'>ID Code: {{participant.id}}</h2>
     <hr>
-    <h2>Personal Details</h2>
 </div>
 
 <!-- Load pre-session quesitons if participant is in stage 2 -->
 {% if stage == 2 %}
-<div>
-    {{session.pre_ques}}
-    <button onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
-</div>
+<h2>Pre Session Survey</h2>
+<div id = 'pre_ques_blk'></div>
+<button class = 'surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit & Continue</button>
+
 <!-- Load post-session quesitons if participant is in stage 4 -->
 {% elif stage == 4 %}
-<div>
-    {{session.post_ques}}
-    <button onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
-</div>
+<h2>Post Session Survey</h2>
+<div id = 'post_ques_blk'></div>
+<button class = 'surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
 {% endif %}
 
 <!-- Load consent modal if participant is in stage 1 -->
@@ -56,13 +49,91 @@
 
 
 <script>
-    
+    // global variable
+    var counter = 1
+
     window.onload = () => {
         $('#consentModal').modal({
             backdrop: 'static',
             keyboard: false
         })
         $('#consentModal').modal('show');
+    }
+
+    var stage = "{{stage}}"
+    // generating question blocks based on stage
+    if (stage >= 2){
+        genBlock(stage)
+    }
+
+    // generating prequestions
+    function genBlock(stage){
+        
+        if (stage == 2){
+            var all_ques = JSON.parse('{{session.pre_ques|safe}}')
+            var parent = document.getElementById('pre_ques_blk')
+        }
+        else{
+            var all_ques = JSON.parse('{{session.post_ques|safe}}')
+            var parent = document.getElementById('post_ques_blk')
+        }
+        //for loop to generate questions
+        for (var i = 0; i< all_ques.length; i++){
+
+            var indiv_ques = all_ques[i] // each question
+            var child = document.createElement('div')  //creating child container to be appended
+            child.setAttribute('id', 'q' + counter)
+            child.setAttribute('class', 'questionBlk')
+
+            //checking if question is mcq
+            if (indiv_ques.includes('\n')){
+
+                // splitting mcq into question and options
+                var mcq = indiv_ques.split('\n')
+                var question = mcq[0]
+                var options = mcq.slice(1)
+
+                // setting attributes
+                var ques = document.createElement('p')
+                ques.innerText = question
+                
+                child.appendChild(ques)
+                // creating options
+                for (var j = 0; j< options.length; j++){
+
+                    var option = options[j] // retrieving each option
+                    var opt = document.createElement('input')
+                    var label = document.createElement('label')
+
+                    opt.setAttribute('id', 'q'+ counter + 'o'+ counter)
+                    opt.setAttribute('name', 'q' + counter)
+                    opt.setAttribute('type', 'radio')
+                    opt.setAttribute('value', option)
+
+                    label.setAttribute('for', 'q'+ counter + 'o'+ counter)
+                    label.innerText = option
+                    
+                    child.appendChild(opt)
+                    child.appendChild(label)
+                    child.appendChild(document.createElement('br'))
+                }
+            }
+            // open ended questions
+            else{
+                // creating elements
+                var ques = document.createElement('p')
+                var text = document.createElement('textarea')
+
+                // setting attributes
+                ques.innerText = indiv_ques
+                text.setAttribute('id', 'q' + counter)
+                child.appendChild(ques)
+                child.appendChild(text)
+            }
+
+            parent.appendChild(child)
+            counter ++
+        }
     }
 
     function hide() {
