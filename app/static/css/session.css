@@ -12,14 +12,30 @@ h2{
     margin-top: 10%;
 }
 
-#main{
+#main1{
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-bottom: 5%;
+    padding-top: 5%;
     margin: auto;
     width: 70%;
     margin-top: 15%;
     background-color: white;
-    padding: 10%;
     border-radius: 20px;
 }
+
+#main2{
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-bottom: 13%;
+    padding-top: 3%;
+    margin: auto;
+    width: 70%;
+    margin-top: 15%;
+    background-color: white;
+    border-radius: 20px;
+}
+
 
 button{
     font-size: larger;
@@ -31,8 +47,34 @@ button{
     padding: 6%;
     border-radius: 15px;
     width: 100%;
+    font-weight: bold;
 }
 
 #btn2{
-    margin-top: 10%;
+    margin-top: 5%;
+}
+
+#instruction{
+    color: #8f8e8e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 2%;
+}
+
+#participantId{
+    background-color: lightgrey;
+    padding: 6%;
+    width: 100%;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 8%;
+}
+
+#continue{
+    margin-top: 5%;
+}
+
+#back{
+    float:left;
+    margin-top: 8%;
 }

@@ -4,13 +4,12 @@
     <link rel = 'stylesheet' href = '../static/css/session.css'>
 </head>
 
-<p>session page</p>
 <h1>Welcome to Emotion App!</h1>
 <h2>Session Name: {{session.session_title}}</h2>
 <p>{{stage}}</p>
 
 <div id = 'container'>
-    <div id = 'main'>
+    <div id = 'main1'>
         <button id = 'btn1' onclick="startSession('{{session.id}}')">Start Session</button><br>
         <button id = 'btn2' onclick= 'genContinueBlk()'>Continue Session</button>
     </div>
@@ -21,7 +20,7 @@
     function genContinueBlk(){
         
         // initializing variables (DOM)
-        var parent = document.getElementById('main')
+        var parent = document.getElementById('main1')
         var btn1 = document.getElementById('btn1')
         var btn2 = document.getElementById('btn2')
         
@@ -36,13 +35,18 @@
         var revert = document.createElement('span')
 
         //setting attributes
+        parent.setAttribute('id', 'main2')
         instruction.setAttribute('id', 'instruction')
         instruction.innerText = "enter your personal id code to continue session"
         btn3.setAttribute('onclick', "continueSession('{{session.id}}')")
+        btn3.setAttribute('id', 'continue')
         btn3.innerText = 'Continue'
-        input.setAttribute('id', 'input')
-        revert.innerText = '<< Back'
+        input.setAttribute('id', 'participantId')
+        input.setAttribute('type', 'text')
+        input.setAttribute('placeholder', 'Enter Personal Code Here')
+        revert.innerText = '< < Back'
         revert.setAttribute('onclick', 'revert()')
+        revert.setAttribute('id', 'back')
         
 
         parent.appendChild(instruction)
@@ -57,7 +61,7 @@
     function revert(){
         //initializing parent and child
         var parent = document.getElementById('container')
-        var child = document.getElementById('main')
+        var child = document.getElementById('main2')
 
         // removing everything
         parent.removeChild(child)
@@ -68,7 +72,7 @@
         var btn2 = document.createElement('button')
 
         // setting attributes of elements
-        main.setAttribute('id','main')
+        main.setAttribute('id','main1')
         btn1.setAttribute('id', 'btn1')
         btn1.setAttribute('onclick', "startSession('{{session.id}}')")
         btn1.innerText = 'Start Session'
