@@ -1,0 +1,15 @@
+#personalDetails{
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#reminder{
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+h2{
+    padding:2%;
+    font-size: 40px;
+}

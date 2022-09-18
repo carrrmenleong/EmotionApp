@@ -1,13 +1,18 @@
 {% extends "base_participant.html" %}
 {% block content %}
+<head>
+    <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_3.css') }}">
+</head>
 <p>Session Name: {{session.session_title}}</p>
 <p>Stage Num: {{stage}}</p>
 <p>Participant stagenum: {{participant.stage_num}}</p>
 
-<p>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
-    the future.</p>
-<h2>ID Code: {{participant.id}}</h2>
-<hr>
+<div id = 'personalDetails'>
+    <p id = 'reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
+        the future.</p>
+    <h2 id = 'id'>ID Code: {{participant.id}}</h2>
+    <hr>
+</div>
 <p>Click on the emotion you are feeling right now and indicate it's intensity.
     Maximum intensity is {{session.intensity}}</p>
 <div>
