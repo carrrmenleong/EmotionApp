@@ -340,7 +340,7 @@ def copySession(id):
 
 
 
-# Superadmin delete user and sessions created by that user
+# Superadmin delete user and all sessions created by that user
 #----------------------------------------------------------
 @app.route('/deleteuser/<userid>', methods=['GET','POST'])
 @login_required
