@@ -33,67 +33,71 @@
     var emotions = "{{session.emotions}}".split('\n')
     var intensity = "{{session.intensity}}"
 
-    genEmotion(emotions, intensity)
+    genEmotions(emotions, intensity)
 
-    function genEmotion(emotions, intensity){
-
-        var bigContainer = document.getElementById('bigContainer')
+    function genEmotions(emotions, intensity){
+        var mainContainer = document.getElementById('bigContainer')
 
         // using for loop to generate all emotion blocks
         for(let i = 0; i< emotions.length; i++){
 
-            var emotion = emotions[i]
+            // creating row for 2 blocks
+            if (i % 2 == 0){
+                var row = document.createElement('div')
+                row.setAttribute('class', 'row')
+            }
 
-            var subParent = document.createElement('div')
-            var subContainer = document.createElement('div')
-            var blk = document.createElement('span')
-            var add = document.createElement('span')
-            var subtract = document.createElement('span')
-            var intensity = document.createElement('span')
+            var emotion = emotions[i] // each emotion
 
-            blk.innerHTML = emotion
-            add.innerHTML = "+"
-            subtract.innerHTML = "-"
-            intensity.innerHTML = "-"
+            var smallContainer = document.createElement('div')
+            smallContainer.setAttribute('class', 'smallContainer')
 
-            blk.setAttribute('class', 'emotion')
+            // creating emotion 
+            var emotionBlk = document.createElement('div')          // div container holding emotion
+            var emotionLabel = document.createElement('span')       // label that contains emotion
 
-            add.setAttribute('class', 'add')
+            emotionBlk.setAttribute('class', 'emotionBlk')
+            emotionBlk.setAttribute('id', 'e' + counter)  
+            emotionBlk.setAttribute('onclick', 'select(this.id)')   
+            emotionLabel.setAttribute('class', 'emotion')
+            emotionLabel.innerHTML = emotion
+            emotionBlk.appendChild(emotionLabel)
+
+            // creating intensity adjustor
+            var adjustorBlk = document.createElement('div')         // div container holding adjustor
+            var add = document.createElement('span')                // add button
+            var subtract = document.createElement('span')           // subtract button
+            var intensityLabel = document.createElement('span')     // intensity label
+
+            add.setAttribute('class', 'add')                        // setting attributes of add button
             add.setAttribute('id', 'a' + counter)
-            add.setAttribute('onclick', 'add(this.id)')
-            
-            subtract.setAttribute('class', 'subtract')
+            //add.setAttribute('onclick','add(this.id)')      
+            add.innerHTML = "+"   
+
+            subtract.setAttribute('class', 'subtract')              // setting attributes of subtract button
             subtract.setAttribute('id', 's' + counter)
-            subtract.setAttribute('onclick', 'subtract(this.id)')
+            //subtract.setAttribute('onclick', 'subtract(this.id)')   
+            subtract.innerHTML = "-"
 
-            intensity.setAttribute('class', 'intensity')
-            intensity.setAttribute('id', 'i'+ counter)
-            subParent.setAttribute('id', 'e' + counter)
-            subParent.setAttribute('class','emotionBlk')
-            subParent.setAttribute('onclick', 'select(this.id)')
-            subContainer.setAttribute('class', 'adjustBlk')
+            intensityLabel.setAttribute('class', 'intensity')       // setting attributes of intensity label
+            intensityLabel.setAttribute('id', 'i'+ counter)
+            intensityLabel.innerHTML = "-"
 
+            adjustorBlk.setAttribute('class', 'adjustorBlk')
+            adjustorBlk.setAttribute('id', 'adj' + counter)
+            adjustorBlk.appendChild(subtract)
+            adjustorBlk.appendChild(intensityLabel)
+            adjustorBlk.appendChild(add)
 
-            subContainer.appendChild(add)
-            subContainer.appendChild(intensity)
-            subContainer.appendChild(subtract)
-            subParent.appendChild(blk)
-            subParent.appendChild(subContainer)
+            // adding emotion and adjustor block into container
+            smallContainer.appendChild(emotionBlk)
+            smallContainer.appendChild(adjustorBlk)
 
-            if (counter % 2 == 1){
-                
-                var container = document.createElement('div')
-                container.setAttribute('id', counter)
-                container.setAttribute('class', 'container')
-                container.appendChild(subParent)
-            }
-            else{
-                container.appendChild(subParent)
-            }
+            row.appendChild(smallContainer)
 
-            bigContainer.appendChild(container)
-            
+            mainContainer.appendChild(row)
             counter ++
+
         }
     }
 
@@ -102,35 +106,61 @@
         var targetEmotion = document.getElementById("e" + targetId)
         var targetAdd = document.getElementById('a' + targetId)
         var targetSubtract = document.getElementById('s' + targetId)
+        var targetAdj = document.getElementById('adj' + targetId)
+        var targetLabel = document.getElementById('i' + targetId)
 
+        // toggles css to active state
+        targetAdj.classList.toggle('adjustorBlkActive')
         targetEmotion.classList.toggle('emotionBlkActive')
         targetAdd.classList.toggle('addActive')
         targetSubtract.classList.toggle('subtractActive')
+
+        var name = targetEmotion.getAttribute('class')
+
+        // checking if emotion is selected
+        if (name.includes('Active')){
+            // enable selection of intensity
+            targetAdd.setAttribute('onclick','add(this.id)')
+            targetSubtract.setAttribute('onclick', 'subtract(this.id)')
+        }
+        else{
+            // disables selection of intensity
+            targetAdd.setAttribute('onclick','')
+            targetSubtract.setAttribute('onclick', '')
+
+            // resetting label of intensity to -
+            targetLabel.innerHTML = "-"
+        }
+
+
     }
     function subtract(id){
         var targetId = id.slice(1)
         var targetIntensity = document.getElementById('i' + targetId)
         var targetAdd = document.getElementById('a' + targetId)
         var targetSubtract = document.getElementById('s' + targetId)
-        var intensity = targetIntensity.textContent
-        
+        var value = targetIntensity.textContent
+
         targetAdd.setAttribute('onclick', 'add(this.id)')
 
-        if (intensity == "-"){
-            if ("{{session.intensity}}" % 2 == 0){
-                intensity = "{{session.intensity}}" / 2
+        if (value == "-"){
+            if (intensity % 2 == 0){
+                value = intensity / 2
             }
             else {
-                intensity = ("{{session.intensity}}" + 1) / 2
+                value = (parseInt(intensity)  + 1 )/2
+                
             }
         } 
-        else if (intensity == 1){
+        else{
+            value --
+        }
+
+        // disable subtract button
+        if (value == 1){
             targetSubtract.setAttribute('onclick', '')
         }
-        else{
-            intensity --
-        }
-        targetIntensity.innerHTML = intensity
+        targetIntensity.innerHTML = value
     }
 
     function add(id){
@@ -138,25 +168,29 @@
         var targetIntensity = document.getElementById('i' + targetId)
         var targetAdd = document.getElementById('a' + targetId)
         var targetSubtract = document.getElementById('s' + targetId)
-        var intensity = targetIntensity.textContent
-        
+        var value = targetIntensity.textContent
+
+        //enable subtract option
         targetSubtract.setAttribute('onclick', 'subtract(this.id)')
 
-        if (intensity == "-"){
-            if ("{{session.intensity}}" % 2 == 0){
-                intensity = "{{session.intensity}}" / 2
+        if (value == "-"){
+            if (intensity % 2 == 0){
+                value = intensity / 2
             }
             else {
-                intensity = ("{{session.intensity}}" + 1) / 2
+                value = (parseInt(intensity)  + 1 )/2
+                
             }
         } 
-        else if (intensity == "{{session.intensity}}"){
+        else{
+            value ++
+        }
+
+        // disable subtract button
+        if (value == intensity){
             targetAdd.setAttribute('onclick', '')
         }
-        else{
-            intensity ++
-        }
-        targetIntensity.innerHTML = intensity
+        targetIntensity.innerHTML = value
     }
 
 
