@@ -1,30 +1,30 @@
 var counter = 2
 
 //adding question block
-function add(target){
-    counter ++
+function add(target) {
+    counter++
     var close
 
     //retrieving parent div container
-    if (target == 'pre'){
+    if (target == 'pre') {
         parent = document.getElementById('pre_questions')
     }
-    else{
+    else {
         parent = document.getElementById('post_questions')
     }
-    
+
     //creating necessary elements
     question = document.createElement('textarea')
     close = document.createElement('i')
 
     //setting attributes of elements
-    if (target == 'pre'){
+    if (target == 'pre') {
         question.setAttribute('class', 'preQ')
-        close.setAttribute('id', 'preqD'+counter)
+        close.setAttribute('id', 'preqD' + counter)
     }
-    else{
+    else {
         question.setAttribute('class', 'postQ')
-        close.setAttribute('id', 'postD'+counter)
+        close.setAttribute('id', 'postD' + counter)
     }
     close.setAttribute('class', 'fas fa-trash fa-2x')
     close.setAttribute('onclick', 'del(this)')
@@ -41,67 +41,67 @@ function add(target){
 }
 
 // delete question block
-function del(x){
+function del(x) {
     target = x.id.slice(-1)
     child = document.getElementById(target)
-    
+
     //if target belongs to prequestions
-    if(x.id.includes('pre')){
+    if (x.id.includes('pre')) {
         parent = document.getElementById('pre_questions')
     }
     //if target belongs to postquestions
-    else{
+    else {
         parent = document.getElementById('post_questions')
     }
-    
+
     parent.removeChild(child)
 }
 
 //function to retrieve results
 //title
-function retrieve_title(){
+function retrieve_title() {
     var title = document.getElementById('title').value
     return title
 }
 //consent
-function retrieve_consent(){
+function retrieve_consent() {
     var consent = document.getElementById('consent').value
     return consent
 }
 //prequestions
-function retrieve_prequestions(){
+function retrieve_prequestions() {
     var prequestions = []
     var all = document.getElementsByClassName('preQ')
     //if there are no prequestions
-    if (all == null){
+    if (all == null) {
         prequestions = []
     }
-    else{
-        for(let i = 0; i< all.length; i ++){
-            var question = all[i].value.replace(/\n/g, "\\n")
+    else {
+        for (let i = 0; i < all.length; i++) {
+            var question = all[i].value
             prequestions.push(question)
         }
     }
-    jsonPreQ =JSON.stringify(prequestions)
+    jsonPreQ = JSON.stringify(prequestions)
     return jsonPreQ
 }
 //emotions
-function retrieve_emotions(){
+function retrieve_emotions() {
     emotion = document.getElementById('emotion').value
     return emotion
 }
 //intensity
-function retrieve_intensity(){
+function retrieve_intensity() {
     intensity = parseInt(document.getElementById('intensity').value)
     return intensity
 }
 
 //post questions
-function retrieve_postquestions(){
+function retrieve_postquestions() {
     var postquestions = []
     var all = document.getElementsByClassName('postQ')
-    for(let i = 0; i< all.length; i ++){
-        var question = all[i].value.replace(/\n/g, "\\n")
+    for (let i = 0; i < all.length; i++) {
+        var question = all[i].value
         postquestions.push(question)
     }
     jsonPostq = JSON.stringify(postquestions)
@@ -109,7 +109,7 @@ function retrieve_postquestions(){
 }
 
 //function to retrieve and submit results
-function submit(){
+function submit() {
 
     //retrieving results
     var title = retrieve_title()
@@ -119,13 +119,13 @@ function submit(){
     var intensity = retrieve_intensity()
     var postquestions = retrieve_postquestions()
     //combining the data
-    mydata =  {
-        sessionTitle:title, 
-        consent: consent, 
-        preQuestions: prequestions, 
-        emotions: emotion, 
-        intensity:intensity, 
-        postQuestions:postquestions
+    mydata = {
+        sessionTitle: title,
+        consent: consent,
+        preQuestions: prequestions,
+        emotions: emotion,
+        intensity: intensity,
+        postQuestions: postquestions
     }
     //submiting data
     var xhttp = new XMLHttpRequest();
@@ -145,12 +145,12 @@ function submit(){
     }
     xhttp.open('POST', '/createsession', true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify(mydata)); 
+    xhttp.send(JSON.stringify(mydata));
 
     //displaying modal
     $('#myModal').modal('show')
 }
 
-function hide(){
+function hide() {
     $('#myModal').modal('hide')
 }
