@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+    <link rel='stylesheet' href='../static/css/viewsession.css'>
+</head>
+<div class="text-center">
+    <h1 class="display-4 p-4">View Participants Results</h1>
+    <h3 class="">Session ID: {{session.id}}</h3>
+    <h3 class="">Session Name: {{session.session_title}}</h3>
+
+    <a href="{{url_for('bulkDownloadAns', sessionid = session.id)}}"><button class="edit btn btn-primary m-4 p-3"> Bulk
+            Download Results (Questions)</button></a>
+    <a href="{{url_for('bulkDownloadEmotions', sessionid = session.id)}}"><button class="edit btn btn-primary m-4 p-3">
+            Bulk Download Results (Emotions)</button></a>
+</div>
+
+<div class="container-holder m-3">
+    <div class="container-fluid text-center bg-white" id='container'>
+        <div class="row bg-dark text-white">
+            <div class="col-2 d-flex">
+                <h5 class="m-auto p-3"><strong>Participant ID</strong></h5>
+            </div>
+            <div class="col-8 d-flex">
+                <h5 style="margin:auto"><strong>Session Result</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Delete Result</strong></h5>
+            </div>
+        </div>
+
+        {% for participant in participants %}
+        <div id={{participant.id}} class="row">
+            <div class="col-2 border d-flex">
+                <p style="margin:auto; padding-top: 15px; padding-bottom: 15px">{{ participant.id }}</p>
+            </div>
+            <div class="col-8 border">
+                {% if participant.stage_num == 5 %}
+                <a class="fs-5" style="margin:auto; padding-top: 15px; padding-bottom: 15px"
+                    href="{{url_for('downloadFile', sessionid = session.id, participantid = participant.id)}}"> <button
+                        class="btn btn-success m-3">Download</button> </a>
+                {% else %}
+                <button disabled class="btn btn-secondary m-3">Download</button>
+                {% endif %}
+            </div>
+            <div class="col-2 border">
+                <button class="edit btn btn-danger m-3" onclick="delResult({{session.id}},{{participant.id}})">Delete</button>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    // Delete Session
+    function delResult(sessionid, participantid) {
+        deletedSession = document.getElementById(participantid)
+        parent = document.getElementById('container')
+        parent.removeChild(deletedSession)
+
+        var target = JSON.stringify({'sessionid':sessionid,"participantid":participantid})
+        $.ajax({
+            url: '/deleteresult',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(target)
+        })
+    }
+</script>
+
+{% endblock %}
