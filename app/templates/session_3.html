@@ -64,7 +64,7 @@
             
             subtract.setAttribute('class', 'subtract')
             subtract.setAttribute('id', 's' + counter)
-            subtract.setAttribute('onclick', 'subtract(this.id')
+            subtract.setAttribute('onclick', 'subtract(this.id)')
 
             intensity.setAttribute('class', 'intensity')
             intensity.setAttribute('id', 'i'+ counter)
@@ -107,6 +107,31 @@
         targetAdd.classList.toggle('addActive')
         targetSubtract.classList.toggle('subtractActive')
     }
+    function subtract(id){
+        var targetId = id.slice(1)
+        var targetIntensity = document.getElementById('i' + targetId)
+        var targetAdd = document.getElementById('a' + targetId)
+        var targetSubtract = document.getElementById('s' + targetId)
+        var intensity = targetIntensity.textContent
+        
+        targetAdd.setAttribute('onclick', 'add(this.id)')
+
+        if (intensity == "-"){
+            if ("{{session.intensity}}" % 2 == 0){
+                intensity = "{{session.intensity}}" / 2
+            }
+            else {
+                intensity = ("{{session.intensity}}" + 1) / 2
+            }
+        } 
+        else if (intensity == 1){
+            targetSubtract.setAttribute('onclick', '')
+        }
+        else{
+            intensity --
+        }
+        targetIntensity.innerHTML = intensity
+    }
 
     function add(id){
         var targetId = id.slice(1)
@@ -118,7 +143,12 @@
         targetSubtract.setAttribute('onclick', 'subtract(this.id)')
 
         if (intensity == "-"){
-            intensity = 3
+            if ("{{session.intensity}}" % 2 == 0){
+                intensity = "{{session.intensity}}" / 2
+            }
+            else {
+                intensity = ("{{session.intensity}}" + 1) / 2
+            }
         } 
         else if (intensity == "{{session.intensity}}"){
             targetAdd.setAttribute('onclick', '')
