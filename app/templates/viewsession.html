@@ -12,7 +12,7 @@
     <div class="container-fluid text-center bg-white" id='container'>
         <div class="row bg-dark text-white">
             <div class="col-1 d-flex">
-                <h5 style="margin:auto"><strong>Session ID</strong></h5>
+                <h5 class="m-auto p-3"><strong>Session ID</strong></h5>
             </div>
             <div class="col-2 d-flex">
                 <h5 style="margin:auto"><strong>Session Name</strong></h5>
@@ -32,15 +32,13 @@
         </div>
 
         {% for session in sessions %}
-        <div>
-        </div>
 
         <div id={{session.id}} class="row">
             <div class="col-1 border d-flex">
                 <p style="margin:auto; padding-top: 15px; padding-bottom: 15px">{{ session.id }}</p>
             </div>
             <div class="col-2 border d-flex">
-                <p style="margin:auto">{{ session.session_title }}</p>
+                <a class="m-auto fs-5 fw-normal link-primary text-decoration-underline" href="{{url_for('viewSession', sessionid = session.id)}}">{{ session.session_title }}</a>
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
@@ -65,11 +63,12 @@
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
-                    <a href = "{{url_for('copySession', id = session.id)}}"><button class="btn btn-warning">copy</button></a>
+                    <a href="{{url_for('copySession', id = session.id)}}"><button
+                            class="btn btn-warning">copy</button></a>
                 </p>
             </div>
             <div class="col-3 border d-flex">
-                <p style="margin:auto">
+                <p class="editButton" style="margin:auto">
                     {% if session.published %}
                     <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
                     {% else %}
@@ -134,10 +133,8 @@
         $('#' + sessionid + ' div:nth-child(4)').append("<p style='margin:auto'>published</p>");
 
         // Disable edit button
-        $('#' + sessionid + ' div:nth-child(6) .edit').prop('disabled', true);
-        $('#' + sessionid + ' div:nth-child(6) .edit').prop('aria-disabled', true);
-        $('#' + sessionid + ' div:nth-child(6) .edit').prop('class', "edit btn btn-secondary");
-        $('#' + sessionid + ' div:nth-child(6) .edit').prop('href', "#");
+        $('#' + sessionid + ' div:nth-child(6) .editButton').empty();
+        $('#' + sessionid + ' div:nth-child(6) .editButton').append("<button disabled aria-disabled='true' class='edit btn btn-secondary'>edit</button>");
 
         // Activate link button
         $('#' + sessionid + ' div:nth-child(3) button').prop('disabled', false);
