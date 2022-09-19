@@ -9,7 +9,7 @@
 <h1 class="display-4 pagetitle">View Sessions</h1>
 
 <div class="container-holder">
-    <div class="container-fluid text-center bg-white">
+    <div class="container-fluid text-center bg-white" id="container">
         <div class="row bg-dark text-white">
             <div class="col-2 d-flex">
                 <h5 style="margin:auto"><strong>Session ID</strong></h5>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
-                    <button class="delete btn btn-danger">delete</button>
+                    <button class="delete btn btn-danger" onclick="delSession('{{session[0].id}}')">delete</button>
                 </p>
             </div>
         </div>
@@ -69,55 +69,26 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+
 <script>
-    function publish(ele) {
-        var sessionid = ele.getAttribute('sessionid')
-        var data = { sessionId: sessionid }
-        update(sessionid)
 
-        // Send HTTP request
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState === XMLHttpRequest.DONE) {
-                const status = xhttp.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    console.log(xhttp.responseText);
-                    update(sessionid)
-                } else {
-                    console.log(xhttp.responseText);
-                }
-            }
-        }
-        xhttp.open('POST', '/publishsession', true);
-        xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(data));
+    // Delete Session
+    function delSession(sessionid){
+        console.log("test",sessionid)
+        //removing session on front end using DOM
+        deletedSession = document.getElementById(sessionid)
+        parent = document.getElementById('container')
+        parent.removeChild(deletedSession)
+
+        var target = JSON.stringify(sessionid)
+        $.ajax({
+            url: 'deleteSession',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(target)
+        })
     }
-
-    // Update the link, disable edit button, remove publish button
-    function update(sessionid) {
-        // Replace publish button with "Published"
-        $('#' + sessionid + ' div:nth-child(4)').empty();
-        $('#' + sessionid + ' div:nth-child(4)').append("<p>published</p>");
-
-        // Disable edit button
-        $('#' + sessionid + ' div:nth-child(6) .edit').prop('disabled', true);
-
-        // Activate link button
-        $('#' + sessionid + ' div:nth-child(3) button').prop('disabled', false);
-    }
-
-    // Update the link and QR Code in the popup
-    function updatelink(sessionid) {
-        $(".modal-body").empty()
-        rootUrl = window.location.origin
-        linkUrl = rootUrl + '/session/' + sessionid
-
-        $(".modal-body").append("<div id='qrcode'></div>")
-        $(".modal-body").append('<p>' + linkUrl + '</p>')
-
-        new QRCode(document.getElementById("qrcode"), linkUrl);
-    }
+        
 </script>
 
 
