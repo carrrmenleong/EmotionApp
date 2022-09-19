@@ -499,10 +499,32 @@ def copySession(id):
 
 # Superadmin delete user and all sessions created by that user
 #----------------------------------------------------------
-@app.route('/deleteuser/<userid>', methods=['GET','POST'])
+@app.route('/deleteUser', methods=['GET','POST'])
 @login_required
-def deleteUser(userid):
-    User.query.filter(User.id == userid).delete()
-    Session.query.filter(Session.user_id == userid).delete()
+def deleteUser():
+    temp = request.get_json()
+    selectedUserId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+
+    # delete user from user table
+    target = User.query.get(selectedUserId)
+    db.session.delete(target)
+
+    # delete sessions created by the user
+    session_id = Session.query.get(Session.user_id == selectedUserId)
+    delete_s = Session.__table__.delete().where(Session.user_id == selectedUserId)
+    db.session.execute(delete_s)
+
+    # delete participants of the session from participant table
+    delete_p = Participant.__table__.delete().where(Participant.session_id == session_id)
+    db.session.execute(delete_p)
+
+    # delete response of the session from response table
+    delete_r = Response.__table__.delete().where(Response.session_id == session_id)
+    db.session.execute(delete_r)
+
     db.session.commit()
     return redirect(url_for('viewusers'))
