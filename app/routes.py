@@ -6,7 +6,7 @@ from werkzeug.urls import url_parse
 from app.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from sqlalchemy import func 
 from app.api.errors import bad_request
-from app.email import send_password_reset_email
+from app.email import send_password_reset_email, send_sign_up_req_email, send_req_result_email
 import flask_excel as excel
 
 import json
@@ -269,6 +269,7 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        send_sign_up_req_email(user)
         flash('Congratulations, your signup have been requested! You will receive an email when your sign up request is approved.')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')

@@ -1,0 +1,6 @@
+Dear {{ user.username }},
+
+Your sign up request to Mood Track has been {{ results }}.
+
+Sincerely,
+Mood Track
