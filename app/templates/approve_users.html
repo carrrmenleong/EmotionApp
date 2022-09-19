@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/viewusers.css'>
+    <link rel = 'stylesheet' href = '../static/css/approve_users.css'>
+</head>
+
+<h1 class="display-4 pagetitle">Sign Up Request</h1>
+
+<div class="container-holder">
+    <div class="container-fluid text-center bg-white">
+        <div class="row bg-dark text-white">
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>UserID</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Username</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>ORCID</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>First Name</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Last Name</strong></h5>
+            </div>
+            <div class="col-1 d-flex">
+                <h5 style="margin:auto"><strong>Institution</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Email</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Reason for using app</strong></h5>
+            </div>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Approve / Deny</strong></h5>
+            </div>
+        </div>
+
+        {% for user in users %}
+
+        <div id={{user.id}} class="row">
+            <div class="col-1 border d-flex">
+                <p style="margin:auto; ">{{ user.id }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.username }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.orcid }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.fist_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.last_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.institution }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p class="text-break" style="margin:auto">{{ user.email }}</p>
+            </div>
+            <div class="col-2 border d-flex overflow-auto" style="height:120px;">
+                <p class="text-break" style="margin:auto">{{ user.reason }}</p>
+            </div>
+            <div class="col-2 border d-flex">
+                <p style="margin:auto">
+                    <button class="btn btn-success">Approve</button>
+                    <button class="delete btn btn-danger">Deny</button>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -60,6 +60,15 @@
                     {% endif %}
                 {% endif %}
                 
+                <!-- Sign Up Request for superadmin only -->
+                {% if is_superadmin is defined %}
+                    {% if is_signupreq is defined %}
+                    <li><a href="{{url_for('signupreq')}}" class ="leftActive" >Sign Up Requests</a></li>
+                    {% else %}
+                    <li><a href="{{url_for('signupreq')}}" class ="left" >Sign Up Requests</a></li>
+                    {% endif %}
+                {% endif %}
+
                 <!-- View Session(s)-->
                 {% if is_view is defined %}
                 <li><a href="{{url_for('viewsessions')}}" class = 'leftActive'>View Sessions</a></li>
