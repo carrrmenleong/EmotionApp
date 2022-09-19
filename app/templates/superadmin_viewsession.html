@@ -45,7 +45,7 @@
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
-                    <button class="delete btn btn-danger" onclick="delSession('{{session.id}}')">delete</button>
+                    <button class="delete btn btn-danger" onclick="delSession('{{session[0].id}}')">delete</button>
                 </p>
             </div>
         </div>
@@ -74,7 +74,7 @@
 
     // Delete Session
     function delSession(sessionid){
-
+        console.log("test",sessionid)
         //removing session on front end using DOM
         deletedSession = document.getElementById(sessionid)
         parent = document.getElementById('container')
