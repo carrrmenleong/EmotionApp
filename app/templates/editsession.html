@@ -2,38 +2,43 @@
 
 {% block content %}
 
-<head> 
-    <link rel = 'stylesheet' href = '../static/css/createsession.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
+<head>
+    <link rel='stylesheet' href='../static/css/createsession.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+    </link>
     <script src='../static/js/createsession.js'></script>
 </head>
+
 <body>
-    <div class = 'parent'>
+    <div class='parent'>
         {% if is_create is not defined %}
         <h1> Edit Session </h1>
         {% else %}
         <h1> Create Session </h1>
         {% endif%}
-        <!-- Session Title -->  
-        <div id = 'title_block' class = 'block'>
-            <label class = 'main'>Title</label><br>
-            <input id = 'title' type ='text' value = '{{session.session_title}}'>  </input><br>
+        <!-- Session Title -->
+        <div id='title_block' class='block'>
+            <label class='main'>Title</label><br>
+            <input id='title' type='text' value='{{session.session_title}}'> </input><br>
         </div>
 
         <!-- Participant Consent -->
-        <div id = 'consent_block' class = 'block'>
-            <label class = 'main'> Participant Information and Consent </label><br>
-            <label class = 'sub'> Fill in the terms and condition that is required for participants to agree on before undertaking this session. </label><br>
-            <textarea  id = 'consent'>{{session.consent}} </textarea>
+        <div id='consent_block' class='block'>
+            <label class='main'> Participant Information and Consent </label><br>
+            <label class='sub'> Fill in the terms and condition that is required for participants to agree on before
+                undertaking this session. </label><br>
+            <textarea id='consent'>{{session.consent}} </textarea>
         </div>
 
         <!-- Pre-measuring Questions-->
-        <div id = 'pre_block' class = 'block'>
-            <label class = 'main'> Pre-Measuring Questions </label><br>
-            <label class = 'sub'> To create open-ended question, type in question as a paragraph. To create multiple-choice question, type in question as first paragraph and type in each option as a new line. </label>
-                <!-- where new questions will be added-->
-                <div id = 'pre_questions'></div>
-            <button class = 'add' onclick = "add('pre')"> Add New Question </button>
+        <div id='pre_block' class='block'>
+            <label class='main'> Pre-Measuring Questions </label><br>
+            <label class='sub'> To create open-ended question, type in question as a paragraph. To create
+                multiple-choice question, type in question as first paragraph and type in each option as a new line.
+            </label>
+            <!-- where new questions will be added-->
+            <div id='pre_questions'></div>
+            <button class='add' onclick="add('pre')"> Add New Question </button>
         </div>
 
         <!--Emotions -->
@@ -47,51 +52,51 @@
         </div>
 
         <!-- Post Measuring Question -->
-        <div id = 'post_block' class = 'block'>
-            <label class = 'main'> Post-measuring Questions </label><br>
+        <div id='post_block' class='block'>
+            <label class='main'> Post-measuring Questions </label><br>
             <!-- where new questions will be added-->
-            <div id = 'post_questions'></div>  
-            <button class = 'add' onclick ="add('post')"> Add New Question </button>
+            <div id='post_questions'></div>
+            <button class='add' onclick="add('post')"> Add New Question </button>
         </div>
         {% if is_create is not defined %}
-        <button onclick="update()" id = 'update'>Update Session</button>
+        <button onclick="update()" id='update'>Update Session</button>
         {% else %}
-        <button onclick="submit()" id = 'submit'>Create Session</button>
+        <button onclick="submit()" id='submit'>Create Session</button>
         {% endif%}
     </div>
 
     <!-- modal-->
-    <div id = "myModal" class="modal" tabindex="-1" role="dialog">
+    <div id="myModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Session Updated</h5>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Session Updated</h5>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if is_create is not defined %}
+                    <p> Session updated successfully! </p>
+                    <p> Feel free to add more changes or head to the View Session Page</a> to checkout your session!</p>
+                    {% else %}
+                    <p> Please head to view session page to checkout the session created.</p>
+                    {% endif%}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id='closeModal' onclick='hide()'>Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                {% if is_create is not defined %}
-                <p> Session updated successfully! </p>
-                <p> Feel free to add more changes or head to the View Session Page</a> to checkout your session!</p>
-                {% else %}
-                <p> Please head to view session page to checkout the session created.</p>
-                {% endif%}
-                
-            </div>
-            <div class="modal-footer">
-              <button type="button" id = 'closeModal' onclick ='hide()'>Close</button>
-            </div>
-          </div>
         </div>
     </div>
 </body>
 
 <script>
     // function to generate question blocks and delete option using document object model (DOM)
-    function gen_block(all_questions, target){
-        if (target == 'pre_questions'){
+    function gen_block(all_questions, target) {
+        if (target == 'pre_questions') {
             var type = 'preq'
         }
-        else{
+        else {
             var type = 'post'
         }
 
@@ -99,19 +104,19 @@
         var parent = document.getElementById(target)
 
         //adding 
-        for (var i = 0; i <all_questions.length; i++){
-            
+        for (var i = 0; i < all_questions.length; i++) {
+
             var child = document.createElement('div')
-            
+
             // creating question and delete 
             var question = document.createElement('textarea')
             var del = document.createElement('i')
 
             // setting attributes of question and del
-            if (type == 'preq'){
+            if (type == 'preq') {
                 question.setAttribute('class', 'preQ')
             }
-            else{
+            else {
                 question.setAttribute('class', 'postQ')
             }
             question.setAttribute('id', 't' + counter.toString())
@@ -133,7 +138,7 @@
             counter++
         }
     }
-    
+
 
     // retrieving pre and post questions
     var preQ_all = JSON.parse('{{session.pre_ques|safe}}')
@@ -147,7 +152,7 @@
     gen_block(postQ_all, 'post_questions')
 
     // function to collate and update db
-    function update(){
+    function update() {
         //retrieving results
         var title = retrieve_title()
         var consent = retrieve_consent()
@@ -156,18 +161,18 @@
         var intensity = retrieve_intensity()
         var postquestions = retrieve_postquestions()
         //combining the data
-        mydata =  {
+        mydata = {
             id: '{{session.id}}',
-            sessionTitle:title, 
-            consent: consent, 
-            preQuestions: prequestions, 
-            emotions: emotion, 
-            intensity:intensity, 
-            postQuestions:postquestions
+            sessionTitle: title,
+            consent: consent,
+            preQuestions: prequestions,
+            emotions: emotion,
+            intensity: intensity,
+            postQuestions: postquestions
         }
         jsonData = JSON.stringify(mydata)
         $.ajax({
-            url:'/updateSession',
+            url: '/updateSession',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(jsonData)
