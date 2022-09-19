@@ -505,3 +505,21 @@ def updateSession():
 def copySession(id):
     session = Session.query.get(id)
     return render_template('editsession.html', session = session, is_create=True)
+
+
+# Approve User Sign up request
+#---------------------------------------------------------------
+@app.route('/approveUser/<userid>', methods= ['GET', 'POST'])
+def approveUser(userid):
+    user = User.query.get(userid)
+    user.approved = True
+    db.session.commit()
+    return redirect(url_for('signupreq'))
+
+# Deny User Sign up request and delete user in database
+#---------------------------------------------------------------
+@app.route('/denyUser/<userid>', methods= ['GET', 'POST'])
+def denyUser(userid):
+    User.query.filter(User.id == userid).delete()
+    db.session.commit()
+    return redirect(url_for('signupreq'))
