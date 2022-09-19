@@ -1,0 +1,4 @@
+There is a new sign up request from {{ user.username }}, please review it.
+
+
+Mood Track
