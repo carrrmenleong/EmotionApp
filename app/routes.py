@@ -219,6 +219,17 @@ def viewusers():
     else:
         return render_template("404.html")
 
+# Sign up requests
+#----------------------------------------------------------
+@app.route('/signupreq', methods=['GET'])
+@login_required
+def signupreq():
+    if current_user.email == "emotionappmoodtrack@gmail.com":
+        users = User.query.all()
+        return render_template("approve_users.html", title="Sign Up Requests", is_superadmin = True, is_signupreq = True, users = users)
+    else:
+        return render_template("404.html")
+
 
 # Publish Session
 #----------------------------------------------------------
