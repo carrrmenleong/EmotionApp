@@ -337,3 +337,15 @@ def updateSession():
 def copySession(id):
     session = Session.query.get(id)
     return render_template('editsession.html', session = session, is_create=True)
+
+
+
+# Superadmin delete user and sessions created by that user
+#----------------------------------------------------------
+@app.route('/deleteuser/<userid>', methods=['GET','POST'])
+@login_required
+def deleteUser(userid):
+    User.query.filter(User.id == userid).delete()
+    Session.query.filter(Session.user_id == userid).delete()
+    db.session.commit()
+    return redirect(url_for('viewusers'))
