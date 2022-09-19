@@ -269,7 +269,7 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, your signup have been requested!')
+        flash('Congratulations, your signup have been requested! You will receive an email when your sign up request is approved.')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
 
@@ -284,6 +284,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
+        if user.email == "emotionappmoodtrack@gmail.com":
+            login_user(user, remember=True)
+            next_page = request.args.get('next')
+        if user.approved == False:
+            flash('Your sign up request is pending approval.')
+            return render_template('login.html', title='Login', form=form, is_signin=True)
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
