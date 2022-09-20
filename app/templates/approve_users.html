@@ -2,17 +2,18 @@
 
 {% block content %}
 
-<head>
-    <link rel='stylesheet' href='../static/css/viewusers.css'>
+<head> 
+    <link rel = 'stylesheet' href = '../static/css/viewusers.css'>
+    <link rel = 'stylesheet' href = '../static/css/approve_users.css'>
 </head>
 
-<h1 class="display-4 pagetitle">View Users</h1>
+<h1 class="display-4 pagetitle">Sign Up Request</h1>
 
 <div class="container-holder">
-    <div class="container-fluid text-center bg-white" id="container">
+    <div class="container-fluid text-center bg-white">
         <div class="row bg-dark text-white">
             <div class="col-1 d-flex">
-                <h5 style="margin:auto"><strong>User ID</strong></h5>
+                <h5 style="margin:auto"><strong>UserID</strong></h5>
             </div>
             <div class="col-1 d-flex">
                 <h5 style="margin:auto"><strong>Username</strong></h5>
@@ -29,14 +30,14 @@
             <div class="col-1 d-flex">
                 <h5 style="margin:auto"><strong>Institution</strong></h5>
             </div>
-            <div class="col-3 d-flex">
+            <div class="col-2 d-flex">
                 <h5 style="margin:auto"><strong>Email</strong></h5>
             </div>
             <div class="col-2 d-flex">
-                <h5 style="margin:auto"><strong>Reason for using the app</strong></h5>
+                <h5 style="margin:auto"><strong>Reason for using app</strong></h5>
             </div>
-            <div class="col-1 d-flex">
-                <h5 style="margin:auto"><strong>Delete</strong></h5>
+            <div class="col-2 d-flex">
+                <h5 style="margin:auto"><strong>Approve / Deny</strong></h5>
             </div>
         </div>
 
@@ -61,59 +62,21 @@
             <div class="col-1 border d-flex">
                 <p style="margin:auto">{{ user.institution }}</p>
             </div>
-            <div class="col-3 border d-flex">
+            <div class="col-2 border d-flex">
                 <p class="text-break" style="margin:auto">{{ user.email }}</p>
             </div>
             <div class="col-2 border d-flex overflow-auto" style="height:120px;">
                 <p class="text-break" style="margin:auto">{{ user.reason }}</p>
             </div>
-            <div class="col-1 border d-flex">
+            <div class="col-2 border d-flex">
                 <p style="margin:auto">
-                    <!--
-                    <button class="delete btn btn-danger" onclick="window.location.href='{{ url_for( 'deleteUser', userid = user.id) }}';">delete</button>
-                    -->
-                    <button class="delete btn btn-danger" onclick="delUser('{{user.id}}')">delete</button>
+                    <button class="btn btn-success">Approve</button>
+                    <button class="delete btn btn-danger">Deny</button>
                 </p>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    function delUser(userid) {
-
-        //removing session on front end using DOM
-        deletedUser = document.getElementById(userid)
-        parent = document.getElementById('container')
-        parent.removeChild(deletedUser)
-
-        var target = JSON.stringify(userid)
-        $.ajax({
-            url: 'deleteUser',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(target)
-        })
-    }
-</script>
 
 {% endblock %}
