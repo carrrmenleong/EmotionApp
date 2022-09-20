@@ -6,7 +6,7 @@ from werkzeug.urls import url_parse
 from app.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from sqlalchemy import func 
 from app.api.errors import bad_request
-from app.email import send_password_reset_email, send_sign_up_req_email, send_req_result_email
+from app.email import send_password_reset_email
 import flask_excel as excel
 
 import json
@@ -269,8 +269,7 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        send_sign_up_req_email(user)
-        flash('Congratulations, your signup have been requested! You will receive an email when your sign up request is approved.')
+        flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
 
@@ -285,12 +284,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        if user.email == "emotionappmoodtrack@gmail.com":
-            login_user(user, remember=True)
-            next_page = request.args.get('next')
-        if user.approved == False:
-            flash('Your sign up request is pending approval.')
-            return render_template('login.html', title='Login', form=form, is_signin=True)
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -471,7 +464,7 @@ def deleteSession():
 
     db.session.commit()
     
-    return redirect(url_for('viewsessions'))
+    return('success')
 
 
 # Edit Session
@@ -514,19 +507,37 @@ def copySession(id):
     return render_template('editsession.html', session = session, is_create=True)
 
 
-# Approve User Sign up request
-#---------------------------------------------------------------
-@app.route('/approveUser/<userid>', methods= ['GET', 'POST'])
-def approveUser(userid):
-    user = User.query.get(userid)
-    user.approved = True
-    db.session.commit()
-    return redirect(url_for('signupreq'))
 
-# Deny User Sign up request and delete user in database
-#---------------------------------------------------------------
-@app.route('/denyUser/<userid>', methods= ['GET', 'POST'])
-def denyUser(userid):
-    User.query.filter(User.id == userid).delete()
+# Superadmin delete user and all sessions created by that user
+#----------------------------------------------------------
+@app.route('/deleteUser', methods=['GET','POST'])
+@login_required
+def deleteUser():
+    temp = request.get_json()
+    selectedUserId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+
+    sessions = Session.query.filter_by(user_id = selectedUserId).all()
+    for session in sessions:
+        sessionId = session.id
+        # delete participants of the session from participant table
+        delete_p = Participant.__table__.delete().where(Participant.session_id == sessionId)
+        db.session.execute(delete_p)
+
+        # delete response of the session from response table
+        delete_r = Response.__table__.delete().where(Response.session_id == sessionId)
+        db.session.execute(delete_r)
+    
+    # delete sessions created by the user
+    delete_s = Session.__table__.delete().where(Session.user_id == selectedUserId)
+    db.session.execute(delete_s)
+
+    # delete user from user table
+    target = User.query.get(selectedUserId)
+    db.session.delete(target)
+
     db.session.commit()
-    return redirect(url_for('signupreq'))
+    return ('success')
