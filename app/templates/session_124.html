@@ -1,27 +1,30 @@
 {% extends "base_participant.html" %}
 {% block content %}
+
 <head>
-    <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_124.css') }}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/session_124.css') }}">
 </head>
 
-<div id = 'personalDetails'>
-    <p id = 'reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
+<div id='personalDetails'>
+    <p id='reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw
+        from research in
         the future.</p>
-    <h2 id = 'id'>ID Code: {{participant.id}}</h2>
+    <h2 id='id'>ID Code: {{participant.id}}</h2>
     <hr>
 </div>
 
 <!-- Load pre-session quesitons if participant is in stage 2 -->
 {% if stage == 2 %}
 <h2>Pre Session Survey</h2>
-<div id = 'pre_ques_blk'></div>
-<button class = 'surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit & Continue</button>
+<div id='pre_ques_blk'></div>
+<button class='surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit &
+    Continue</button>
 
 <!-- Load post-session quesitons if participant is in stage 4 -->
 {% elif stage == 4 %}
 <h2>Post Session Survey</h2>
-<div id = 'post_ques_blk'></div>
-<button class = 'surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
+<div id='post_ques_blk'></div>
+<button class='surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
 {% endif %}
 
 <!-- Load consent modal if participant is in stage 1 -->
@@ -35,7 +38,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p id = 'consent'> {{session.consent}}</p>
+                {% for para in consenttexts %}
+                    <p>{{para}}</p>
+                {% endfor %}
             </div>
             <div class="modal-footer">
                 <button type="button" id='closeModal'
@@ -62,30 +67,30 @@
 
     var stage = "{{stage}}"
     // generating question blocks based on stage
-    if (stage >= 2){
+    if (stage >= 2) {
         genBlock(stage)
     }
 
     // function to collate results
-    function genAnswer(){
+    function genAnswer() {
         var ans = []
         var all_ques = document.getElementsByClassName('questionBlk')
 
-        for (var i = 0; i<all_ques.length; i++){
+        for (var i = 0; i < all_ques.length; i++) {
             var ques = all_ques[i]
 
             // if question is mcq
-            if (ques.classList.contains('Mcq')){
+            if (ques.classList.contains('Mcq')) {
                 var radios = document.getElementsByName('radio')
-                
-                for( let j = 0; j<radios.length; j++){
+
+                for (let j = 0; j < radios.length; j++) {
                     // retrieving selected option
-                    if (radios[j].checked){
+                    if (radios[j].checked) {
                         ans.push(radios[j].value)
                     }
                 }
             }
-            else if (ques.classList.contains('Open')){
+            else if (ques.classList.contains('Open')) {
                 ans.push(document.getElementById('openQ').value)
             }
         }
@@ -93,25 +98,25 @@
     }
 
     // function to generate prequestions / postquestions
-    function genBlock(stage){
-        
-        if (stage == 2){
+    function genBlock(stage) {
+
+        if (stage == 2) {
             var all_ques = JSON.parse('{{session.pre_ques|safe}}')
             var parent = document.getElementById('pre_ques_blk')
         }
-        else{
+        else {
             var all_ques = JSON.parse('{{session.post_ques|safe}}')
             var parent = document.getElementById('post_ques_blk')
         }
         //for loop to generate questions
-        for (var i = 0; i< all_ques.length; i++){
+        for (var i = 0; i < all_ques.length; i++) {
 
             var indiv_ques = all_ques[i] // each question
             var child = document.createElement('div')  //creating child container to be appended
             child.setAttribute('id', 'q' + counter)
 
             //checking if question is mcq
-            if (indiv_ques.includes('\n')){
+            if (indiv_ques.includes('\n')) {
 
                 // splitting mcq into question and options
                 var mcq = indiv_ques.split('\n')
@@ -121,10 +126,10 @@
                 // setting attributes
                 var ques = document.createElement('p')
                 ques.innerText = question
-                
+
                 child.appendChild(ques)
                 // creating options
-                for (var j = 0; j< options.length; j++){
+                for (var j = 0; j < options.length; j++) {
 
                     var option = options[j] // retrieving each option
                     var opt = document.createElement('input')
@@ -135,12 +140,12 @@
                     opt.setAttribute('type', 'radio')
                     opt.setAttribute('value', option)
 
-                    
+
                     child.setAttribute('class', 'questionBlk Mcq')
 
                     //label.setAttribute('for', 'q'+ counter + 'o'+ counter)
                     label.innerText = option
-                    
+
                     child.appendChild(opt)
                     child.appendChild(label)
                     child.appendChild(document.createElement('br'))
@@ -148,7 +153,7 @@
                 }
             }
             // open ended questions
-            else{
+            else {
                 // creating elements
                 var ques = document.createElement('p')
                 var text = document.createElement('textarea')
@@ -162,7 +167,7 @@
             }
 
             parent.appendChild(child)
-            counter ++
+            counter++
         }
     }
 
@@ -204,7 +209,7 @@
         console.log(data)
         let targetUrl = `/session/${sessionId}/${participantId}`
         console.log(stage_num)
-        
+
         //submiting data
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
