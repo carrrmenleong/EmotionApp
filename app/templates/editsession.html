@@ -141,10 +141,9 @@
 
 
     // retrieving pre and post questions
-    var preQ_all = JSON.parse('{{session.pre_ques|safe}}')
-    var postQ_all = JSON.parse('{{session.post_ques|safe}}')
-    var emotions = '{{session.emotions}}'.replace('/\\n/g, "\n")')
-    
+    var preQ_all = {{session.pre_ques|safe}}
+    var postQ_all = {{session.post_ques|safe}}
+    var emotions = {{session.emotions}}
     document.getElementById('emotion').value = emotions
     
     // generating pre and post questions

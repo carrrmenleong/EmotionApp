@@ -1,25 +1,27 @@
 {% extends "base_participant.html" %}
 {% block content %}
+
 <head>
-    <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_3.css') }}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/session_3.css') }}">
 </head>
 <!--
 <p>Session Name: {{session.session_title}}</p>
 <p>Stage Num: {{stage}}</p>
 <p>Participant stagenum: {{participant.stage_num}}</p>
 -->
+
 <body>
-    
-    emotions options: {{session.emotions}}
-    <div id = 'personalDetails'>
-        <p id = 'reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw from research in
+
+    <div id='personalDetails'>
+        <p id='reminder'>Please remember your Personal ID Code below. It will be required to continue session or to
+            withdraw from research in
             the future.</p>
-        <h2 id = 'id'>ID Code: {{participant.id}}</h2>
+        <h2 id='id'>ID Code: {{participant.id}}</h2>
         <hr>
     </div>
-    <p id ='instruction'>Click on the emotion you are feeling right now and indicate it's intensity.<br>
+    <p id='instruction'>Click on the emotion you are feeling right now and indicate it's intensity.<br>
         Maximum intensity is {{session.intensity}}</p>
-    <div id = 'bigContainer'>
+    <div id='bigContainer'>
         <!-- Emotion Blocks will appear here-->
     </div>
     <div>
@@ -35,14 +37,14 @@
 
     genEmotions(emotions, intensity)
 
-    function genEmotions(emotions, intensity){
+    function genEmotions(emotions, intensity) {
         var mainContainer = document.getElementById('bigContainer')
 
         // using for loop to generate all emotion blocks
-        for(let i = 0; i< emotions.length; i++){
+        for (let i = 0; i < emotions.length; i++) {
 
             // creating row for 2 blocks
-            if (i % 2 == 0){
+            if (i % 2 == 0) {
                 var row = document.createElement('div')
                 row.setAttribute('class', 'row')
             }
@@ -57,8 +59,8 @@
             var emotionLabel = document.createElement('span')       // label that contains emotion
 
             emotionBlk.setAttribute('class', 'emotionBlk')
-            emotionBlk.setAttribute('id', 'e' + counter)  
-            emotionBlk.setAttribute('onclick', 'select(this.id)')   
+            emotionBlk.setAttribute('id', 'e' + counter)
+            emotionBlk.setAttribute('onclick', 'select(this.id)')
             emotionLabel.setAttribute('class', 'emotion')
             emotionLabel.innerHTML = emotion
             emotionBlk.appendChild(emotionLabel)
@@ -72,7 +74,7 @@
             add.setAttribute('class', 'add')                        // setting attributes of add button
             add.setAttribute('id', 'a' + counter)
             //add.setAttribute('onclick','add(this.id)')      
-            add.innerHTML = "+"   
+            add.innerHTML = "+"
 
             subtract.setAttribute('class', 'subtract')              // setting attributes of subtract button
             subtract.setAttribute('id', 's' + counter)
@@ -80,7 +82,7 @@
             subtract.innerHTML = "-"
 
             intensityLabel.setAttribute('class', 'intensity')       // setting attributes of intensity label
-            intensityLabel.setAttribute('id', 'i'+ counter)
+            intensityLabel.setAttribute('id', 'i' + counter)
             intensityLabel.innerHTML = "-"
 
             adjustorBlk.setAttribute('class', 'adjustorBlk')
@@ -96,12 +98,12 @@
             row.appendChild(smallContainer)
 
             mainContainer.appendChild(row)
-            counter ++
+            counter++
 
         }
     }
 
-    function select(id){
+    function select(id) {
         var targetId = id.slice(1)
         var targetEmotion = document.getElementById("e" + targetId)
         var targetAdd = document.getElementById('a' + targetId)
@@ -118,14 +120,22 @@
         var name = targetEmotion.getAttribute('class')
 
         // checking if emotion is selected
-        if (name.includes('Active')){
+        if (name.includes('Active')) {
             // enable selection of intensity
-            targetAdd.setAttribute('onclick','add(this.id)')
+            targetAdd.setAttribute('onclick', 'add(this.id)')
             targetSubtract.setAttribute('onclick', 'subtract(this.id)')
+            let value
+            if (intensity % 2 == 0) {
+                value = intensity / 2
+            }
+            else {
+                value = (parseInt(intensity) + 1) / 2
+            }
+            targetLabel.innerHTML = value;
         }
-        else{
+        else {
             // disables selection of intensity
-            targetAdd.setAttribute('onclick','')
+            targetAdd.setAttribute('onclick', '')
             targetSubtract.setAttribute('onclick', '')
 
             // resetting label of intensity to -
@@ -134,7 +144,7 @@
 
 
     }
-    function subtract(id){
+    function subtract(id) {
         var targetId = id.slice(1)
         var targetIntensity = document.getElementById('i' + targetId)
         var targetAdd = document.getElementById('a' + targetId)
@@ -143,27 +153,27 @@
 
         targetAdd.setAttribute('onclick', 'add(this.id)')
 
-        if (value == "-"){
-            if (intensity % 2 == 0){
+        if (value == "-") {
+            if (intensity % 2 == 0) {
                 value = intensity / 2
             }
             else {
-                value = (parseInt(intensity)  + 1 )/2
-                
+                value = (parseInt(intensity) + 1) / 2
+
             }
-        } 
-        else{
-            value --
+        }
+        else {
+            value--
         }
 
         // disable subtract button
-        if (value == 1){
+        if (value == 1) {
             targetSubtract.setAttribute('onclick', '')
         }
         targetIntensity.innerHTML = value
     }
 
-    function add(id){
+    function add(id) {
         var targetId = id.slice(1)
         var targetIntensity = document.getElementById('i' + targetId)
         var targetAdd = document.getElementById('a' + targetId)
@@ -173,29 +183,42 @@
         //enable subtract option
         targetSubtract.setAttribute('onclick', 'subtract(this.id)')
 
-        if (value == "-"){
-            if (intensity % 2 == 0){
+        if (value == "-") {
+            if (intensity % 2 == 0) {
                 value = intensity / 2
             }
             else {
-                value = (parseInt(intensity)  + 1 )/2
-                
+                value = (parseInt(intensity) + 1) / 2
             }
-        } 
-        else{
-            value ++
+        }
+        else {
+            value++
         }
 
         // disable subtract button
-        if (value == intensity){
+        if (value == intensity) {
             targetAdd.setAttribute('onclick', '')
         }
         targetIntensity.innerHTML = value
     }
 
-
     function submitEmotions(sessionId, participantId) {
-        let mydata = { stage: 3, endStage: false, emotions: { 'sad': 10, 'happy': 5 } }
+        let selectedEmotions = { stage: 3, endStage: false, emotions: {} }
+
+        let selectedEmotionsBlocks = $(".emotionBlkActive")
+        for (const selectedEmotion of selectedEmotionsBlocks) {
+            let emotionName = selectedEmotion.firstChild.innerHTML
+            let selectedDiv = selectedEmotion.parentNode
+            let intensity = selectedDiv.lastChild.children[1].innerHTML
+            selectedEmotions['emotions'][emotionName] = Number(intensity)
+        }
+
+        $('.adjustorBlkActive .intensity').html("-")
+        $('.adjustorBlkActive').removeClass("adjustorBlkActive");
+        $('.emotionBlkActive').removeClass("emotionBlkActive");
+        $('.addActive').removeClass("addActive");
+        $('.subtractActive').removeClass("subtractActive");
+
         let targetUrl = `/session/${sessionId}/${participantId}`
         //submiting data
         var xhttp = new XMLHttpRequest();
@@ -214,11 +237,11 @@
         }
         xhttp.open('POST', targetUrl, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(mydata));
+        xhttp.send(JSON.stringify(selectedEmotions));
     }
 
     function finishSession(sessionId, participantId) {
-        let mydata = { stage: 3, endStage: true, emotions: { 'sad': 10, 'happy': 5 } }
+        let mydata = { stage: 3, endStage: true, emotions: {} }
         let targetUrl = `/session/${sessionId}/${participantId}`
         //submiting data
         var xhttp = new XMLHttpRequest();
