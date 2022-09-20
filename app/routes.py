@@ -219,6 +219,17 @@ def viewusers():
     else:
         return render_template("404.html")
 
+# Sign up requests
+#----------------------------------------------------------
+@app.route('/signupreq', methods=['GET'])
+@login_required
+def signupreq():
+    if current_user.email == "emotionappmoodtrack@gmail.com":
+        users = User.query.all()
+        return render_template("approve_users.html", title="Sign Up Requests", is_superadmin = True, is_signupreq = True, users = users)
+    else:
+        return render_template("404.html")
+
 
 # Publish Session
 #----------------------------------------------------------
@@ -453,7 +464,7 @@ def deleteSession():
 
     db.session.commit()
     
-    return redirect(url_for('viewsessions'))
+    return('success')
 
 
 # Edit Session
@@ -494,3 +505,39 @@ def updateSession():
 def copySession(id):
     session = Session.query.get(id)
     return render_template('editsession.html', session = session, is_create=True)
+
+
+
+# Superadmin delete user and all sessions created by that user
+#----------------------------------------------------------
+@app.route('/deleteUser', methods=['GET','POST'])
+@login_required
+def deleteUser():
+    temp = request.get_json()
+    selectedUserId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+
+    sessions = Session.query.filter_by(user_id = selectedUserId).all()
+    for session in sessions:
+        sessionId = session.id
+        # delete participants of the session from participant table
+        delete_p = Participant.__table__.delete().where(Participant.session_id == sessionId)
+        db.session.execute(delete_p)
+
+        # delete response of the session from response table
+        delete_r = Response.__table__.delete().where(Response.session_id == sessionId)
+        db.session.execute(delete_r)
+    
+    # delete sessions created by the user
+    delete_s = Session.__table__.delete().where(Session.user_id == selectedUserId)
+    db.session.execute(delete_s)
+
+    # delete user from user table
+    target = User.query.get(selectedUserId)
+    db.session.delete(target)
+
+    db.session.commit()
+    return ('success')
