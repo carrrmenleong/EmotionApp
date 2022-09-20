@@ -86,7 +86,7 @@ function retrieve_prequestions() {
     return jsonPreQ
 }
 //emotions
-function retrieve_emotions() {
+function retrieve_emotions(){
     emotion = document.getElementById('emotion').value
     return emotion
 }
