@@ -101,11 +101,11 @@
     function genBlock(stage) {
 
         if (stage == 2) {
-            var all_ques = JSON.parse('{{session.pre_ques|safe}}')
+            var all_ques = {{session.pre_ques|safe}}
             var parent = document.getElementById('pre_ques_blk')
         }
         else {
-            var all_ques = JSON.parse('{{session.post_ques|safe}}')
+            var all_ques = {{session.post_ques|safe}}
             var parent = document.getElementById('post_ques_blk')
         }
         //for loop to generate questions
@@ -207,6 +207,7 @@
         //let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
         let data = { stage: Number(stage_num), ans: results }
         console.log(data)
+        console.log(results)
         let targetUrl = `/session/${sessionId}/${participantId}`
         console.log(stage_num)
 
