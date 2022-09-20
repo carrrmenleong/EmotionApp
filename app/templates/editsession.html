@@ -42,13 +42,14 @@
         </div>
 
         <!--Emotions -->
-        <div id = 'emotion_block' class = 'block'>
-            <label class = 'main'> Emotions </label><br>
-            <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
-            <label class = 'main'> Emotion Options </label><br>
-            <textarea id = 'emotion'></textarea><br>
-            <label class = 'main'> Max Intensity </label><br>
-            <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12' value = '{{session.intensity}}'></input><br>
+        <div id='emotion_block' class='block'>
+            <label class='main'> Emotions </label><br>
+            <label class='sub'> Insert each emotion option as a new line </label><br> <br>
+            <label class='main'> Emotion Options </label><br>
+            <textarea id='emotion'>{{session.emotions}}</textarea><br>
+            <label class='main'> Max Intensity </label><br>
+            <input id='intensity' type='text' placeholder='Please enter a number from 3 - 12'
+                value='{{session.intensity}}'></input><br>
         </div>
 
         <!-- Post Measuring Question -->
@@ -141,11 +142,13 @@
 
 
     // retrieving pre and post questions
-    var preQ_all = {{session.pre_ques|safe}}
-    var postQ_all = {{session.post_ques|safe}}
-    var emotions = {{session.emotions}}
-    document.getElementById('emotion').value = emotions
-    
+    var preQ_all = {{ session.pre_ques| safe}}
+    var postQ_all = {{ session.post_ques| safe}}
+
+
+    console.log({{ session.pre_ques | safe }})
+    console.log({{ session.post_ques | safe }})
+
     // generating pre and post questions
     gen_block(preQ_all, 'pre_questions')
     gen_block(postQ_all, 'post_questions')

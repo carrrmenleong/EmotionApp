@@ -382,14 +382,14 @@ def session(sessionid,participantid):
 
     # Split consent
     consenttexts = session.consent.split('\n')
-
+    emotions = session.emotions.split('\n')
     if request.method == 'GET':
         if stage_num == 1:
             return render_template("session_124.html", session = session, participant = participant, stage=1, consenttexts = consenttexts)
         elif stage_num == 2:
             return render_template("session_124.html", session = session, participant = participant, stage=2)
         elif stage_num == 3:
-            return render_template("session_3.html", session = session, participant = participant, stage=3)
+            return render_template("session_3.html", session = session, participant = participant, stage=3, emotions = emotions)
         elif stage_num == 4:
             return render_template("session_124.html", session = session, participant = participant, stage=4)
         else:
