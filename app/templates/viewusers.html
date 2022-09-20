@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<head> 
-    <link rel = 'stylesheet' href = '../static/css/viewusers.css'>
+<head>
+    <link rel='stylesheet' href='../static/css/viewusers.css'>
 </head>
 
 <h1 class="display-4 pagetitle">View Users</h1>
 
 <div class="container-holder">
-    <div class="container-fluid text-center bg-white">
+    <div class="container-fluid text-center bg-white" id="container">
         <div class="row bg-dark text-white">
             <div class="col-1 d-flex">
                 <h5 style="margin:auto"><strong>User ID</strong></h5>
@@ -41,39 +41,41 @@
         </div>
 
         {% for user in users %}
-            {% if user.approved is sameas True %}
-            <div id={{user.id}} class="row">
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto; ">{{ user.id }}</p>
-                </div>
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto">{{ user.username }}</p>
-                </div>
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto">{{ user.orcid }}</p>
-                </div>
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto">{{ user.fist_name }}</p>
-                </div>
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto">{{ user.last_name }}</p>
-                </div>
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto">{{ user.institution }}</p>
-                </div>
-                <div class="col-3 border d-flex">
-                    <p class="text-break" style="margin:auto">{{ user.email }}</p>
-                </div>
-                <div class="col-2 border d-flex overflow-auto" style="height:120px;">
-                    <p class="text-break" style="margin:auto">{{ user.reason }}</p>
-                </div>
-                <div class="col-1 border d-flex">
-                    <p style="margin:auto">
-                        <button class="delete btn btn-danger">Delete</button>
-                    </p>
-                </div>
+
+        <div id={{user.id}} class="row">
+            <div class="col-1 border d-flex">
+                <p style="margin:auto; ">{{ user.id }}</p>
             </div>
-            {% endif %}
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.username }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.orcid }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.fist_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.last_name }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">{{ user.institution }}</p>
+            </div>
+            <div class="col-3 border d-flex">
+                <p class="text-break" style="margin:auto">{{ user.email }}</p>
+            </div>
+            <div class="col-2 border d-flex overflow-auto" style="height:120px;">
+                <p class="text-break" style="margin:auto">{{ user.reason }}</p>
+            </div>
+            <div class="col-1 border d-flex">
+                <p style="margin:auto">
+                    <!--
+                    <button class="delete btn btn-danger" onclick="window.location.href='{{ url_for( 'deleteUser', userid = user.id) }}';">delete</button>
+                    -->
+                    <button class="delete btn btn-danger" onclick="delUser('{{user.id}}')">delete</button>
+                </p>
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>
@@ -83,7 +85,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Link and QR Code</h5>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -96,6 +98,22 @@
 </div>
 
 
+<script>
+    function delUser(userid) {
 
+        //removing session on front end using DOM
+        deletedUser = document.getElementById(userid)
+        parent = document.getElementById('container')
+        parent.removeChild(deletedUser)
+
+        var target = JSON.stringify(userid)
+        $.ajax({
+            url: 'deleteUser',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(target)
+        })
+    }
+</script>
 
 {% endblock %}
