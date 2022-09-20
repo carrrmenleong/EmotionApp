@@ -1,4 +1,1 @@
-There is a new sign up request from {{ user.username }}, please review it.
-
-
-Mood Track
+There is a new sign up request from {{ user.username }} to Mood Track, please review it.
