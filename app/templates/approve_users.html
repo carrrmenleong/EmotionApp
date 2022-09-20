@@ -72,8 +72,8 @@
                 </div>
                 <div class="col-2 border d-flex">
                     <p style="margin:auto">
-                        <button class="btn btn-success" onclick="approveUser(user.id)">Approve</button>
-                        <button class="delete btn btn-danger" onclick="denyUser(user.id)">Deny</button>
+                        <button class="btn btn-success" onclick="approveUser('{{user.id}}')">Approve</button>
+                        <button class="delete btn btn-danger" onclick="denyUser('{{user.id}}')">Deny</button>
                     </p>
                 </div>
             {% endif %}
@@ -85,6 +85,11 @@
 
 <script>
     function approveUser(userid){
+        //removing user on front end using DOM
+        removeUser = document.getElementById(userid)
+        parent = document.getElementById('container')
+        parent.removeChild(removeUser)
+
         var target = JSON.stringify(userid)
         $.ajax({
             url: 'approveUser',
@@ -96,9 +101,9 @@
 
     function denyUser(userid){
         //removing user on front end using DOM
-        deleteUser = document.getElementById(userid)
+        removeUser = document.getElementById(userid)
         parent = document.getElementById('container')
-        parent.removeChild(deleteUser)
+        parent.removeChild(removeUser)
 
         var target = JSON.stringify(userid)
         $.ajax({
