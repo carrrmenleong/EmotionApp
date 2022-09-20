@@ -377,9 +377,12 @@ def session(sessionid,participantid):
         return bad_request("Participant Id doesn't exists")
     stage_num = participant.stage_num
 
+    # Split consent
+    consenttexts = session.consent.split('\n')
+
     if request.method == 'GET':
         if stage_num == 1:
-            return render_template("session_124.html", session = session, participant = participant, stage=1)
+            return render_template("session_124.html", session = session, participant = participant, stage=1, consenttexts = consenttexts)
         elif stage_num == 2:
             return render_template("session_124.html", session = session, participant = participant, stage=2)
         elif stage_num == 3:
