@@ -41,38 +41,42 @@
         </div>
 
         {% for user in users %}
-
-        <div id={{user.id}} class="row">
-            <div class="col-1 border d-flex">
-                <p style="margin:auto; ">{{ user.id }}</p>
-            </div>
-            <div class="col-1 border d-flex">
-                <p style="margin:auto">{{ user.username }}</p>
-            </div>
-            <div class="col-1 border d-flex">
-                <p style="margin:auto">{{ user.orcid }}</p>
-            </div>
-            <div class="col-1 border d-flex">
-                <p style="margin:auto">{{ user.fist_name }}</p>
-            </div>
-            <div class="col-1 border d-flex">
-                <p style="margin:auto">{{ user.last_name }}</p>
-            </div>
-            <div class="col-1 border d-flex">
-                <p style="margin:auto">{{ user.institution }}</p>
-            </div>
-            <div class="col-3 border d-flex">
-                <p class="text-break" style="margin:auto">{{ user.email }}</p>
-            </div>
-            <div class="col-2 border d-flex overflow-auto" style="height:120px;">
-                <p class="text-break" style="margin:auto">{{ user.reason }}</p>
-            </div>
-            <div class="col-1 border d-flex">
-                <p style="margin:auto">
-                    <button class="delete btn btn-danger" onclick="delUser('{{user.id}}')">delete</button>
-                </p>
-            </div>
-        </div>
+            {% if user.approved is sameas True %}
+                <div id={{user.id}} class="row">
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto; ">{{ user.id }}</p>
+                    </div>
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto">{{ user.username }}</p>
+                    </div>
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto">{{ user.orcid }}</p>
+                    </div>
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto">{{ user.fist_name }}</p>
+                    </div>
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto">{{ user.last_name }}</p>
+                    </div>
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto">{{ user.institution }}</p>
+                    </div>
+                    <div class="col-3 border d-flex">
+                        <p class="text-break" style="margin:auto">{{ user.email }}</p>
+                    </div>
+                    <div class="col-2 border d-flex overflow-auto" style="height:120px;">
+                        <p class="text-break" style="margin:auto">{{ user.reason }}</p>
+                    </div>
+                    <div class="col-1 border d-flex">
+                        <p style="margin:auto">
+                            <!--
+                            <button class="delete btn btn-danger" onclick="window.location.href='{{ url_for( 'deleteUser', userid = user.id) }}';">delete</button>
+                            -->
+                            <button class="delete btn btn-danger" onclick="delUser('{{user.id}}')">delete</button>
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

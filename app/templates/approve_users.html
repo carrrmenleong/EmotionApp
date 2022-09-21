@@ -10,7 +10,7 @@
 <h1 class="display-4 pagetitle">Sign Up Request</h1>
 
 <div class="container-holder">
-    <div class="container-fluid text-center bg-white">
+    <div class="container-fluid text-center bg-white" id="container">
         <div class="row bg-dark text-white">
             <div class="col-1 d-flex">
                 <h5 style="margin:auto"><strong>UserID</strong></h5>
@@ -72,8 +72,8 @@
                 </div>
                 <div class="col-2 border d-flex">
                     <p style="margin:auto">
-                        <button class="btn btn-success" onclick = "window.location.href='{{ url_for( 'approveUser', userid = user.id) }}';">Approve</button>
-                        <button class="delete btn btn-danger" onclick = "window.location.href='{{ url_for( 'denyUser', userid = user.id) }}';">Deny</button>
+                        <button class="btn btn-success" onclick="approveUser('{{user.id}}')">Approve</button>
+                        <button class="delete btn btn-danger" onclick="denyUser('{{user.id}}')">Deny</button>
                     </p>
                 </div>
             {% endif %}
@@ -85,9 +85,29 @@
 
 <script>
     function approveUser(userid){
+        //removing user on front end using DOM
+        removeUser = document.getElementById(userid)
+        parent = document.getElementById('container')
+        parent.removeChild(removeUser)
+
         var target = JSON.stringify(userid)
         $.ajax({
             url: 'approveUser',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(target)
+        })
+    }
+
+    function denyUser(userid){
+        //removing user on front end using DOM
+        removeUser = document.getElementById(userid)
+        parent = document.getElementById('container')
+        parent.removeChild(removeUser)
+
+        var target = JSON.stringify(userid)
+        $.ajax({
+            url: 'denyUser',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(target)
