@@ -1,6 +1,17 @@
 <p>Dear {{ user.username }},</p>
 
-<p>Your sign up request to Mood Track has been {{ results }}.</p>
+{% if results is sameas True %}
+<p>Congratulations, your sign up request to Mood Track has been denied. 
+    You can now log in to create survey session.</p>
 
+{% else %}
+<p>Sorry, your sign up request to Mood Track has been denied.</p>
+<br>
+<p>However, you may submit another sign up request in the future.</p>
+{% endif %}
+
+
+<br>
+<br>
 <p>Sincerely,</p>
 <p>Mood Track</p>
