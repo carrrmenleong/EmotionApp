@@ -269,7 +269,10 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+
+        #email superadmin about new sign up request
         send_sign_up_req_email(user)
+        
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
@@ -562,6 +565,7 @@ def denyUser():
     if current_user.email != "emotionappmoodtrack@gmail.com":
         return bad_request("Action not allowed")
     
+    # email sign up review results to user
     user = User.query.get(userId)
     send_req_result_email(user, results=False)
 
@@ -586,6 +590,7 @@ def approveUser():
     if current_user.email != "emotionappmoodtrack@gmail.com":
         return bad_request("Action not allowed")
     
+    # email sign up review results to user
     user = User.query.get(userId)
     send_req_result_email(user, results=True)
 
