@@ -182,11 +182,17 @@
         $(".modal-body").append('<div><p>' + warning2 + '</p></div>')
         $(".modal-body").append('<div><p>' + warning3 + '</p></div>')
 
+        
+        // adding label
+        label = "Please check the checkbox to confirm your intent!"
+        $(".modal-body").append('<br><br><div><label id = "notify">' + label + '</label></div>')
+        notify = document.getElementById('notify')
+        notify.style.display = "none"
+
         // adding confirmation
         confirmation = "I have read and confirmed my intent"
-
-        $(".modal-body").append('<br><div class = "confirmation"><input type="checkbox" id = "confirmation"></div>')
-        $(".confirmation").append('<label for="confirmation">' + confirmation + '</label>')
+        $(".modal-body").append('<div id = "confirmationBlk"><input type="checkbox" id = "confirmation"></div>')
+        $("#confirmationBlk").append('<label for="confirmation" id = "confirmLabel">' + confirmation + '</label>') // hiding label 
 
         // adding button
         $(".modal-footer").append('<br><button id = "confirmDel">Delete</button>')
@@ -197,6 +203,7 @@
 
     function confirmDel(sessionid){
         var confirmation = document.getElementById('confirmation')
+        var blk = document.getElementById('confirmationBlk')
 
         // checking if user confirms their intent
         if (confirmation.checked){
@@ -220,10 +227,11 @@
 
         }
         else{
-            console.log("NO")
+            label = document.getElementById('notify')
+            label.style.display = 'inline'
+            blk.style.outline= "thin solid red"
         }
         
-        console.log(sessionid)
     }
 
 

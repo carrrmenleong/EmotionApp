@@ -58,6 +58,16 @@
   font-weight: bold;
 }
 
-.confirmation{
-  padding: 1%;
+#confirmationBlk{
+  padding: 5%;
+}
+
+#notify{
+  vertical-align: center;
+  text-align: center;
+  color: red;
+}
+
+#confirmLabel{
+  padding-left: 2%;
 }
