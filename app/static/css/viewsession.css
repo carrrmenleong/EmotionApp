@@ -60,14 +60,22 @@
 
 #confirmationBlk{
   padding: 5%;
+  border-radius: 15px;
+  margin-top: 5%;
 }
 
 #notify{
   vertical-align: center;
   text-align: center;
   color: red;
+  margin-top: 2%;
 }
 
 #confirmLabel{
   padding-left: 2%;
+}
+
+#warning{
+  padding: 2%;
+  margin-bottom: 2%;
 }
