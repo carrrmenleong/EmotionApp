@@ -110,6 +110,7 @@
 
     // function to generate prequestions / postquestions
     function genBlock(stage) {
+        console.log(stage)
 
         // selecting target block for prequestions page
         if (stage == 2) {
@@ -127,7 +128,15 @@
 
             var indiv_ques = all_ques[i] // each question
             var child = document.createElement('div')  //creating child container to be appended
-            child.setAttribute('id', 'q' + counter)
+            
+            // for postquestions
+            if(stage ==4){
+                child.setAttribute('id', 'q' + counter)
+            }
+            // for prequestions
+            else{
+                child.setAttribute('id', 'q' + counter)
+            }
 
             //checking if question is mcq
             if (indiv_ques.includes('\n')) {
@@ -175,7 +184,7 @@
                 // setting attributes
                 ques.innerText = indiv_ques
                 child.setAttribute('class', 'questionBlk Open')
-                text.setAttribute('id', 'openQ')
+                text.setAttribute('id', 'openQ'+ (i+3))
                 child.appendChild(ques)
                 child.appendChild(text)
             }
