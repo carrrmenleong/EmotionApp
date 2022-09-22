@@ -23,7 +23,18 @@
 <!-- Load post-session quesitons if participant is in stage 4 -->
 {% elif stage == 4 %}
 <h2>Post Session Survey</h2>
-<div id='post_ques_blk'></div>
+<div id='post_ques_blk'>
+    <!-- Preset Questions-->
+    <div id = "q1" class = "questionBlk Open">
+        <p> Can you explain why you have chosen this as your highest frequency </p>
+        <textarea id = "openQ1"></textarea>
+    </div>
+    <div id = "q2" class = "questionBlk Open">
+        <p> Can you explain why you have chosen this as your highest intensity </p>
+        <textarea id = "openQ2"></textarea>
+    </div>
+
+</div>
 <button class='surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit</button>
 {% endif %}
 
@@ -100,12 +111,15 @@
     // function to generate prequestions / postquestions
     function genBlock(stage) {
 
+        // selecting target block for prequestions page
         if (stage == 2) {
             var all_ques = {{session.pre_ques|safe}}
             var parent = document.getElementById('pre_ques_blk')
         }
+        // selecting target block for postquestions page
         else {
             var all_ques = {{session.post_ques|safe}}
+            console.log(all_ques)
             var parent = document.getElementById('post_ques_blk')
         }
         //for loop to generate questions
