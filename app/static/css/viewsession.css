@@ -35,3 +35,29 @@
   font-size: medium;
   padding: 0%;
 }
+
+#warning{
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+
+#confirmDel{
+  font-size: larger;
+  background-color: #f3b06a;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  border-color: white;
+  letter-spacing: 2px;
+  padding: 2%;
+  border-radius: 15px;
+  margin: auto;
+  width: 80%;
+  font-weight: bold;
+}
+
+.confirmation{
+  padding: 1%;
+}
