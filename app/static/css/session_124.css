@@ -1,0 +1,66 @@
+body{
+    text-align: center;
+}
+
+#consent{
+    text-align: justify;
+    text-justify: inter-word;
+    padding: 2%;
+}
+
+button{
+    font-size: larger;
+    background-color: #f3b06a;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    border-color: white;
+    letter-spacing: 2px;
+    padding: 2%;
+    border-radius: 15px;
+    width: 100%;
+    font-weight: bold;
+}
+
+#personalDetails{
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#reminder{
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+h2{
+    padding:2%;
+    font-size: 40px;
+}
+
+#pre_ques_blk, #post_ques_blk{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.questionBlk{
+    letter-spacing: 2px;
+    padding: 2%;
+    font-size: 20px;
+    text-align: left;
+}
+
+textarea{
+    width: 100%;
+    height: 150px;
+    border-radius: 15px;
+}
+input, label{
+    padding: 1%;
+    margin-left: 2%;
+}
+
+.surveyBtn{
+    width: 80%;
+    letter-spacing: 2px;
+}

@@ -151,6 +151,7 @@
         $(".modal-body").append('<div><p>Session ID: ' + sessionid + '</p></div>')
         $(".modal-body").append('<div><p>Session Name: ' + sessiontitle + '</p></div>')
         $(".modal-body").append("<div id='qrcode'></div>")
+        $(".modal-body").append("<div><p class='grey'>(right-click or drag to download QR code)</p></div>")
         $(".modal-body").append('<div><p>Session Link: <a id="link" href="' + linkUrl + '">' + linkUrl + '</a></p></div>')
 
         new QRCode(document.getElementById("qrcode"), linkUrl);

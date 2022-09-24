@@ -1,13 +1,14 @@
 {% extends "base_participant.html" %}
 {% block content %}
-
-<p>Stage 5</p>
-<h1>Thank you for your participation!</h1>
-<h2>Session Name: {{session.session_title}}</h2>
-<h2>ID Code: {{participant.id}}</h2>
-<p>Participant stagenum: {{participant.stage_num}}</p>
-
-
-</script>
+<head>
+    <link rel = 'stylesheet' href = "{{ url_for('static', filename='css/session_5.css') }}">
+</head>
+<div id = 'container'>
+    <h1>Thank you for your participation!</h1>
+    <div id = 'sub'>
+        <h2>Session Name: {{session.session_title}}</h2>
+        <h2>ID Code: {{participant.id}}</h2>
+    </div>
+</div>
 
 {% endblock %}
