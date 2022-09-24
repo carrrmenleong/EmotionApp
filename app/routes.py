@@ -347,6 +347,8 @@ def reset_password(token):
 @app.route('/session/<int:sessionid>', methods=['GET','POST'])
 def session_home(sessionid):
         session = Session.query.filter_by(id = sessionid).first_or_404()
+        if not session.published:
+            return render_template("404.html")
         return render_template('session.html', title='Session', session = session)
 
 
@@ -380,17 +382,21 @@ def check_id(sessionid,participantid):
 def session(sessionid,participantid):
     participant = Participant.query.filter_by(id=participantid).first_or_404()
     session = Session.query.filter_by(id = sessionid).first_or_404()
+
     if participant is None:
         return bad_request("Participant Id doesn't exists")
     stage_num = participant.stage_num
 
+    # Split consent
+    consenttexts = session.consent.split('\n')
+    emotions = session.emotions.split('\n')
     if request.method == 'GET':
         if stage_num == 1:
-            return render_template("session_124.html", session = session, participant = participant, stage=1)
+            return render_template("session_124.html", session = session, participant = participant, stage=1, consenttexts = consenttexts)
         elif stage_num == 2:
             return render_template("session_124.html", session = session, participant = participant, stage=2)
         elif stage_num == 3:
-            return render_template("session_3.html", session = session, participant = participant, stage=3)
+            return render_template("session_3.html", session = session, participant = participant, stage=3, emotions = emotions)
         elif stage_num == 4:
             return render_template("session_124.html", session = session, participant = participant, stage=4)
         else:
@@ -418,17 +424,17 @@ def session(sessionid,participantid):
             if 'emotions' not in data:
                 return bad_request('Must include emotions and endStage')
             
-            # Add each emotion response to database
-            for emotion in data['emotions']:
-                response = Response(
-                emotion = emotion,
-                intensity = data['emotions'][emotion],
-                participant_id = participant.id,
-                session_id = session.id)
-                db.session.add(response)
-
             if data['endStage']:
                 participant.stage_num = 4
+            else:
+                # Add each emotion response to database
+                for emotion in data['emotions']:
+                    response = Response(
+                    emotion = emotion,
+                    intensity = data['emotions'][emotion],
+                    participant_id = participant.id,
+                    session_id = session.id)
+                    db.session.add(response)
             
             db.session.commit()
             return ('Successfully recorded emotions response')
