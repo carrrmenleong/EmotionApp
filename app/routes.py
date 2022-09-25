@@ -269,6 +269,7 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        #send_sign_up_req_email(user)
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
@@ -284,6 +285,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
+        if user.email == "emotionappmoodtrack@gmail.com":
+             login_user(user, remember=True)
+             next_page = request.args.get('next')
+        if user.approved == False:
+             flash('Your sign up request is pending approval.')
+             return render_template('login.html', title='Login', form=form, is_signin=True)
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -547,3 +554,44 @@ def deleteUser():
 
     db.session.commit()
     return ('success')
+
+
+# Superadmin deny user sign up requests
+#----------------------------------------------------------
+@app.route('/denyUser', methods=['GET','POST'])
+@login_required
+def denyUser():
+    temp = request.get_json()
+    userId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+    
+    # delete user in database
+    target = User.query.get(userId)
+    db.session.delete(target)
+    db.session.commit()
+    
+    return redirect(url_for('signupreq'))
+
+
+
+# Superadmin approve user sign up requests
+#----------------------------------------------------------
+@app.route('/approveUser', methods=['GET','POST'])
+@login_required
+def approveUser():
+    temp = request.get_json()
+    userId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+    
+    # approve user
+    target = User.query.get(userId)
+    target.approved = True
+    db.session.commit()
+    
+    return redirect(url_for('signupreq'))
