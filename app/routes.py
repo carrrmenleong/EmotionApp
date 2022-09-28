@@ -350,6 +350,8 @@ def reset_password(token):
 @app.route('/session/<int:sessionid>', methods=['GET','POST'])
 def session_home(sessionid):
         session = Session.query.filter_by(id = sessionid).first_or_404()
+        if not session.published:
+            return render_template('404.html')
         return render_template('session.html', title='Session', session = session)
 
 
@@ -386,14 +388,17 @@ def session(sessionid,participantid):
     if participant is None:
         return bad_request("Participant Id doesn't exists")
     stage_num = participant.stage_num
+    
+    consenttexts = session.consent.split('\n')
+    emotions = session.emotions.split('\n')
 
     if request.method == 'GET':
         if stage_num == 1:
-            return render_template("session_124.html", session = session, participant = participant, stage=1)
+            return render_template("session_124.html", session = session, participant = participant, stage=1, consenttexts = consenttexts)
         elif stage_num == 2:
             return render_template("session_124.html", session = session, participant = participant, stage=2)
         elif stage_num == 3:
-            return render_template("session_3.html", session = session, participant = participant, stage=3)
+            return render_template("session_3.html", session = session, participant = participant, stage=3, emotions = emotions)
         elif stage_num == 4:
             return render_template("session_124.html", session = session, participant = participant, stage=4)
         else:
