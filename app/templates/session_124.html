@@ -132,13 +132,12 @@
             
             // for postquestions
             if(stage ==4){
-                child.setAttribute('id', 'q' + counter)
+                child.setAttribute('id', 'q' + (counter + 2))
             }
             // for prequestions
-            else{
+            else if (stage == 2){
                 child.setAttribute('id', 'q' + counter)
             }
-
             //checking if question is mcq
             if (indiv_ques.includes('\n')) {
 
@@ -159,16 +158,27 @@
                     var opt = document.createElement('input')
                     var label = document.createElement('label')
 
-                    opt.setAttribute('id', 'q'+ counter + 'o'+ counter)
-                    opt.setAttribute('name', 'radio' + counter)
+                    // for pre questions page
+                    if (stage == 2){
+                        opt.setAttribute('id', 'q'+ counter + 'o'+ (j + 1))
+                        opt.setAttribute('name', 'radio' + counter)
+                        label.setAttribute('for', 'q'+ counter + 'o'+ (j + 1))
+                        label.innerText = option
+                    }
+                    // for post questions page
+                    else if (stage ==4){
+                        opt.setAttribute('id', 'q'+ (counter + 2)+ 'o'+ (j + 1))
+                        opt.setAttribute('name', 'radio' + (counter + 2))
+                        label.setAttribute('for', 'q'+ (counter + 2) + 'o'+ (j + 1))
+                        label.innerText = option
+                    }
                     opt.setAttribute('type', 'radio')
                     opt.setAttribute('value', option)
 
 
                     child.setAttribute('class', 'questionBlk Mcq')
 
-                    label.setAttribute('for', 'q'+ counter + 'o'+ counter)
-                    label.innerText = option
+                    
 
                     child.appendChild(opt)
                     child.appendChild(label)
@@ -185,7 +195,12 @@
                 // setting attributes
                 ques.innerText = indiv_ques
                 child.setAttribute('class', 'questionBlk Open')
-                text.setAttribute('id', 'openQ'+ (i  + 1))
+                if (stage == 2){
+                    text.setAttribute('id', 'openQ'+ counter)
+                }
+                else if (stage == 4){
+                    text.setAttribute('id', 'openQ'+ (counter + 2))
+                }
                 child.appendChild(ques)
                 child.appendChild(text)
             }
