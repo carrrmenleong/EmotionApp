@@ -92,7 +92,7 @@
 
             // if question is mcq
             if (ques.classList.contains('Mcq')) {
-                var radios = document.getElementsByName('radio')
+                var radios = document.getElementsByName('radio' + (i+1))
 
                 for (let j = 0; j < radios.length; j++) {
                     // retrieving selected option
@@ -102,15 +102,16 @@
                 }
             }
             else if (ques.classList.contains('Open')) {
-                ans.push(document.getElementById('openQ').value)
+                
+                ans.push(document.getElementById('openQ' + (i+1)).value)
             }
         }
         return ans
     }
+    
 
     // function to generate prequestions / postquestions
     function genBlock(stage) {
-        console.log(stage)
 
         // selecting target block for prequestions page
         if (stage == 2) {
@@ -158,15 +159,15 @@
                     var opt = document.createElement('input')
                     var label = document.createElement('label')
 
-                    //opt.setAttribute('id', 'q'+ counter + 'o'+ counter)
-                    opt.setAttribute('name', 'radio')
+                    opt.setAttribute('id', 'q'+ counter + 'o'+ counter)
+                    opt.setAttribute('name', 'radio' + counter)
                     opt.setAttribute('type', 'radio')
                     opt.setAttribute('value', option)
 
 
                     child.setAttribute('class', 'questionBlk Mcq')
 
-                    //label.setAttribute('for', 'q'+ counter + 'o'+ counter)
+                    label.setAttribute('for', 'q'+ counter + 'o'+ counter)
                     label.innerText = option
 
                     child.appendChild(opt)
@@ -184,7 +185,7 @@
                 // setting attributes
                 ques.innerText = indiv_ques
                 child.setAttribute('class', 'questionBlk Open')
-                text.setAttribute('id', 'openQ'+ (i+3))
+                text.setAttribute('id', 'openQ'+ (i  + 1))
                 child.appendChild(ques)
                 child.appendChild(text)
             }
@@ -227,10 +228,10 @@
 
     function submitAns(sessionId, participantId, stage_num) {
         let results = genAnswer()
+        console.log(results)
         //let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
         let data = { stage: Number(stage_num), ans: results }
         console.log(data)
-        console.log(results)
         let targetUrl = `/session/${sessionId}/${participantId}`
         console.log(stage_num)
 
@@ -255,7 +256,6 @@
         xhttp.open('POST', targetUrl, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(data));
-
     }
 
 </script>
