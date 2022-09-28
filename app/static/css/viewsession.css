@@ -36,6 +36,10 @@
   padding: 0%;
 }
 
+.grey {
+  color: grey;
+}
+
 #warning{
   color: red;
   font-weight: bold;

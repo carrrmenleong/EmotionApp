@@ -6,7 +6,7 @@ from werkzeug.urls import url_parse
 from app.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from sqlalchemy import func 
 from app.api.errors import bad_request
-from app.email import send_password_reset_email
+from app.email import send_password_reset_email, send_sign_up_req_email, send_req_result_email
 import flask_excel as excel
 
 import json
@@ -269,6 +269,10 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+
+        #email superadmin about new sign up request
+        send_sign_up_req_email(user)
+        
         flash('Congratulations, your signup have been requested!')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
@@ -284,6 +288,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
+        if user.email == "emotionappmoodtrack@gmail.com":
+             login_user(user, remember=True)
+             next_page = request.args.get('next')
+        if user.approved == False:
+             flash('Your sign up request is pending approval.')
+             return render_template('login.html', title='Login', form=form, is_signin=True)
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -340,8 +350,6 @@ def reset_password(token):
 @app.route('/session/<int:sessionid>', methods=['GET','POST'])
 def session_home(sessionid):
         session = Session.query.filter_by(id = sessionid).first_or_404()
-        if not session.published:
-            return render_template("404.html")
         return render_template('session.html', title='Session', session = session)
 
 
@@ -375,21 +383,17 @@ def check_id(sessionid,participantid):
 def session(sessionid,participantid):
     participant = Participant.query.filter_by(id=participantid).first_or_404()
     session = Session.query.filter_by(id = sessionid).first_or_404()
-
     if participant is None:
         return bad_request("Participant Id doesn't exists")
     stage_num = participant.stage_num
 
-    # Split consent
-    consenttexts = session.consent.split('\n')
-    emotions = session.emotions.split('\n')
     if request.method == 'GET':
         if stage_num == 1:
-            return render_template("session_124.html", session = session, participant = participant, stage=1, consenttexts = consenttexts)
+            return render_template("session_124.html", session = session, participant = participant, stage=1)
         elif stage_num == 2:
             return render_template("session_124.html", session = session, participant = participant, stage=2)
         elif stage_num == 3:
-            return render_template("session_3.html", session = session, participant = participant, stage=3, emotions = emotions)
+            return render_template("session_3.html", session = session, participant = participant, stage=3)
         elif stage_num == 4:
             return render_template("session_124.html", session = session, participant = participant, stage=4)
         else:
@@ -417,17 +421,17 @@ def session(sessionid,participantid):
             if 'emotions' not in data:
                 return bad_request('Must include emotions and endStage')
             
+            # Add each emotion response to database
+            for emotion in data['emotions']:
+                response = Response(
+                emotion = emotion,
+                intensity = data['emotions'][emotion],
+                participant_id = participant.id,
+                session_id = session.id)
+                db.session.add(response)
+
             if data['endStage']:
                 participant.stage_num = 4
-            else:
-                # Add each emotion response to database
-                for emotion in data['emotions']:
-                    response = Response(
-                    emotion = emotion,
-                    intensity = data['emotions'][emotion],
-                    participant_id = participant.id,
-                    session_id = session.id)
-                    db.session.add(response)
             
             db.session.commit()
             return ('Successfully recorded emotions response')
@@ -547,3 +551,52 @@ def deleteUser():
 
     db.session.commit()
     return ('success')
+
+
+# Superadmin deny user sign up requests
+#----------------------------------------------------------
+@app.route('/denyUser', methods=['GET','POST'])
+@login_required
+def denyUser():
+    temp = request.get_json()
+    userId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+    
+    # email sign up review results to user
+    user = User.query.get(userId)
+    send_req_result_email(user, results=False)
+
+    # delete user in database
+    target = User.query.get(userId)
+    db.session.delete(target)
+    db.session.commit()
+    
+    return redirect(url_for('signupreq'))
+
+
+
+# Superadmin approve user sign up requests
+#----------------------------------------------------------
+@app.route('/approveUser', methods=['GET','POST'])
+@login_required
+def approveUser():
+    temp = request.get_json()
+    userId = json.loads(temp)
+
+    # Restrict access to superadmin only
+    if current_user.email != "emotionappmoodtrack@gmail.com":
+        return bad_request("Action not allowed")
+    
+    # email sign up review results to user
+    user = User.query.get(userId)
+    send_req_result_email(user, results=True)
+
+    # approve user
+    target = User.query.get(userId)
+    target.approved = True
+    db.session.commit()
+    
+    return redirect(url_for('signupreq'))
