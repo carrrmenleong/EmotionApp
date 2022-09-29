@@ -15,6 +15,7 @@
         <div id = 'title_block' class = 'block'>
             <label class = 'main'>Session Title</label><br>
             <input id = 'title' type ='text' placeholder ='Please enter your session title here'></input><br>
+            <label class = 'error' id = 'title_error'></label>
         </div>
 
         <!-- Participant Consent -->
@@ -22,6 +23,7 @@
             <label class = 'main'> Participant Information and Consent </label><br>
             <label class = 'sub'> Fill in the terms and condition that is required for participants to agree on before undertaking this session. </label><br>
             <textarea  id = 'consent'></textarea>
+            <label class = 'error' id = 'consent_error'></label>
         </div>
 
         <!-- Pre-measuring Questions-->
@@ -33,6 +35,7 @@
                     <div id = '1' class = 'qblock'>
                         <textarea id = 't1' class = 'preQ'></textarea>
                         <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'preqD1' onclick ='del(this)'></i>
+                        <label class = 'error' id = 'preq_error1'></label>
                     </div>
                 </div>
             <button class = 'add' onclick = "add('pre')"> Add New Question </button>
@@ -41,11 +44,14 @@
         <!--Emotions -->
         <div id = 'emotion_block' class = 'block'>
             <label class = 'main'> Emotions </label><br>
-            <label class = 'sub'> Insert each emotion option as a new line </label><br>  <br>
+            <label class = 'sub'> Insert each emotion option as a new line </label><br><br>
             <label class = 'main'> Emotion Options </label><br>
             <textarea id = 'emotion'></textarea><br>
+            <label class = 'error' id = 'emotions_error'></label><br>
             <label class = 'main'> Max Intensity </label><br>
             <input id = 'intensity' type = 'text' placeholder = 'Please enter a number from 3 - 12'> </input><br>
+            <label class = 'error' id = 'intensity_error'></label>
+            
         </div>
 
         <!-- Post Measuring Question -->
@@ -56,6 +62,7 @@
                 <div id = '2' class = 'qblock'>
                     <textarea id = 't2' class = 'postQ'></textarea>
                     <i class="fas fa-trash fa-2x" aria-hidden="true" id = 'postD2' onclick ='del(this)'></i>
+                    <label class = 'error' id = 'postq_error2'></label>
                 </div>
             </div>  
             <button class = 'add' onclick ="add('post')"> Add New Question </button>
