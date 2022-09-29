@@ -410,7 +410,10 @@ def session(sessionid,participantid):
             return bad_request('Must include stage number')
 
         if data['stage'] == 1 and data['consent']:
-            participant.stage_num = 2
+            if session.pre_ques == '[]':
+                participant.stage_num = 3
+            else:
+                participant.stage_num = 2
             db.session.commit()
             return ('Successfully recorded consent')
 
