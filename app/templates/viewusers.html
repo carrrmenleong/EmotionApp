@@ -41,7 +41,8 @@
         </div>
 
         {% for user in users %}
-            {% if user.approved is sameas True %}
+            {% if user.id == admin.id %}
+            {% elif user.approved%}
                 <div id={{user.id}} class="row">
                     <div class="col-1 border d-flex">
                         <p style="margin:auto; ">{{ user.id }}</p>
@@ -69,9 +70,6 @@
                     </div>
                     <div class="col-1 border d-flex">
                         <p style="margin:auto">
-                            <!--
-                            <button class="delete btn btn-danger" onclick="window.location.href='{{ url_for( 'deleteUser', userid = user.id) }}';">delete</button>
-                            -->
                             <button class="delete btn btn-danger" onclick="delUser('{{user.id}}')">delete</button>
                         </p>
                     </div>
