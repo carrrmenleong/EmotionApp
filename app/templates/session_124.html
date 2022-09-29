@@ -157,6 +157,7 @@
                     var option = options[j] // retrieving each option
                     var opt = document.createElement('input')
                     var label = document.createElement('label')
+                    var para = document.createElement('p')
 
                     // for pre questions page
                     if (stage == 2){
@@ -164,6 +165,7 @@
                         opt.setAttribute('name', 'radio' + counter)
                         label.setAttribute('for', 'q'+ counter + 'o'+ (j + 1))
                         label.innerText = option
+                        para.setAttribute('id', 'pre_error' + counter)
                     }
                     // for post questions page
                     else if (stage ==4){
@@ -171,38 +173,45 @@
                         opt.setAttribute('name', 'radio' + (counter + 2))
                         label.setAttribute('for', 'q'+ (counter + 2) + 'o'+ (j + 1))
                         label.innerText = option
+                        para.setAttribute('id', 'post_error' + (counter + 2))
                     }
+                    para.setAttribute('class', 'error')
                     opt.setAttribute('type', 'radio')
                     opt.setAttribute('value', option)
 
-
                     child.setAttribute('class', 'questionBlk Mcq')
-
-                    
 
                     child.appendChild(opt)
                     child.appendChild(label)
                     child.appendChild(document.createElement('br'))
 
                 }
+                
+                child.appendChild(para)
             }
             // open ended questions
             else {
                 // creating elements
                 var ques = document.createElement('p')
                 var text = document.createElement('textarea')
+                var para = document.createElement('p')
 
                 // setting attributes
                 ques.innerText = indiv_ques
                 child.setAttribute('class', 'questionBlk Open')
                 if (stage == 2){
                     text.setAttribute('id', 'openQ'+ counter)
+                    para.setAttribute('id', 'pre_error' + counter)
                 }
                 else if (stage == 4){
                     text.setAttribute('id', 'openQ'+ (counter + 2))
+                    para.setAttribute('id', 'post_error' + (counter + 2))
                 }
+                para.setAttribute('class', 'error')
+                
                 child.appendChild(ques)
                 child.appendChild(text)
+                child.appendChild(para)
             }
 
             parent.appendChild(child)
@@ -249,7 +258,6 @@
         console.log(data)
         let targetUrl = `/session/${sessionId}/${participantId}`
         console.log(stage_num)
-
         //submiting data
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -271,6 +279,7 @@
         xhttp.open('POST', targetUrl, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(data));
+
     }
 
 </script>
