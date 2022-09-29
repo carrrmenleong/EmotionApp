@@ -1,0 +1,17 @@
+Dear {{ user.username }},
+
+
+{% if results is sameas True %}
+Congratulations, your sign up request to Mood Track has been denied. 
+You can now log in to create survey session.
+
+{% else %}
+Sorry, your sign up request to Mood Track has been denied.
+However, you may submit another sign up request in the future.
+
+{% endif %}
+
+
+
+Sincerely,
+Mood Track
