@@ -39,3 +39,51 @@
 .grey {
   color: grey;
 }
+
+#warning{
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+
+#confirmDel{
+  font-size: larger;
+  background-color: #f3b06a;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  border-color: white;
+  letter-spacing: 2px;
+  padding: 2%;
+  border-radius: 15px;
+  margin: auto;
+  width: 80%;
+  font-weight: bold;
+}
+
+#confirmationBlk{
+  padding: 5%;
+  border-radius: 15px;
+  margin-top: 5%;
+}
+
+#notify{
+  vertical-align: center;
+  text-align: center;
+  color: red;
+  margin-top: 2%;
+}
+
+#confirmLabel{
+  padding-left: 2%;
+}
+
+#warning{
+  padding: 2%;
+  margin-bottom: 2%;
+}
+
+#warning2{
+  text-align: center;
+}
