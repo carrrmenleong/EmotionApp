@@ -28,6 +28,15 @@
         <button onclick="submitEmotions('{{session.id}}','{{participant.id}}')">Submit present emotion(s)</button>
         <button onclick="finishSession('{{session.id}}','{{participant.id}}')">Finish Session</button>
     </div>
+
+    <div id = "submissionModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <h1 class="modal-title">Emotions submitted!</h1>
+          </div>
+        </div>
+    </div>
+
 </body>
 
 <script>
@@ -238,6 +247,9 @@
         xhttp.open('POST', targetUrl, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(selectedEmotions));
+
+        $('#submissionModal').modal('show')
+        setTimeout(function() {$('#submissionModal').modal('hide')}, 1000)
     }
 
     function finishSession(sessionId, participantId) {
