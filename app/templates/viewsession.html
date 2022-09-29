@@ -77,7 +77,8 @@
                     {% endif%}
                 </p>
                 <p style="margin:auto">
-                    <button class="delete btn btn-secondary" onclick="delSession('{{session.id}}')">delete</button>
+                    <button class="delete btn btn-secondary"data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" onclick="delSession('{{session.id}}')">delete</button>
                 </p>
             </div>
         </div>
@@ -145,6 +146,10 @@
     // Update the link and QR Code in the popup
     function updatelink(sessionid, sessiontitle) {
         $(".modal-body").empty()
+        
+        var title = document.getElementById('exampleModalLabel')
+        title.innerHTML = "Link and QR Code"
+
         rootUrl = window.location.origin
         linkUrl = rootUrl + '/session/' + sessionid
 
@@ -159,20 +164,79 @@
 
     // Delete Session
     function delSession(sessionid) {
+        id = sessionid
+        
+        // emptying the modal
+        $(".modal-body").empty()
+        $(".modal-footer").empty()
 
-        //removing session on front end using DOM
-        deletedSession = document.getElementById(sessionid)
-        parent = document.getElementById('container')
-        parent.removeChild(deletedSession)
+        // changing title of modal
+        var title = document.getElementById('exampleModalLabel')
+        title.innerHTML = "Deletion of Session"
 
-        var target = JSON.stringify(sessionid)
-        $.ajax({
-            url: 'deleteSession',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(target)
-        })
+        // adding warning 
+        warning1 = "WARNING"
+        warning2 = "Are you sure you want to to delete this session?"
+        warning3 = "There is no way to undo this"
+
+        $(".modal-body").append('<div id = "warningBlk"><p id = "warning">' + warning1 + '</p></div>')
+        $(".modal-body").append('<div><p>' + warning2 + '</p></div>')
+        $(".modal-body").append('<div><p>' + warning3 + '</p></div>')
+
+        
+        // adding confirmation
+        confirmation = "I have read and confirmed my intent"
+        $(".modal-body").append('<div id = "confirmationBlk"><input type="checkbox" id = "confirmation"></div>')
+        $("#confirmationBlk").append('<label for="confirmation" id = "confirmLabel">' + confirmation + '</label>') // hiding label 
+
+        // adding label
+        label = "Please check the checkbox to confirm your intent!"
+        $(".modal-body").append('<div><label id = "notify">' + label + '</label></div>')
+        notify = document.getElementById('notify')
+        notify.style.display = "none"
+
+        // adding button
+        $(".modal-footer").append('<br><button id = "confirmDel">Delete</button>')
+
+
+        var delBtn = document.getElementById('confirmDel')
+        delBtn.onclick = function(){confirmDel(id)}
     }
+
+    function confirmDel(sessionid){
+        var confirmation = document.getElementById('confirmation')
+        var blk = document.getElementById('confirmationBlk')
+
+        // checking if user confirms their intent
+        if (confirmation.checked){
+
+            //  removing session on front end using DOM
+            deletedSession = document.getElementById(sessionid)
+            parent = document.getElementById('container')
+            parent.removeChild(deletedSession)
+            
+            // closing the modal
+            $('#exampleModal').modal('hide');
+            
+            // deleting from db
+            var target = JSON.stringify(sessionid)
+            $.ajax({
+                url: 'deleteSession',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(target)
+            })
+
+        }
+        else{
+            label = document.getElementById('notify')
+            label.style.display = 'inline'
+            blk.style.outline= "thin solid red"
+        }
+        
+    }
+
+
 
 </script>
 
