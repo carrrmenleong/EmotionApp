@@ -45,14 +45,30 @@
                 {% endif %}
             </div>
             <div class="col-2 border">
-                <button class="edit btn btn-danger m-3" onclick="delResult({{session.id}},{{participant.id}})">Delete</button>
+                <button class="edit btn btn-danger m-3" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" onclick="delResult('{{session.id}}','{{participant.id}}')">Delete</button>
             </div>
         </div>
-
-
         {% endfor %}
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     // Delete Session
@@ -68,6 +84,81 @@
             contentType: 'application/json',
             data: JSON.stringify(target)
         })
+    }
+
+    function delResult(sessionid, participantid) {
+
+        id = sessionid
+        pid = participantid
+
+        // emptying the modal
+        $(".modal-body").empty()
+        $(".modal-footer").empty()
+
+        // changing title of modal
+        var title = document.getElementById('exampleModalLabel')
+        title.innerHTML = "Deletion of Result"
+
+        // adding warning 
+        warning1 = "WARNING"
+        warning2 = "Are you sure you want to to delete this participant's result?"
+        warning3 = "There is no way to undo this."
+
+        $(".modal-body").append('<div id = "warningBlk"><p id = "warning">' + warning1 + '</p></div>')
+        $(".modal-body").append('<div><p>' + warning2 + '</p></div>')
+        $(".modal-body").append('<div><p>' + warning3 + '</p></div>')
+
+        
+        // adding confirmation
+        confirmation = "I have read and confirmed my intent"
+        $(".modal-body").append('<div id = "confirmationBlk"><input type="checkbox" id = "confirmation"></div>')
+        $("#confirmationBlk").append('<label for="confirmation" id = "confirmLabel">' + confirmation + '</label>') // hiding label 
+
+        // adding label
+        label = "Please check the checkbox to confirm your intent!"
+        $(".modal-body").append('<div><label id = "notify">' + label + '</label></div>')
+        notify = document.getElementById('notify')
+        notify.style.display = "none"
+
+        // adding button
+        $(".modal-footer").append('<br><button id = "confirmDel">Delete</button>')
+
+
+        var delBtn = document.getElementById('confirmDel')
+        delBtn.onclick = function(){confirmDel(id, pid)}
+    }
+
+    function confirmDel(sessionid, participantid){
+        var confirmation = document.getElementById('confirmation')
+        var blk = document.getElementById('confirmationBlk')
+
+        // checking if user confirms their intent
+        if (confirmation.checked){
+
+            //  removing session on front end using DOM
+            deletedSession = document.getElementById(participantid)
+            parent = document.getElementById('container')
+            parent.removeChild(deletedSession)
+            
+            // closing the modal
+            $('#exampleModal').modal('hide');
+
+            // deleting from db
+            var target = JSON.stringify({'sessionid':sessionid,"participantid":participantid})
+            $.ajax({
+                url: '/deleteresult',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(target)
+            })
+
+        }
+        else{
+            label = document.getElementById('notify')
+            label.style.display = 'inline'
+            blk.style.outline= "thin solid red"
+        }
+        
     }
 </script>
 
