@@ -121,9 +121,9 @@ function retrieve_postquestions() {
 function validateInput(){
 
     // initializing variables 
-    var letterNumber = /^[0-9a-zA-Z]+$/
-    var number = /^[0-9]+$/
-    var letter = /^[a-zA-z]+$/
+    var letterNumber = /[0-9a-zA-Z]/
+    var number = /[0-9]/
+    var letter = /[a-zA-z]/
 
     // retrieving input
     var title = document.getElementById('title').value
@@ -133,14 +133,13 @@ function validateInput(){
     var all_pre = document.getElementsByClassName('preQ')
     var all_post = document.getElementsByClassName('postQ')
 
-
     // checking if input has been filled in
     var test_title = title.match(letterNumber)
     var test_consent = consent.match(letterNumber)
     var test_emotions = emotions.match(letter)
     var test_intensity = intensity.match(number)
 
-
+    console.log(intensity)
     // for title
     var title_input = document.getElementById('title')
     var title_label = document.getElementById('title_error')    
@@ -218,10 +217,12 @@ function validateInput(){
         intensity_label.innerHTML = "Please enter a number from 3-12 as the Intensity for your session!"
         intensity_label.style.visibility = 'visible'
         intensity_input.style.border = "solid red"
+        test_intensity = false
     }
     else{
         intensity_label.style.visibility = 'hidden'
         intensity_input.style.border = "none"
+        test_intensity = true
     }
 
     // for postquestion
@@ -254,7 +255,7 @@ function validateInput(){
         test_post = true
     }
 
-    if (test_title != null && test_consent != null && test_emotions != null &&  test_intensity != null && test_pre == true && test_post == true ){
+    if (test_title != null && test_consent != null && test_emotions != null &&  test_intensity == true && test_pre == true && test_post == true ){
         return true
     }
     else{
