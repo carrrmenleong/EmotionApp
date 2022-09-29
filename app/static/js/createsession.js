@@ -139,7 +139,6 @@ function validateInput(){
     var test_emotions = emotions.match(letter)
     var test_intensity = intensity.match(number)
 
-    console.log(intensity)
     // for title
     var title_input = document.getElementById('title')
     var title_label = document.getElementById('title_error')    

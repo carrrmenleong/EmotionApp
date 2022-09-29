@@ -154,10 +154,6 @@
     var preQ_all = {{ session.pre_ques| safe}}
     var postQ_all = {{ session.post_ques| safe}}
 
-
-    console.log({{ session.pre_ques | safe }})
-    console.log({{ session.post_ques | safe }})
-
     // generating pre and post questions
     gen_block(preQ_all, 'pre_questions')
     gen_block(postQ_all, 'post_questions')
@@ -166,7 +162,6 @@
     function update() {
         // validate input
         var is_validate = validateInput()
-        console.log(is_validate)
 
         if (is_validate == true){
             //retrieving results
