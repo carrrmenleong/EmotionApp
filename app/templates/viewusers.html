@@ -41,7 +41,8 @@
         </div>
 
         {% for user in users %}
-            {% if user.approved is sameas True %}
+            {% if user.id == admin.id %}
+            {% elif user.approved%}
                 <div id={{user.id}} class="row">
                     <div class="col-1 border d-flex">
                         <p style="margin:auto; ">{{ user.id }}</p>
@@ -72,7 +73,8 @@
                             <!--
                             <button class="delete btn btn-danger" onclick="window.location.href='{{ url_for( 'deleteUser', userid = user.id) }}';">delete</button>
                             -->
-                            <button class="delete btn btn-danger" onclick="delUser('{{user.id}}')">delete</button>
+                            <button class="delete btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" onclick="delUser('{{user.id}}')">delete</button>
                         </p>
                     </div>
                 </div>
@@ -102,19 +104,80 @@
 <script>
     function delUser(userid) {
 
-        //removing session on front end using DOM
-        deletedUser = document.getElementById(userid)
-        parent = document.getElementById('container')
-        parent.removeChild(deletedUser)
+        id = userid
+        
+        // emptying the modal
+        $(".modal-body").empty()
+        $(".modal-footer").empty()
 
-        var target = JSON.stringify(userid)
-        $.ajax({
-            url: 'deleteUser',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(target)
-        })
+        // changing title of modal
+        var title = document.getElementById('exampleModalLabel')
+        title.innerHTML = "Deletion of User"
+
+        // adding warning 
+        warning1 = "WARNING"
+        warning2 = "Are you sure you want to to delete this user account?"
+        warning3 = "All the sessions created by this user will also be deleted."
+        warning4 = "There is no way to undo this."
+
+        $(".modal-body").append('<div id = "warningBlk"><p id = "warning">' + warning1 + '</p></div>')
+        $(".modal-body").append('<div><p>' + warning2 + '</p></div>')
+        $(".modal-body").append('<div><p>' + warning3 + '</p></div>')
+        $(".modal-body").append('<br><div><p>' + warning4 + '</p></div>')
+
+        
+        // adding confirmation
+        confirmation = "I have read and confirmed my intent"
+        $(".modal-body").append('<div id = "confirmationBlk"><input type="checkbox" id = "confirmation"></div>')
+        $("#confirmationBlk").append('<label for="confirmation" id = "confirmLabel">' + confirmation + '</label>') // hiding label 
+
+        // adding label
+        label = "Please check the checkbox to confirm your intent!"
+        $(".modal-body").append('<div><label id = "notify">' + label + '</label></div>')
+        notify = document.getElementById('notify')
+        notify.style.display = "none"
+
+        // adding button
+        $(".modal-footer").append('<br><button id = "confirmDel">Delete</button>')
+
+
+        var delBtn = document.getElementById('confirmDel')
+        delBtn.onclick = function(){confirmDel(id)}
     }
+
+    function confirmDel(userid){
+        var confirmation = document.getElementById('confirmation')
+        var blk = document.getElementById('confirmationBlk')
+
+        // checking if user confirms their intent
+        if (confirmation.checked){
+
+            //  removing session on front end using DOM
+            deletedUser = document.getElementById(userid)
+            parent = document.getElementById('container')
+            parent.removeChild(deletedUser)
+            
+            // closing the modal
+            $('#exampleModal').modal('hide');
+            
+            // deleting from db
+            var target = JSON.stringify(userid)
+            $.ajax({
+                url: 'deleteUser',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(target)
+            })
+
+        }
+        else{
+            label = document.getElementById('notify')
+            label.style.display = 'inline'
+            blk.style.outline= "thin solid red"
+        }
+        
+    }
+    
 </script>
 
 {% endblock %}
