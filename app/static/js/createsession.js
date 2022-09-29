@@ -15,23 +15,23 @@ function add(target) {
 
     //creating necessary elements
     question = document.createElement('textarea')
-    label = document.createElement('label')
+    para = document.createElement('p')
     close = document.createElement('i')
 
     //setting attributes of elements
     if (target == 'pre') {
         question.setAttribute('class', 'preQ')
         close.setAttribute('id', 'preqD' + counter)
-        label.setAttribute('id', 'preq_error' + counter)
+        para.setAttribute('id', 'preq_error' + counter)
     }
     else {
         question.setAttribute('class', 'postQ')
         close.setAttribute('id', 'postD' + counter)
-        label.setAttribute('id', 'postq_error' + counter)
+        para.setAttribute('id', 'postq_error' + counter)
     }
     
     question.setAttribute('id', 't' + counter)
-    label.setAttribute('class', 'error')
+    para.setAttribute('class', 'error')
     close.setAttribute('class', 'fas fa-trash fa-2x')
     close.setAttribute('onclick', 'del(this)')
 
@@ -39,7 +39,7 @@ function add(target) {
     child = document.createElement('div')
     child.appendChild(question)
     child.appendChild(close)
-    child.appendChild(label)
+    child.appendChild(para)
     child.setAttribute('id', counter)
     child.setAttribute('class', 'qblock')
 
