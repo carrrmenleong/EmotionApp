@@ -215,7 +215,8 @@ def viewusers():
     if current_user.email == "emotionappmoodtrack@gmail.com":
         sessions = Session.query.all()
         users = User.query.all()
-        return render_template("viewusers.html", title="View Users", is_viewuser = True, sessions = sessions, users = users, is_superadmin=True)
+        admin = current_user
+        return render_template("viewusers.html", title="View Users", is_viewuser = True, admin = admin, sessions = sessions, users = users, is_superadmin=True)
     else:
         return render_template("404.html")
 
