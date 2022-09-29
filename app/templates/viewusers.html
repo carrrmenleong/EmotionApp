@@ -41,7 +41,8 @@
         </div>
 
         {% for user in users %}
-            {% if user.approved is sameas True %}
+            {% if user.id == admin.id %}
+            {% elif user.approved%}
                 <div id={{user.id}} class="row">
                     <div class="col-1 border d-flex">
                         <p style="margin:auto; ">{{ user.id }}</p>
