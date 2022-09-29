@@ -167,10 +167,10 @@
             //retrieving results
             var title = retrieve_title()
             var consent = retrieve_consent()
-            var prequestions = retrieve_prequestions()
+            var prequestions = retrieve_questions('pre')
             var emotion = retrieve_emotions()
             var intensity = retrieve_intensity()
-            var postquestions = retrieve_postquestions()
+            var postquestions = retrieve_questions('post')
             //combining the data
             mydata = {
                 id: '{{session.id}}',
@@ -191,9 +191,6 @@
             //displaying modal
             $('#myModal').modal('show')
         }
-        
-
-
     }
 
 </script>

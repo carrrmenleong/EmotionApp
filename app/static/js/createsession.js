@@ -67,54 +67,105 @@ function del(x) {
 //function to retrieve results
 //title
 function retrieve_title() {
-    var title = document.getElementById('title').value
+    var title = document.getElementById('title').value.trim()
     return title
 }
 //consent
 function retrieve_consent() {
-    var consent = document.getElementById('consent').value
+    var consent = document.getElementById('consent').value.trim()
     return consent
 }
 //prequestions
-function retrieve_prequestions() {
-    var prequestions = []
-    var all = document.getElementsByClassName('preQ')
-    //if there are no prequestions
+function retrieve_questions(type) {
+
+    var letterNumber = /[0-9a-zA-Z]/
+    var questions = []
+    if (type == "pre"){
+        var all = document.getElementsByClassName('preQ')
+    }
+    else {
+        var all = document.getElementsByClassName('postQ')
+    }
+    //if there are no question
     if (all.length == 0) {
-        prequestions = []
+        questions = []
     }
     else {
         for (let i = 0; i < all.length; i++) {
             var question = all[i].value
-            prequestions.push(question)
+
+            var temp2 = []
+            // checking if theres a new line in question
+            if (question.includes('\n')){
+                var temp = question.split('\n')
+                // check if option is uncessary 
+                for (j = 0; j<temp.length; j++){
+                    var option = temp[j]
+                    if (option.match(letterNumber) != null){
+                        temp2.push(option)
+                    }
+                }
+                if (temp2.length == 1){
+                    questions.push(temp2[0].trim())
+                }
+                else{
+                    var final = ''
+                    for(x = 0; x<temp2.length; x++){
+                        if(x == temp2.length -1){
+                            final += temp2[x].trim()
+                        }
+                        else{
+                            final += temp2[x].trim() + '\n'
+                        }
+                    }
+                    questions.push(final)
+                }
+            }
+            else{
+                questions.push(question.trim())
+            }
         }
     }
-    jsonPreQ = JSON.stringify(prequestions)
-    return jsonPreQ
+    final_questions = JSON.stringify(questions)
+    return final_questions
 }
 
 //emotions
 function retrieve_emotions(){
-    emotion = document.getElementById('emotion').value
-    return emotion
+    emotions = document.getElementById('emotion').value
+    var all = emotions.split('\n')
+    var letterNumber = /[0-9a-zA-Z]/
+    var final = ""
+    var temp = []
+    // removing empty new lines
+    for (i =0; i< all.length; i++){
+        var emotion = all[i]
+        if(emotion.match(letterNumber) != null){
+            temp.push(emotion)
+        }
+    }
+    // checking number of emotions
+    if (temp.length == 1){
+        var final = temp[0].trim()
+    }
+    else{
+        for (j = 0; j<temp.length; j++){
+            if(j == temp.length -1){
+                final += temp[j].trim()
+            }
+            else{
+                final += temp[j].trim() + '\n'
+            }
+
+        }
+    }
+    return final
 }
 
 //intensity
 function retrieve_intensity() {
     intensity = parseInt(document.getElementById('intensity').value)
     return intensity
-}
-
-//post questions
-function retrieve_postquestions() {
-    var postquestions = []
-    var all = document.getElementsByClassName('postQ')
-    for (let i = 0; i < all.length; i++) {
-        var question = all[i].value
-        postquestions.push(question)
-    }
-    jsonPostq = JSON.stringify(postquestions)
-    return jsonPostq
 }
 
 // function to check if there is all input
@@ -273,10 +324,10 @@ function submit() {
         //retrieving results
         var title = retrieve_title()
         var consent = retrieve_consent()
-        var prequestions = retrieve_prequestions()
+        var prequestions = retrieve_questions('pre')
         var emotion = retrieve_emotions()
         var intensity = retrieve_intensity()
-        var postquestions = retrieve_postquestions()
+        var postquestions = retrieve_questions('post')
 
         //combining the data
         mydata = {
