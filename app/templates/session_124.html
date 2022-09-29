@@ -28,10 +28,12 @@
     <div id = "q1" class = "questionBlk Open">
         <p> Can you explain why you have chosen this as your highest frequency </p>
         <textarea id = "openQ1"></textarea>
+        <p id = 'error1' class = 'error'></p>
     </div>
     <div id = "q2" class = "questionBlk Open">
         <p> Can you explain why you have chosen this as your highest intensity </p>
         <textarea id = "openQ2"></textarea>
+        <p id = 'error2' class = 'error'></p>
     </div>
 
 </div>
@@ -82,6 +84,68 @@
         genBlock(stage)
     }
 
+    // function to validate inputs
+    function validateInput(){
+        var main_test = []
+        var letterNumber = /[0-9a-zA-Z]/
+        var all_ques = document.getElementsByClassName('questionBlk')
+
+        for (var i = 0; i< all_ques.length; i++){
+            var ques = all_ques[i]
+            // open ended
+            if (ques.classList.contains('Open')){
+                var blk = document.getElementById('q' + (i + 1))
+                var input = document.getElementById('openQ' + (i + 1)).value
+                var para = document.getElementById('error' + (i+ 1))
+                if (input.match(letterNumber) == null){
+                    para.innerHTML = "Please enter your response!"
+                    blk.style.border = "solid red"
+                    blk.style.borderRadius  = '15px'
+                    main_test.push(false)
+                } 
+                else{
+                    para.style.visibility = 'Hidden'
+                    blk.style.border = "None"
+                    main_test.push(true)
+                }
+            }
+            // mcq
+            else if (ques.classList.contains('Mcq')){
+                var sub_test = []
+                var radios = document.getElementsByName('radio' + (i+1))
+                var blk = document.getElementById('q' + (i + 1))
+                var para = document.getElementById('error' + (i+ 1))
+                for (let j = 0; j < radios.length; j++) {
+                    // if selected
+                    if (radios[j].checked) {
+                        sub_test.push(true)
+                    }
+                    // if unselected
+                    else{
+                        sub_test.push(false)
+                    }
+                }
+                if (sub_test.includes(true)){
+                    para.style.visibility = 'Hidden'
+                    blk.style.border = 'None'
+                    main_test.push(true)
+                }
+                else{
+                    para.innerHTML = 'Please select a response'
+                    blk.style.border = 'solid red'
+                    blk.style.borderRadius = '15px'
+                    main_test.push(false)
+                }
+            }
+        }
+        if(main_test.includes(false)){
+            return false
+        }
+        else{
+            return true
+        }
+    }
+
     // function to collate results
     function genAnswer() {
         var ans = []
@@ -121,7 +185,6 @@
         // selecting target block for postquestions page
         else {
             var all_ques = {{session.post_ques|safe}}
-            console.log(all_ques)
             var parent = document.getElementById('post_ques_blk')
         }
         //for loop to generate questions
@@ -165,7 +228,7 @@
                         opt.setAttribute('name', 'radio' + counter)
                         label.setAttribute('for', 'q'+ counter + 'o'+ (j + 1))
                         label.innerText = option
-                        para.setAttribute('id', 'pre_error' + counter)
+                        para.setAttribute('id', 'error' + counter)
                     }
                     // for post questions page
                     else if (stage ==4){
@@ -173,7 +236,7 @@
                         opt.setAttribute('name', 'radio' + (counter + 2))
                         label.setAttribute('for', 'q'+ (counter + 2) + 'o'+ (j + 1))
                         label.innerText = option
-                        para.setAttribute('id', 'post_error' + (counter + 2))
+                        para.setAttribute('id', 'error' + (counter + 2))
                     }
                     para.setAttribute('class', 'error')
                     opt.setAttribute('type', 'radio')
@@ -201,11 +264,11 @@
                 child.setAttribute('class', 'questionBlk Open')
                 if (stage == 2){
                     text.setAttribute('id', 'openQ'+ counter)
-                    para.setAttribute('id', 'pre_error' + counter)
+                    para.setAttribute('id', 'error' + counter)
                 }
                 else if (stage == 4){
                     text.setAttribute('id', 'openQ'+ (counter + 2))
-                    para.setAttribute('id', 'post_error' + (counter + 2))
+                    para.setAttribute('id', 'error' + (counter + 2))
                 }
                 para.setAttribute('class', 'error')
                 
@@ -251,37 +314,37 @@
     }
 
     function submitAns(sessionId, participantId, stage_num) {
-        let results = genAnswer()
-        console.log(results)
-        //let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
-        let data = { stage: Number(stage_num), ans: results }
-        console.log(data)
-        let targetUrl = `/session/${sessionId}/${participantId}`
-        console.log(stage_num)
-        //submiting data
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState === XMLHttpRequest.DONE) {
-                const status = xhttp.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                    // The request has been completed successfully
-                    console.log('Submitted!')
-                    console.log(xhttp.responseText);
-                    // Redirect to next stage
-                    targetUrl = `/session/${sessionId}/${participantId}`
-                    location.href = targetUrl;
-                } else {
-                    console.log(xhttp.responseText);
-                    // Oh no! There has been an error with the request!
+        let is_validate = validateInput()
+        if(is_validate == true){
+            let results = genAnswer()
+            console.log(results)
+            //let dummydata = { stage: Number(stage_num), ans: ['yeah'] }
+            let data = { stage: Number(stage_num), ans: results }
+            console.log(data)
+            let targetUrl = `/session/${sessionId}/${participantId}`
+            console.log(stage_num)        //submiting data
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState === XMLHttpRequest.DONE) {
+                    const status = xhttp.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        // The request has been completed successfully
+                        console.log('Submitted!')
+                        console.log(xhttp.responseText);
+                        // Redirect to next stage
+                        targetUrl = `/session/${sessionId}/${participantId}`
+                        location.href = targetUrl;
+                    } else {
+                        console.log(xhttp.responseText);
+                        // Oh no! There has been an error with the request!
+                    }
                 }
             }
+            xhttp.open('POST', targetUrl, true);
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(data));
         }
-        xhttp.open('POST', targetUrl, true);
-        xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(data));
-
     }
-
 </script>
 
 {% endblock %}
