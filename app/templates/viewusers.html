@@ -116,11 +116,13 @@
         // adding warning 
         warning1 = "WARNING"
         warning2 = "Are you sure you want to to delete this user account?"
-        warning3 = "All the sessions created by this user will also be deleted. There is no way to undo this."
+        warning3 = "All the sessions created by this user will also be deleted."
+        warning4 = "There is no way to undo this."
 
         $(".modal-body").append('<div id = "warningBlk"><p id = "warning">' + warning1 + '</p></div>')
         $(".modal-body").append('<div><p>' + warning2 + '</p></div>')
         $(".modal-body").append('<div><p>' + warning3 + '</p></div>')
+        $(".modal-body").append('<br><div><p>' + warning4 + '</p></div>')
 
         
         // adding confirmation
