@@ -122,8 +122,13 @@ def downloadFile(sessionid, participantid):
 
     result.append([])
     result.append(['Questions','Answer'])
-    for i in range(len(postques)):
-        result.append([postques[i],postans[i]])
+    for i in range(len(postques)+ 2):
+        if i == 0:
+            result.append(['Please state what your highest frequency emotion(s) and comment on them', postans[i]])
+        elif i ==1: 
+            result.append(['Please state what your highest frequency intensiy/intensities and comment on them', postans[i]])
+        else:
+            result.append([postques[i-2],postans[i]])
 
     return excel.make_response_from_array(result, "csv", file_name=f"participant{participant.id} result")
 
@@ -156,7 +161,12 @@ def bulkDownloadAns(sessionid):
         postans = participant.post_ques_ans
         if participant.stage_num == 5:
             for i in range(len(postans)):
-                result.append([postques[i],postans[i],participant.id])
+                if i ==0:
+                    result.append(['Please state what your highest frequency emotion(s) and comment on them', postans[i],participant.id])
+                elif i == 1:
+                    result.append(['Please state what your highest frequency intensiy/intensities and comment on them', postans[i],participant.id])
+                else:
+                    result.append([postques[i-2],postans[i],participant.id])
 
     return excel.make_response_from_array(result, "csv", file_name="Bulk Results (Questions)")
 
