@@ -290,7 +290,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is None:
-            flash('Please check you email. Or sign up a new account to use Mood Track.')
+            flash('Please check your email. Or sign up a new account to use Mood Track.')
             return redirect(url_for('login'))
         elif user.email == "emotionappmoodtrack@gmail.com":
              login_user(user, remember=True)
