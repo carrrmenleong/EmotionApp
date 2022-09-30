@@ -2,6 +2,14 @@ body{
     text-align: center;
 }
 
+h1{
+    font-size: 64px;
+    padding: 5%;
+}
+
+.results{
+    padding: 2%;
+}
 #consent{
     text-align: justify;
     text-justify: inter-word;

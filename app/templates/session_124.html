@@ -15,18 +15,22 @@
 
 <!-- Load pre-session quesitons if participant is in stage 2 -->
 {% if stage == 2 %}
-<h2>Pre Session Survey</h2>
+<h1>Pre Session Survey</h1>
 <div id='pre_ques_blk'></div>
 <button class='surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit &
     Continue</button>
 
 <!-- Load post-session quesitons if participant is in stage 4 -->
 {% elif stage == 4 %}
-<h2>Post Session Survey</h2>
-<h3> Your highest frequency emotion(s) are as shown below: </h3>
-<h2>{{max_emotions}}</h2>
-<h3> Your highest frequency intensity(s) are as shown below:</h3>
-<h2>{{max_intensity}}</h2>
+<h1>Post Session Survey</h1>
+<div class = 'results'>
+    <h3> Your highest frequency emotion(s) are as shown below: </h3>
+    <h2>{{max_emotions}}</h2>
+</div>
+<div class = 'results'>
+    <h3> Your highest frequency intensity(s) are as shown below:</h3>
+    <h2>{{max_intensity}}</h2>
+</div>
 <div id='post_ques_blk'>
     <!-- Preset Questions-->
     <div id = "q1" class = "questionBlk Open">
