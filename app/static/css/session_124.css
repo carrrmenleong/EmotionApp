@@ -2,6 +2,14 @@ body{
     text-align: center;
 }
 
+h1{
+    font-size: 64px;
+    padding: 5%;
+}
+
+.results{
+    padding: 2%;
+}
 #consent{
     text-align: justify;
     text-justify: inter-word;
@@ -48,6 +56,13 @@ h2{
     padding: 2%;
     font-size: 20px;
     text-align: left;
+    margin-bottom: 4%;
+}
+.error{
+    color: red;
+    text-align: center;
+    margin-top: 5%;
+    font-weight: bold;
 }
 
 textarea{

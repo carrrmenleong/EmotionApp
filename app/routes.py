@@ -9,6 +9,7 @@ from app.api.errors import bad_request
 from app.email import send_password_reset_email, send_sign_up_req_email, send_req_result_email
 import flask_excel as excel
 
+
 import json
 
 
@@ -121,8 +122,13 @@ def downloadFile(sessionid, participantid):
 
     result.append([])
     result.append(['Questions','Answer'])
-    for i in range(len(postques)):
-        result.append([postques[i],postans[i]])
+    for i in range(len(postques)+ 2):
+        if i == 0:
+            result.append(['Please state what your highest frequency emotion(s) and comment on them', postans[i]])
+        elif i ==1: 
+            result.append(['Please state what your highest frequency intensiy/intensities and comment on them', postans[i]])
+        else:
+            result.append([postques[i-2],postans[i]])
 
     return excel.make_response_from_array(result, "csv", file_name=f"participant{participant.id} result")
 
@@ -155,7 +161,12 @@ def bulkDownloadAns(sessionid):
         postans = participant.post_ques_ans
         if participant.stage_num == 5:
             for i in range(len(postans)):
-                result.append([postques[i],postans[i],participant.id])
+                if i ==0:
+                    result.append(['Please state what your highest frequency emotion(s) and comment on them', postans[i],participant.id])
+                elif i == 1:
+                    result.append(['Please state what your highest frequency intensiy/intensities and comment on them', postans[i],participant.id])
+                else:
+                    result.append([postques[i-2],postans[i],participant.id])
 
     return excel.make_response_from_array(result, "csv", file_name="Bulk Results (Questions)")
 
@@ -405,7 +416,68 @@ def session(sessionid,participantid):
         elif stage_num == 3:
             return render_template("session_3.html", session = session, participant = participant, stage=3, emotions = emotions)
         elif stage_num == 4:
-            return render_template("session_124.html", session = session, participant = participant, stage=4)
+                        
+            intensity_checker = {}
+            emotion_checker = {}
+            
+            #filtering responses based on participant id
+            temp = Response.query.filter_by(participant_id = participantid).all()
+            
+            for x in temp:
+                #counting counts of emotions
+                if x.emotion not in emotion_checker:
+                    emotion_checker[x.emotion] = 1
+                else:
+                    emotion_checker[x.emotion] += 1
+                #break down of scores for intensities
+                if x.emotion not in intensity_checker:
+                    intensity_checker[x.emotion] = x.intensity
+                else:
+                    intensity_checker[x.emotion] += x.intensity
+                
+            #finding highest frequency of emotions
+            emotion_val = emotion_checker.values()
+            max_emotion_val = max(emotion_val)
+            emotion_list = []
+            final_emotions = ''
+            
+            for key, value in emotion_checker.items():
+                if value == max_emotion_val:
+                    emotion_list.append(key)
+            if len(emotion_list) == 1:
+                final_emotions = emotion_list[0]
+            elif len(emotion_list) == 2:
+                final_emotions = emotion_list[0] + ' and ' + emotion_list[1]
+            else:
+                for i in range(len(emotion_list)):            
+                    if i == len(emotion_list) -1:
+                        final_emotions += 'and ' + emotion_list[i]
+                    else:
+                        final_emotions += emotion_list[i] + ', '
+
+            #finding highest intensity
+            intensity_val = intensity_checker.values()
+            max_intensity_val = max(intensity_val)
+            intensity_list = []
+            final_intensity = ''
+            
+            for key, value in intensity_checker.items():
+                if value == max_intensity_val:
+                    intensity_list.append(key)
+            if len(intensity_list) == 1:
+                final_intensity = intensity_list[0]
+            elif len(intensity_list) == 2:
+                final_intensity = intensity_list[0] + ' and ' + intensity_list[1]
+            else: 
+                for i in range(len(intensity_list)):
+                    if i == len(intensity_list) -1:
+                        final_intensity += 'and ' + intensity_list[i]
+                    else:
+                        final_intensity += intensity_list[i] + ', '
+            
+            
+            return render_template("session_124.html", session = session, participant = participant, stage=4,
+                                   max_emotions = final_emotions, max_intensity = final_intensity)
         else:
             return render_template("session_5.html", session = session, participant = participant, stage=5)
     
@@ -415,7 +487,10 @@ def session(sessionid,participantid):
             return bad_request('Must include stage number')
 
         if data['stage'] == 1 and data['consent']:
-            participant.stage_num = 2
+            if session.pre_ques == '[]':
+                participant.stage_num = 3
+            else:
+                participant.stage_num = 2
             db.session.commit()
             return ('Successfully recorded consent')
 
