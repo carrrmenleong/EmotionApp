@@ -20,6 +20,7 @@
         <div id='title_block' class='block'>
             <label class='main'>Title</label><br>
             <input id='title' type='text' value='{{session.session_title}}'> </input><br>
+            <p class = 'error' id = 'title_error'></p>
         </div>
 
         <!-- Participant Consent -->
@@ -28,6 +29,7 @@
             <label class='sub'> Fill in the terms and condition that is required for participants to agree on before
                 undertaking this session. </label><br>
             <textarea id='consent'>{{session.consent}} </textarea>
+            <p class = 'error' id = 'consent_error'></p>
         </div>
 
         <!-- Pre-measuring Questions-->
@@ -47,9 +49,11 @@
             <label class='sub'> Insert each emotion option as a new line </label><br> <br>
             <label class='main'> Emotion Options </label><br>
             <textarea id='emotion'>{{session.emotions}}</textarea><br>
+            <p class = 'error' id = 'emotions_error'></p><br>
             <label class='main'> Max Intensity </label><br>
             <input id='intensity' type='text' placeholder='Please enter a number from 3 - 12'
                 value='{{session.intensity}}'></input><br>
+            <p class = 'error' id = 'intensity_error'></p>
         </div>
 
         <!-- Post Measuring Question -->
@@ -112,13 +116,16 @@
             // creating question and delete 
             var question = document.createElement('textarea')
             var del = document.createElement('i')
+            var para = document.createElement('p')
 
             // setting attributes of question and del
             if (type == 'preq') {
                 question.setAttribute('class', 'preQ')
+                para.setAttribute('id', 'preq_error' + counter.toString())
             }
             else {
                 question.setAttribute('class', 'postQ')
+                para.setAttribute('id', 'postq_error' + counter.toString())
             }
             question.setAttribute('id', 't' + counter.toString())
             question.value = all_questions[i]
@@ -126,12 +133,14 @@
             del.setAttribute('class', "fas fa-trash fa-2x")
             del.setAttribute('aria-hidden', "true")
             del.setAttribute('onclick', 'del(this)')
+            para.setAttribute('class', 'error')
 
             // appending created things to child
             child.setAttribute('id', counter)
             child.setAttribute('class', 'qblock')
             child.appendChild(question)
             child.appendChild(del)
+            child.appendChild(para)
 
             // appending back into parent block
             parent.appendChild(child)
@@ -145,43 +154,43 @@
     var preQ_all = {{ session.pre_ques| safe}}
     var postQ_all = {{ session.post_ques| safe}}
 
-
-    console.log({{ session.pre_ques | safe }})
-    console.log({{ session.post_ques | safe }})
-
     // generating pre and post questions
     gen_block(preQ_all, 'pre_questions')
     gen_block(postQ_all, 'post_questions')
 
     // function to collate and update db
     function update() {
-        //retrieving results
-        var title = retrieve_title()
-        var consent = retrieve_consent()
-        var prequestions = retrieve_prequestions()
-        var emotion = retrieve_emotions()
-        var intensity = retrieve_intensity()
-        var postquestions = retrieve_postquestions()
-        //combining the data
-        mydata = {
-            id: '{{session.id}}',
-            sessionTitle: title,
-            consent: consent,
-            preQuestions: prequestions,
-            emotions: emotion,
-            intensity: intensity,
-            postQuestions: postquestions
-        }
-        jsonData = JSON.stringify(mydata)
-        $.ajax({
-            url: '/updateSession',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(jsonData)
-        })
-        //displaying modal
-        $('#myModal').modal('show')
+        // validate input
+        var is_validate = validateInput()
 
+        if (is_validate == true){
+            //retrieving results
+            var title = retrieve_title()
+            var consent = retrieve_consent()
+            var prequestions = retrieve_questions('pre')
+            var emotion = retrieve_emotions()
+            var intensity = retrieve_intensity()
+            var postquestions = retrieve_questions('post')
+            //combining the data
+            mydata = {
+                id: '{{session.id}}',
+                sessionTitle: title,
+                consent: consent,
+                preQuestions: prequestions,
+                emotions: emotion,
+                intensity: intensity,
+                postQuestions: postquestions
+            }
+            jsonData = JSON.stringify(mydata)
+            $.ajax({
+                url: '/updateSession',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(jsonData)
+            })
+            //displaying modal
+            $('#myModal').modal('show')
+        }
     }
 
 </script>
