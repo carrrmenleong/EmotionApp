@@ -30,50 +30,50 @@
             {% if current_user.is_anonymous %}
                 <!-- Sign In -->
                 {% if is_signin is not defined %}
-                <li><a href="{{ url_for('login') }}" class = 'right'>Sign In</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class = 'right'>Sign In</a></li>
                 {% else %}
-                <li><a href="{{ url_for('login') }}" class = 'rightActive'>Sign In</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class = 'rightActive'>Sign In</a></li>
                 {% endif %}
 
                 <!-- Sign Up-->
                 {% if is_signup is not defined %}
-                <li><a href="{{ url_for('signup') }}" class = 'right' >Sign Up</a></li>
+                <li><a href="{{ url_for('auth.signup') }}" class = 'right' >Sign Up</a></li>
                 {% else %}
-                <li><a href="{{ url_for('signup') }}" class = 'rightActive' >Sign Up</a></li>
+                <li><a href="{{ url_for('auth.signup') }}" class = 'rightActive' >Sign Up</a></li>
                 {% endif%}
             {% else %}
                 <li><a href="#" class = 'right'>{{ current_user.username }}</a></li>
-                <li><a href="{{ url_for('logout') }}" class = 'right'>Logout</a></li>
+                <li><a href="{{ url_for('auth.logout') }}" class = 'right'>Logout</a></li>
                 
                 <!-- Create Session for admin / View Users for superadmin-->
                 {% if is_superadmin is defined %} 
                     {% if is_viewuser is defined %} 
-                    <li><a href="{{url_for('viewusers')}}" class ="leftActive" >View Users</a></li>
+                    <li><a href="{{url_for('admin.viewusers')}}" class ="leftActive" >View Users</a></li>
                     {% else %}
-                    <li><a href="{{url_for('viewusers')}}" class ="left" >View Users</a></li>
+                    <li><a href="{{url_for('admin.viewusers')}}" class ="left" >View Users</a></li>
                     {% endif %}
                 {% else %}
                     {% if is_create is defined %}
-                    <li><a href="{{url_for('createsession')}}" class = 'leftActive'>Create Session</a></li>
+                    <li><a href="{{url_for('admin.createsession')}}" class = 'leftActive'>Create Session</a></li>
                     {% else %}
-                    <li><a href="{{url_for('createsession')}}" class = 'left'>Create Session</a></li>
+                    <li><a href="{{url_for('admin.createsession')}}" class = 'left'>Create Session</a></li>
                     {% endif %}
                 {% endif %}
                 
                 <!-- Sign Up Request for superadmin only -->
                 {% if is_superadmin is defined %}
                     {% if is_signupreq is defined %}
-                    <li><a href="{{url_for('signupreq')}}" class ="leftActive" >Sign Up Requests</a></li>
+                    <li><a href="{{url_for('admin.signupreq')}}" class ="leftActive" >Sign Up Requests</a></li>
                     {% else %}
-                    <li><a href="{{url_for('signupreq')}}" class ="left" >Sign Up Requests</a></li>
+                    <li><a href="{{url_for('admin.signupreq')}}" class ="left" >Sign Up Requests</a></li>
                     {% endif %}
                 {% endif %}
 
                 <!-- View Session(s)-->
                 {% if is_view is defined %}
-                <li><a href="{{url_for('viewsessions')}}" class = 'leftActive'>View Sessions</a></li>
+                <li><a href="{{url_for('admin.viewsessions')}}" class = 'leftActive'>View Sessions</a></li>
                 {% else %}
-                <li><a href="{{url_for('viewsessions')}}" class ="left" >View Sessions</a></li>
+                <li><a href="{{url_for('admin.viewsessions')}}" class ="left" >View Sessions</a></li>
                 {% endif %}
             {% endif %}
 
