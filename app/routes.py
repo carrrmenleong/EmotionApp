@@ -276,7 +276,12 @@ def signup():
         return redirect(url_for('createsession'))
     form = SignupForm()
     if form.validate_on_submit():
-        user = User(fist_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
+        # Superadmin account is approved upon signup
+        if form.email.data.lower() == "emotionappmoodtrack@gmail.com":
+            user = User(fist_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
+            email=form.email.data.lower(), reason=form.reason.data, approved=True)
+        else:
+            user = User(fist_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
             email=form.email.data.lower(), reason=form.reason.data, approved=False)
         user.set_password(form.password.data)
         db.session.add(user)
