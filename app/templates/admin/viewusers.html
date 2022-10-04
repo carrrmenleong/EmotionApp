@@ -70,9 +70,6 @@
                     </div>
                     <div class="col-1 border d-flex">
                         <p style="margin:auto">
-                            <!--
-                            <button class="delete btn btn-danger" onclick="window.location.href='{{ url_for( 'deleteUser', userid = user.id) }}';">delete</button>
-                            -->
                             <button class="delete btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" onclick="delUser('{{user.id}}')">delete</button>
                         </p>

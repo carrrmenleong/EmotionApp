@@ -38,7 +38,7 @@
                 <p style="margin:auto; padding-top: 15px; padding-bottom: 15px">{{ session.id }}</p>
             </div>
             <div class="col-2 border d-flex">
-                <a class="m-auto fs-5 fw-normal link-primary text-decoration-underline" href="{{url_for('viewSession', sessionid = session.id)}}">{{ session.session_title }}</a>
+                <a class="m-auto fs-5 fw-normal link-primary text-decoration-underline" href="{{url_for('admin.viewSession', sessionid = session.id)}}">{{ session.session_title }}</a>
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
@@ -63,7 +63,7 @@
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
-                    <a href="{{url_for('copySession', id = session.id)}}"><button
+                    <a href="{{url_for('admin.copySession', id = session.id)}}"><button
                             class="btn btn-warning">copy</button></a>
                 </p>
             </div>
@@ -72,7 +72,7 @@
                     {% if session.published %}
                     <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
                     {% else %}
-                    <a style="display: inline;" href="{{url_for('editSession', id = session.id)}}"><button
+                    <a style="display: inline;" href="{{url_for('admin.editSession', id = session.id)}}"><button
                             class="edit btn btn-info">edit</button></a>
                     {% endif%}
                 </p>

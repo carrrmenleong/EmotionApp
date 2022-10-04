@@ -10,9 +10,9 @@
     <h3 class="">Session ID: {{session.id}}</h3>
     <h3 class="">Session Name: {{session.session_title}}</h3>
 
-    <a href="{{url_for('bulkDownloadAns', sessionid = session.id)}}"><button class="edit btn btn-primary m-4 p-3"> Bulk
+    <a href="{{url_for('admin.bulkDownloadAns', sessionid = session.id)}}"><button class="edit btn btn-primary m-4 p-3"> Bulk
             Download Results (Questions)</button></a>
-    <a href="{{url_for('bulkDownloadEmotions', sessionid = session.id)}}"><button class="edit btn btn-primary m-4 p-3">
+    <a href="{{url_for('admin.bulkDownloadEmotions', sessionid = session.id)}}"><button class="edit btn btn-primary m-4 p-3">
             Bulk Download Results (Emotions)</button></a>
 </div>
 
@@ -38,7 +38,7 @@
             <div class="col-8 border">
                 {% if participant.stage_num == 5 %}
                 <a class="fs-5" style="margin:auto; padding-top: 15px; padding-bottom: 15px"
-                    href="{{url_for('downloadFile', sessionid = session.id, participantid = participant.id)}}"> <button
+                    href="{{url_for('admin.downloadFile', sessionid = session.id, participantid = participant.id)}}"> <button
                         class="btn btn-success m-3">Download</button> </a>
                 {% else %}
                 <button disabled class="btn btn-secondary m-3">Download</button>
