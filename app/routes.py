@@ -303,26 +303,26 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('createsession'))
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        if user is None:
-            flash('Please check your email. Or sign up a new account to use Mood Track.')
+
+        # Flash error message if credentials are incorrect
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid email or password, please check your email and password.')
             return redirect(url_for('login'))
-        elif user.email == "emotionappmoodtrack@gmail.com":
-             login_user(user, remember=True)
-             next_page = request.args.get('next')
+        # Flash error message if account is not yet approved
         elif user.approved == False:
              flash('Your sign up request is pending approval.')
              return render_template('login.html', title='Login', form=form, is_signin=True)
-        elif not user.check_password(form.password.data):
-            flash('Incorrect password.')
-            return redirect(url_for('login'))
         
+        # Log user in if credentials are correct and redirect them to the desired page if specified
+        login_user(user, remember=True)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('createsession')
-        
         return redirect(next_page)
+
     return render_template('login.html', title='Login', form=form, is_signin=True)
 
 
