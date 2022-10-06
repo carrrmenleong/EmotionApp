@@ -10,7 +10,7 @@ import jwt
 # Each row in this table represent an Admin(Researcher) or a Superadmin
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fist_name = db.Column(db.String(64))
+    first_name = db.Column(db.String(64))
     last_name = db.Column(db.String(64))
     username = db.Column(db.String(64))
     orcid = db.Column(db.String(64))
