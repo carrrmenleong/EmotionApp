@@ -159,7 +159,9 @@
         $(".modal-body").append("<div><p class='grey'>(right-click or drag to download QR code)</p></div>")
         $(".modal-body").append('<div><p>Session Link: <a id="link" href="' + linkUrl + '">' + linkUrl + '</a></p></div>')
 
-        new QRCode(document.getElementById("qrcode"), linkUrl);
+        new QRCode(document.getElementById("qrcode"), linkUrl); 
+
+        $(".modal-footer").empty()
     }
 
     // Delete Session
