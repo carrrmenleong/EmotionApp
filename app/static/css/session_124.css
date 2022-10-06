@@ -79,3 +79,7 @@ input, label{
     width: 80%;
     letter-spacing: 2px;
 }
+
+input[type = radio]{
+    transform: scale(2);
+}
