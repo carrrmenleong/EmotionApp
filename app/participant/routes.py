@@ -82,47 +82,57 @@ def session(sessionid,participantid):
                 
             #finding highest frequency of emotions
             emotion_val = emotion_checker.values()
-            max_emotion_val = max(emotion_val)
-            emotion_list = []
-            final_emotions = ''
             
-            for key, value in emotion_checker.items():
-                if value == max_emotion_val:
-                    emotion_list.append(key)
-            if len(emotion_list) == 1:
-                final_emotions = emotion_list[0]
-            elif len(emotion_list) == 2:
-                final_emotions = emotion_list[0] + ' and ' + emotion_list[1]
-            else:
-                for i in range(len(emotion_list)):            
-                    if i == len(emotion_list) -1:
-                        final_emotions += 'and ' + emotion_list[i]
-                    else:
-                        final_emotions += emotion_list[i] + ', '
+            #if user does nto have any emotions selected
+            if emotion_val == '':
+                
+                max_emotion_val = max(emotion_val)
+                emotion_list = []
+                final_emotions = ''
+                
+                for key, value in emotion_checker.items():
+                    if value == max_emotion_val:
+                        emotion_list.append(key)
+                if len(emotion_list) == 1:
+                    final_emotions = emotion_list[0]
+                elif len(emotion_list) == 2:
+                    final_emotions = emotion_list[0] + ' and ' + emotion_list[1]
+                else:
+                    for i in range(len(emotion_list)):            
+                        if i == len(emotion_list) -1:
+                            final_emotions += 'and ' + emotion_list[i]
+                        else:
+                            final_emotions += emotion_list[i] + ', '
 
-            #finding highest intensity
-            intensity_val = intensity_checker.values()
-            max_intensity_val = max(intensity_val)
-            intensity_list = []
-            final_intensity = ''
-            
-            for key, value in intensity_checker.items():
-                if value == max_intensity_val:
-                    intensity_list.append(key)
-            if len(intensity_list) == 1:
-                final_intensity = intensity_list[0]
-            elif len(intensity_list) == 2:
-                final_intensity = intensity_list[0] + ' and ' + intensity_list[1]
-            else: 
-                for i in range(len(intensity_list)):
-                    if i == len(intensity_list) -1:
-                        final_intensity += 'and ' + intensity_list[i]
-                    else:
-                        final_intensity += intensity_list[i] + ', '
-            
-            
-            return render_template("participant/session_124.html", session = session, participant = participant, stage=4,
-                                   max_emotions = final_emotions, max_intensity = final_intensity)
+                #finding highest intensity
+                intensity_val = intensity_checker.values()
+                max_intensity_val = max(intensity_val)
+                intensity_list = []
+                final_intensity = ''
+                
+                for key, value in intensity_checker.items():
+                    if value == max_intensity_val:
+                        intensity_list.append(key)
+                if len(intensity_list) == 1:
+                    final_intensity = intensity_list[0]
+                elif len(intensity_list) == 2:
+                    final_intensity = intensity_list[0] + ' and ' + intensity_list[1]
+                else: 
+                    for i in range(len(intensity_list)):
+                        if i == len(intensity_list) -1:
+                            final_intensity += 'and ' + intensity_list[i]
+                        else:
+                            final_intensity += intensity_list[i] + ', '
+                
+                
+                return render_template("participant/session_124.html", session = session, participant = participant, stage=4,
+                                    max_emotions = final_emotions, max_intensity = final_intensity)
+            else:
+                final_intensity = "-"
+                final_emotions = "-"\
+                
+                return render_template("participant/session_124.html", session = session, participant = participant, stage=4,
+                                    max_emotions = final_emotions, max_intensity = final_intensity)
         else:
             return render_template("participant/session_5.html", session = session, participant = participant, stage=5)
     
