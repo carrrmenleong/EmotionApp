@@ -39,7 +39,12 @@ $ pip install -r requirements.txt
 $ flask db upgrade
 ```
 
-### 5. Run the application
+### 5. Setup database for testing (optional)
+
+Copy app.db file and rename the copied file to test.db which will be used during testing
+
+
+### 6. Run the application
 
 ```
 $ flask run
@@ -68,3 +73,11 @@ To download the pakages listed in the requirements.txt file, run the following c
 ```
 $ pip install -r requirements.txt
 ```
+
+## Testing the application (backend)
+### 1. Run the unit and funcional tests
+```
+$ python -m pytest -v --disable-warnings --cov=app --cov-report html 
+```
+### 2. Read the test report
+Open up htmlcov/index.html to read the test report

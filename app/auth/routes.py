@@ -2,7 +2,7 @@ from app import db
 from app.auth import bp
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from flask_login import current_user, login_user,login_required,logout_user
-from app.models import User, Session, Participant, Response
+from app.models import User
 from werkzeug.urls import url_parse
 from app.auth.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.api.errors import bad_request
@@ -18,10 +18,10 @@ def signup():
     if form.validate_on_submit():
         # Superadmin account is approved upon signup
         if form.email.data.lower() == "emotionappmoodtrack@gmail.com":
-            user = User(fist_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
+            user = User(first_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
             email=form.email.data.lower(), reason=form.reason.data, approved=True)
         else:
-            user = User(fist_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
+            user = User(first_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
             email=form.email.data.lower(), reason=form.reason.data, approved=False)
         user.set_password(form.password.data)
         db.session.add(user)
