@@ -79,3 +79,16 @@ input, label{
     width: 80%;
     letter-spacing: 2px;
 }
+
+input[type = radio]{
+    transform: scale(2);
+}
+
+.modal-body{
+    text-align: justify;
+}
+
+.modal-title{
+    font-size: 30px;
+    font-weight: bold;
+}
