@@ -128,3 +128,11 @@ a {
     letter-spacing: 4px;
     font-family: 'Poppins', sans-serif;
 }
+
+#name{
+    padding: 1%;
+    font-size: 60px;
+    letter-spacing: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
