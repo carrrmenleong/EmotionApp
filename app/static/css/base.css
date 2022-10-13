@@ -105,3 +105,26 @@ a {
     border-radius: 8px;
     width: 85px;
 }
+
+.flash{
+    text-align: center;
+    margin: auto;
+    background-color: #a1a9fe;
+    width: 20%;
+    padding: 1%;
+    font-size: 20px;
+    border-radius: 15px;
+    border-style: double;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-top: 1%;
+}
+
+#appName{
+    float: left;
+    font-size: 50px;
+    padding-right: 2%;
+    font-weight: bold;
+    letter-spacing: 4px;
+    font-family: 'Poppins', sans-serif;
+}

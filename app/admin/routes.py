@@ -15,7 +15,6 @@ import json
 # POST REQUEST JSON DATA FORMAT
 # {sessionTitle:'',consent:'',preQuestions:['',''],emotions:'',intensity:'',postQuestions:['','']}
 #----------------------------------------------------------
-@bp.route('/')
 @bp.route('/createsession', methods=['GET', 'POST'])
 @login_required
 def createsession():
