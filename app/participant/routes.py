@@ -84,7 +84,7 @@ def session(sessionid,participantid):
             #finding highest frequency of emotions
             emotion_val = emotion_checker.values()
             #if user does nto have any emotions selected
-            if emotion_val == '':
+            if temp == []:
                 final_intensity = "-"
                 final_emotions = "-"
                 
