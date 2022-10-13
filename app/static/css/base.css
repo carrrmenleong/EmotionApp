@@ -119,3 +119,12 @@ a {
     font-weight: bold;
     margin-top: 1%;
 }
+
+#appName{
+    float: left;
+    font-size: 50px;
+    padding-right: 2%;
+    font-weight: bold;
+    letter-spacing: 4px;
+    font-family: 'Poppins', sans-serif;
+}
