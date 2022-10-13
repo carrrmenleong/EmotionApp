@@ -68,6 +68,7 @@ def session(sessionid,participantid):
             #filtering responses based on participant id
             temp = Response.query.filter_by(participant_id = participantid).all()
             
+            
             for x in temp:
                 #counting counts of emotions
                 if x.emotion not in emotion_checker:
@@ -82,9 +83,14 @@ def session(sessionid,participantid):
                 
             #finding highest frequency of emotions
             emotion_val = emotion_checker.values()
-            
             #if user does nto have any emotions selected
-            if emotion_val == '':
+            if temp == []:
+                final_intensity = "-"
+                final_emotions = "-"
+                
+                return render_template("participant/session_124.html", session = session, participant = participant, stage=4,
+                                    max_emotions = final_emotions, max_intensity = final_intensity)
+            else:
                 
                 max_emotion_val = max(emotion_val)
                 emotion_list = []
@@ -123,13 +129,6 @@ def session(sessionid,participantid):
                             final_intensity += 'and ' + intensity_list[i]
                         else:
                             final_intensity += intensity_list[i] + ', '
-                
-                
-                return render_template("participant/session_124.html", session = session, participant = participant, stage=4,
-                                    max_emotions = final_emotions, max_intensity = final_intensity)
-            else:
-                final_intensity = "-"
-                final_emotions = "-"\
                 
                 return render_template("participant/session_124.html", session = session, participant = participant, stage=4,
                                     max_emotions = final_emotions, max_intensity = final_intensity)

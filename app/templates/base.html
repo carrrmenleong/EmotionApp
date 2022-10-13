@@ -25,7 +25,7 @@
     <!-- navbar-->
     {% block navbar %}
     <div class="topnav">
-        <img class = 'logo' src = '../static/images/logo.png'></img>
+        <div id = "appName"> EmotionApp </div>
         <ul>
             {% if current_user.is_anonymous %}
                 <!-- Sign In -->
@@ -84,7 +84,7 @@
     {% if messages %}
     <ul>
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class = 'flash'><li>{{ message }}</li></div>
         {% endfor %}
     </ul>
     {% endif %}
