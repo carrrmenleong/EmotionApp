@@ -37,6 +37,7 @@ def signup():
 
 # Login/Sign In
 #----------------------------------------------------------
+@bp.route('/')
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
