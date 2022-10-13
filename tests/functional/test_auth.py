@@ -4,7 +4,7 @@ def test_login_page(test_client):
     WHEN the '/login' page is requested (GET)
     THEN check the response is valid
     """
-    response = test_client.get('/auth/login')
+    response = test_client.get('/login')
     assert response.status_code == 200
     assert b'Login' in response.data
     assert b'Email' in response.data
@@ -17,7 +17,7 @@ def test_valid_login_logout(test_client, init_database):
     WHEN the '/login' page is posted to (POST)
     THEN check the response is valid
     """
-    response = test_client.post('/auth/login',
+    response = test_client.post('/login',
                                 data=dict(email='test@gmail.com', password='1234'),
                                 follow_redirects=True)
     assert response.status_code == 200
@@ -29,7 +29,7 @@ def test_valid_login_logout(test_client, init_database):
     WHEN the '/logout' page is requested (GET)
     THEN check the response is valid
     """
-    response = test_client.get('/auth/logout', follow_redirects=True)
+    response = test_client.get('/logout', follow_redirects=True)
     assert response.status_code == 200
     assert b'Login' in response.data
     assert b'Email' in response.data
@@ -42,7 +42,7 @@ def test_invalid_login(test_client, init_database):
     WHEN the '/login' page is posted to with invalid credentials (POST)
     THEN check an error message is returned to the user
     """
-    response = test_client.post('/auth/login',
+    response = test_client.post('/login',
                                 data=dict(email='patkennedy79@gmail.com', password='FlaskIsNotAwesome'),
                                 follow_redirects=True)
     assert response.status_code == 200
@@ -58,7 +58,7 @@ def test_login_already_logged_in(test_client, init_database, login_default_user)
     WHEN the '/login' page is requested (GET) when the user is already logged in
     THEN check user is redirected to createsession or viewuser page
     """
-    response = test_client.get('/auth/login',follow_redirects=True)
+    response = test_client.get('/login',follow_redirects=True)
     assert response.status_code == 200
     assert b'View Sessions' in response.data
     assert b'Logout' in response.data
@@ -68,7 +68,7 @@ def test_login_already_logged_in(test_client, init_database, login_default_user)
     WHEN the '/logout' page is requested (GET)
     THEN check the response is valid
     """
-    response = test_client.get('/auth/logout', follow_redirects=True)
+    response = test_client.get('/logout', follow_redirects=True)
     assert response.status_code == 200
     assert b'Login' in response.data
     assert b'Email' in response.data
@@ -81,7 +81,7 @@ def test_valid_registration(test_client, init_database):
     WHEN the '/register' page is posted to (POST)
     THEN check the response is valid and user is redirected to login page
     """
-    response = test_client.post('/auth/signup',
+    response = test_client.post('/signup',
                                 data = dict(firstname = 'Carmen',
                                             lastname = 'Leong',
                                             username = 'CarmenKW',
@@ -110,7 +110,7 @@ def test_invalid_registration(test_client, init_database):
     WHEN the '/register' page is posted to (POST) using an email address already registered
     THEN check an error message is returned to the user
     """
-    response = test_client.post('/auth/signup',
+    response = test_client.post('/signup',
                                 data = dict(firstname = 'Carmen',
                                             lastname = 'Leong',
                                             username = 'CarmenKW',
@@ -135,7 +135,7 @@ def test_reset_password_request_page(test_client):
     WHEN the '/reset_password_request' page is requested (GET)
     THEN check the response is valid
     """
-    response = test_client.get('/auth/reset_password_request')
+    response = test_client.get('/reset_password_request')
     assert response.status_code == 200
     assert b'Reset Password' in response.data
     assert b'Email' in response.data
@@ -147,7 +147,7 @@ def test_valid_reset_password_request(test_client,init_database):
     WHEN the '/reset_password_request' page is posted to (POST) with valid email
     THEN check the response is valid
     """
-    response = test_client.post('/auth/reset_password_request',
+    response = test_client.post('/reset_password_request',
                                 data = dict(email="test@gmail.com"),
                                 follow_redirects=True)
     assert response.status_code == 200
@@ -163,7 +163,7 @@ def test_reset_password_page(test_client,init_database,user_token):
     WHEN the '/reset_password/<token>' page is requested (GET) with valid token
     THEN check the response is valid
     """
-    response = test_client.get('/auth/reset_password/'+user_token)
+    response = test_client.get('/reset_password/'+user_token)
     assert response.status_code == 200
     assert b"Reset Your Password" in response.data
     assert b'Password' in response.data
@@ -176,7 +176,7 @@ def test_valid_reset_password(test_client,init_database,user_token):
     WHEN the '/reset_password/<token>' page is posted to (POST) with valid token
     THEN check the response is valid
     """
-    response = test_client.post('/auth/reset_password/'+user_token, 
+    response = test_client.post('/reset_password/'+user_token, 
                                     data=dict(password="1122",password2='1122'),
                                     follow_redirects=True)
     assert response.status_code == 200
@@ -188,7 +188,7 @@ def test_valid_reset_password(test_client,init_database,user_token):
     '''
     THEN check user can login with new password
     '''
-    response = test_client.post('/auth/login',
+    response = test_client.post('/login',
                         data=dict(email='test@gmail.com', password='1122'),
                         follow_redirects=True)
     assert response.status_code == 200
