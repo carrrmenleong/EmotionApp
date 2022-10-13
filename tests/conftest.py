@@ -52,8 +52,18 @@ def init_database(test_client):
                     reason = "dummy reasons",
                     approved = True)
     user2.set_password('1234')
+    user3 = User(first_name = 'Carmen',
+                    last_name = 'Leong',
+                    username = 'Superadmin',
+                    orcid = 'H1234',
+                    institution = 'UWA',
+                    email = 'emotionappmoodtrack@gmail.com',
+                    reason = "dummy reasons",
+                    approved = True)
+    user3.set_password('1234')
     db.session.add(user1)
     db.session.add(user2)
+    db.session.add(user3)
 
     # Commit the changes for the users
     db.session.commit()
@@ -67,6 +77,17 @@ def init_database(test_client):
 def login_default_user(test_client):
     test_client.post('/auth/login',
                      data=dict(email='clkw@gmail.com', password='1234'),
+                     follow_redirects=True)
+
+    yield  # this is where the testing happens!
+
+    test_client.get('/auth/logout', follow_redirects=True)
+
+
+@pytest.fixture(scope='function')
+def login_superadmin(test_client):
+    test_client.get('/auth/login',
+                     data=dict(email='emotionappmoodtrack@gmail.com', password='1234'),
                      follow_redirects=True)
 
     yield  # this is where the testing happens!
