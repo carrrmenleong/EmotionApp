@@ -1,6 +1,7 @@
 import pytest
 from app import create_app, db
 from app.models import User, Session, Participant, Response
+from datetime import datetime
 
 
 @pytest.fixture(scope='module')
@@ -71,9 +72,21 @@ def init_database(test_client):
                 reason = "dummy reasons",
                 approved = True)
     user3.set_password('1234')
+    user4 = User(
+                id = 4,
+                first_name = 'Carmen',
+                last_name = 'Leong',
+                username = 'Superadmin',
+                orcid = 'H1234',
+                institution = 'UWA',
+                email = 'notapprovedtest@gmail.com',
+                reason = "dummy reasons",
+                approved = False)
+    user4.set_password('1234')
     db.session.add(user1)
     db.session.add(user2)
     db.session.add(user3)
+    db.session.add(user4)
 
     # Insert sessions data
     #----------------------------
@@ -89,6 +102,32 @@ def init_database(test_client):
                     user_id = 1
                     )
     db.session.add(session1)
+
+    session2 = Session(
+                    id = 2,
+                    published = True,
+                    session_title = "Test Session2",
+                    consent = "Please agree with consent",
+                    emotions = "Happy\nSad\nAngry\nSuprised",
+                    intensity = 10,
+                    pre_ques = ["firstq(open)","secondq(mcq)\nno\nyes"],
+                    post_ques = ["firstq(open)(postsession)","secondq(mcq)(postsession)\nno\nyes"],
+                    user_id = 3
+                    )
+    db.session.add(session2)
+
+    session3 = Session(
+                    id = 3,
+                    published = False,
+                    session_title = "Test Session2",
+                    consent = "Please agree with consent",
+                    emotions = "Happy\nSad\nAngry\nSuprised",
+                    intensity = 10,
+                    pre_ques = ["firstq(open)","secondq(mcq)\nno\nyes"],
+                    post_ques = ["firstq(open)(postsession)","secondq(mcq)(postsession)\nno\nyes"],
+                    user_id = 1
+                    )
+    db.session.add(session2)
 
     # Insert Participation data
     #-------------------------------
@@ -117,6 +156,17 @@ def init_database(test_client):
     db.session.add(participant2)
     db.session.add(participant3)
 
+    # Insert Response data
+    response1 = Response(
+                id = 1,
+                emotion = "Happy\nSad",
+                intensity = 5,
+                participant_id = 1,
+                session_id = 1
+                )
+    db.session.add(response1)
+    
+
     # Commit the changes
     db.session.commit()
 
@@ -128,7 +178,7 @@ def init_database(test_client):
 @pytest.fixture(scope='function')
 def login_default_user(test_client):
     test_client.post('/login',
-                     data=dict(email='clkw@gmail.com', password='1234'),
+                     data=dict(email='test@gmail.com', password='1234'),
                      follow_redirects=True)
 
     yield  # this is where the testing happens!
