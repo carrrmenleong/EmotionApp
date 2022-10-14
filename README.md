@@ -43,8 +43,11 @@ $ flask db upgrade
 
 Copy app.db file and rename the copied file to test.db which will be used during testing
 
+### 6. Get and .env file
 
-### 6. Run the application
+Contact one of the contributors or the owner of this project for the .env file. Then, store the .env file locally in the root directory of the cloned project
+
+### 7. Run the application
 
 ```
 $ flask run
