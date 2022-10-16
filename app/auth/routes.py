@@ -30,14 +30,14 @@ def signup():
         #email superadmin about new sign up request
         send_sign_up_req_email(user)
         
-        flash('Congratulations, your signup have been requested!')
+        flash('Congratulations, your signup has been requested!')
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html', title='Sign up', form=form, is_signup=True, test ='pass')
 
 
 # Login/Sign In
 #----------------------------------------------------------
-@bp.route('/')
+@bp.route('/', methods=['GET', 'POST'])
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
