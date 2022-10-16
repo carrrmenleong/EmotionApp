@@ -28,11 +28,11 @@
         <div id = "appName"> EmotionApp </div>
         <ul>
             {% if current_user.is_anonymous %}
-                <!-- Sign In -->
+                <!-- Log In -->
                 {% if is_signin is not defined %}
-                <li><a href="{{ url_for('auth.login') }}" class = 'right'>Sign In</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class = 'right'>Log In</a></li>
                 {% else %}
-                <li><a href="{{ url_for('auth.login') }}" class = 'rightActive'>Sign In</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class = 'rightActive'>Log In</a></li>
                 {% endif %}
 
                 <!-- Sign Up-->
@@ -43,7 +43,7 @@
                 {% endif%}
             {% else %}
                 <li><a href="#" class = 'right'>{{ current_user.username }}</a></li>
-                <li><a href="{{ url_for('auth.logout') }}" class = 'right'>Logout</a></li>
+                <li><a href="{{ url_for('auth.logout') }}" class = 'right'>Log Out</a></li>
                 
                 <!-- Create Session for admin / View Users for superadmin-->
                 {% if is_superadmin is defined %} 
