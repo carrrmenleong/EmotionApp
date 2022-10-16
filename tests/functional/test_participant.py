@@ -1,4 +1,4 @@
-from app.models import User, Session
+from app.models import Session
 
 def test_session_home(test_client,init_database):
     """

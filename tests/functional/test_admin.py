@@ -1,6 +1,4 @@
 import json
-from app.models import Session
-from flask import url_for
 
 def test_logged_in_as_superadmin(test_client, init_database, login_superadmin):
     """
