@@ -43,10 +43,7 @@ def createsession():
         db.session.commit()
 
         # Return response
-        response = jsonify(session.to_dict())
-        response.status_code = 201 
-        response.headers['Location'] = url_for('admin.createsession')
-        return response
+        return "Successully created session"
 
 
 # View Sessions
@@ -256,8 +253,7 @@ def publishsession():
     db.session.commit()
 
     # Return success
-    response = jsonify(success=True)
-    return response
+    return "Successfully published session"
 
 
 # Delete Session
