@@ -11,7 +11,7 @@ def test_logged_in_as_superadmin(test_client, init_database, login_superadmin):
     response = test_client.get('/login',follow_redirects=True)
     assert response.status_code == 200
     assert b'View Users' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """
     GIVEN a Flask application configured for testing
@@ -21,7 +21,7 @@ def test_logged_in_as_superadmin(test_client, init_database, login_superadmin):
     response = test_client.get('/viewsessions', follow_redirects=True)
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """
     GIVEN a Flask application configured for testing
@@ -31,7 +31,7 @@ def test_logged_in_as_superadmin(test_client, init_database, login_superadmin):
     response = test_client.get('/viewsession/2')
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """
     GIVEN a Flask application configured for testing
@@ -41,7 +41,7 @@ def test_logged_in_as_superadmin(test_client, init_database, login_superadmin):
     response = test_client.get('/signupreq')
     assert response.status_code == 200
     assert b'Sign Up Requests' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """ 
     GIVEN a Flask application configured for testing
@@ -66,7 +66,7 @@ def test_logged_in_as_admin(test_client,init_database,login_default_user):
     response = test_client.get('/viewsessions')
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
 
     """
@@ -77,7 +77,7 @@ def test_logged_in_as_admin(test_client,init_database,login_default_user):
     response = test_client.get('/viewsession/1')
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """
     GIVEN a Flask application configured for testing
