@@ -6,40 +6,42 @@
 </head>
 
 <div id='personalDetails'>
-    <p id='reminder'>Please remember your Personal ID Code below. It will be required to continue session or to withdraw
-        from research in
-        the future.</p>
+    <p id='reminder'>
+        Please remember your personal ID Code below. 
+        It will be required if you need to continue this session after closing it, 
+        or if you want to withdraw your responses from research in the future.
+    </p>
     <h2 id='id'>ID Code: {{participant.id}}</h2>
     <hr>
 </div>
 
 <!-- Load pre-session quesitons if participant is in stage 2 -->
 {% if stage == 2 %}
-<h1>Pre Session Survey</h1>
+<h1>Pre-Session Survey</h1>
 <div id='pre_ques_blk'></div>
 <button class='surveyBtn' onclick="submitAns('{{session.id}}','{{participant.id}}','{{stage}}')">Submit &
     Continue</button>
 
 <!-- Load post-session quesitons if participant is in stage 4 -->
 {% elif stage == 4 %}
-<h1>Post Session Survey</h1>
+<h1>Post-Session Survey</h1>
 <div class = 'results'>
     <h3> Your highest frequency emotion(s) are as shown below: </h3>
     <h2>{{max_emotions}}</h2>
 </div>
 <div class = 'results'>
-    <h3> Your highest frequency intensity(s) are as shown below:</h3>
+    <h3> Your highest intensity emotion(s) are as shown below:</h3>
     <h2>{{max_intensity}}</h2>
 </div>
 <div id='post_ques_blk'>
     <!-- Preset Questions-->
     <div id = "q1" class = "questionBlk Open">
-        <p> Please state what your highest frequency emotion(s) and comment on them </p>
+        <p> Please state your highest frequency emotion(s) and comment on them.</p>
         <textarea id = "openQ1"></textarea>
         <p id = 'error1' class = 'error'></p>
     </div>
     <div id = "q2" class = "questionBlk Open">
-        <p> Please state what your highest intensiy/intensities and comment on them </p>
+        <p> Please state your highest intensity emotion(s) and comment on them.</p>
         <textarea id = "openQ2"></textarea>
         <p id = 'error2' class = 'error'></p>
     </div>
@@ -139,7 +141,7 @@
                     main_test.push(true)
                 }
                 else{
-                    para.innerHTML = 'Please select a response'
+                    para.innerHTML = 'Please select a response!'
                     blk.style.border = 'solid red'
                     blk.style.borderRadius = '15px'
                     main_test.push(false)
