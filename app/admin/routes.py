@@ -256,8 +256,7 @@ def publishsession():
     db.session.commit()
 
     # Return success
-    response = jsonify(success=True)
-    return response
+    return "Successfully published session"
 
 
 # Delete Session

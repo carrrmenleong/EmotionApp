@@ -110,7 +110,7 @@ def test_delete_user(test_client, init_database, login_superadmin):
     WHEN superadmin click the 'Delete' button
     THEN check the response is valid
     """
-    response = test_client.post('/deleteUser', json="1", follow_redirects=True)
+    response = test_client.post('/deleteUser', json="2", follow_redirects=True)
     assert response.status_code == 200
     assert b'success' in response.data
 
@@ -139,14 +139,13 @@ def test_modify_session(test_client, init_database, login_default_user):
 def test_publish_session(test_client, init_database, login_default_user):
     """
     GIVEN a Flask application configured for testing
-    WHEN the '/publishSession' page is posted (POST)
+    WHEN the '/publishsession' page is posted (POST)
     THEN check the response is valid
     """
-    response = test_client.post('/publishSession',
-                                json="3",
-                                follow_redirects=True)
+    response = test_client.post('/publishsession',
+                                json={'sessionId':3})
     assert response.status_code == 200
-    assert b'View Session' in response.data
+    assert b"Successfully published session" in response.data
     
 
 def test_update_session(test_client, init_database, login_default_user):
@@ -156,7 +155,7 @@ def test_update_session(test_client, init_database, login_default_user):
     THEN check the response is valid
     """
     response = test_client.post('/updateSession',
-                                data=json.dumps({'id':1,
+                                json=json.dumps({'id':1,
                                     'sessionTitle':'session1a',
                                     'consent': True,
                                     'emotions':'Anxious',
@@ -177,7 +176,7 @@ def test_delete_session(test_client, init_database, login_superadmin):
     THEN check the response is valid
     """
     response = test_client.post('/deleteSession',
-                                json="1",
+                                json="2",
                                 follow_redirects = True
                                 )
     assert response.status_code == 200
@@ -191,7 +190,7 @@ def test_delete_result(test_client, init_database, login_superadmin):
     THEN check the response is valid
     """
     response = test_client.post('/deleteresult',
-                                data=json.dumps({'sessionid':1,'participantid':1}),
+                                json=json.dumps({'sessionid':1,'participantid':1}),
                                 follow_redirects = True
                                 )
     assert response.status_code == 200
