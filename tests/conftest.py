@@ -127,7 +127,7 @@ def init_database(test_client):
                     post_ques = ["firstq(open)(postsession)","secondq(mcq)(postsession)\nno\nyes"],
                     user_id = 1
                     )
-    db.session.add(session2)
+    db.session.add(session3)
 
     # Insert Participation data
     #-------------------------------
