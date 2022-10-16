@@ -25,7 +25,7 @@ def test_new_participant_id(test_client,init_database):
     id = str(session.id)
     response = test_client.get('/session/'+id+'/getid')
     assert response.status_code == 200
-    assert b'4' in response.data
+    assert b'5' in response.data
 
 def test_participant_id_validity(test_client,init_database):
     """

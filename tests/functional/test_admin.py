@@ -85,20 +85,16 @@ def test_logged_in_as_admin(test_client,init_database,login_default_user):
     THEN check the response is valid
     """
     response = test_client.post('/createsession',
-                                json=json.dumps(
-                                    {'id':1,
+                                json={'id':1,
                                     'sessionTitle':'session1a',
                                     'consent': True,
                                     'emotions':'Anxious',
-                                    'intensity':'10',
+                                    'intensity':10,
                                     'preQuestions': 'preQues1',
                                     'postQuestions': 'postQues1'
-                                    }
-                                ),
-                                follow_redirects = True
-                                )
-    assert response.status_code == 201
-    response.headers['Location'] == url_for('admin.createsession') 
+                                    })
+    assert response.status_code == 200
+    assert b'Successully created session' in response.data
 
 def test_approve_user(test_client, init_database, login_superadmin):
     """
@@ -176,7 +172,7 @@ def test_update_session(test_client, init_database, login_default_user):
     THEN check the response is valid
     """
     response = test_client.post('/updateSession',
-                                json=json.dumps({'id':1,
+                                json=json.dumps({'id':2,
                                     'sessionTitle':'session1a',
                                     'consent': True,
                                     'emotions':'Anxious',
@@ -218,7 +214,7 @@ def test_delete_result(test_client, init_database, login_superadmin):
     assert b'success' in response.data
 
 
-def test_bulk_download(test_client, init_database, login_superadmin):
+def test_bulk_download(test_client, init_database, login_default_user):
     """
     GIVEN a Flask application configured for testing
     WHEN the '/download/emotions/<int:sessionid>' page is requested (GET)
@@ -235,9 +231,7 @@ def test_bulk_download(test_client, init_database, login_superadmin):
     """
     
     response = test_client.get('/download/ans/1')
-    s1 = Session.query.filter_by(id=1)
-    
-    response_json = response.json()  
+    assert response.status_code == 200
     assert b'Question,Answer,Participant ID' in response.data
 
 
@@ -247,5 +241,6 @@ def test_download_a_participant_result(test_client, init_database, login_superad
     WHEN the '/download/<int:sessionid>/<int:participantid>' page is requested (GET)
     THEN check the response is valid
     """
-    response = test_client.get('/download/1/1')
-    response_json = response.json()  
+    response = test_client.get('/download/1/4')
+    assert response.status_code == 200
+    assert b'Questions,Answer' in response.data

@@ -2,6 +2,7 @@ import pytest
 from app import create_app, db
 from app.models import User, Session, Participant, Response
 from datetime import datetime
+import json
 
 
 @pytest.fixture(scope='module')
@@ -97,8 +98,8 @@ def init_database(test_client):
                     consent = "Please agree with consent",
                     emotions = "Happy\nSad\nAngry\nSuprised",
                     intensity = 10,
-                    pre_ques = ["firstq(open)","secondq(mcq)\nno\nyes"],
-                    post_ques = ["firstq(open)(postsession)","secondq(mcq)(postsession)\nno\nyes"],
+                    pre_ques = json.dumps(['firstq(open)','secondq(mcq)\nno\nyes']),
+                    post_ques = json.dumps(['firstq(open)(postsession)','secondq(mcq)(postsession)\nno\nyes']),
                     user_id = 1
                     )
     db.session.add(session1)
@@ -152,9 +153,17 @@ def init_database(test_client):
                     pre_ques_ans = ["answer1","no"],
                     post_ques_ans = [],
                     )
+    participant4 = Participant(
+                    id = 4,
+                    stage_num = 5,
+                    session_id = 1, 
+                    pre_ques_ans = ["answer1","no"],
+                    post_ques_ans = ["ye","nah","answer1","no"],
+                    )
     db.session.add(participant1)
     db.session.add(participant2)
     db.session.add(participant3)
+    db.session.add(participant4)
 
     # Insert Response data
     response1 = Response(
