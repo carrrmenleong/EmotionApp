@@ -22,7 +22,7 @@ def test_valid_login_logout(test_client, init_database):
                                 follow_redirects=True)
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """
     GIVEN a Flask application configured for testing
@@ -47,7 +47,7 @@ def test_invalid_login(test_client, init_database):
                                 follow_redirects=True)
     assert response.status_code == 200
     assert b'Invalid email or password, please check your email and password.' in response.data
-    assert b'Login' in response.data
+    assert b'Log In' in response.data
     assert b'Email' in response.data
     assert b'Password' in response.data
 
@@ -61,7 +61,7 @@ def test_login_already_logged_in(test_client, init_database, login_default_user)
     response = test_client.get('/login',follow_redirects=True)
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
     """
     GIVEN a Flask application configured for testing
@@ -94,8 +94,8 @@ def test_valid_registration(test_client, init_database):
                                             reason = "dummyreasonsdummyreasonsdummyreasonsdummyreasonsdummyreasonsdummyreasonsdummyreasonsdummyreasonsdummyreasonsdummyreasons"),
                                 follow_redirects=True)
     assert response.status_code == 200
-    assert b'Congratulations, your signup have been requested!' in response.data
-    assert b'Login' in response.data
+    assert b'Congratulations, your signup has been requested!' in response.data
+    assert b'Log In' in response.data
     assert b'Email' in response.data
     assert b'Password' in response.data
 
@@ -125,7 +125,7 @@ def test_invalid_registration(test_client, init_database):
     assert response.status_code == 200
     assert b'Field must be equal to password.' in response.data
     assert b'Please use a different email address.' in response.data
-    assert b'Login' in response.data
+    assert b'Log In' in response.data
     assert b'Not Yet Registered? Create New Account' in response.data
 
 
@@ -193,6 +193,6 @@ def test_valid_reset_password(test_client,init_database,user_token):
                         follow_redirects=True)
     assert response.status_code == 200
     assert b'View Sessions' in response.data
-    assert b'Logout' in response.data
+    assert b'Log Out' in response.data
 
 

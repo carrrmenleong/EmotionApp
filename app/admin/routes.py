@@ -53,10 +53,10 @@ def createsession():
 def viewsessions():
     if current_user.email == "emotionappmoodtrack@gmail.com":
         sessions = db.session.query(Session, User).filter(Session.user_id == User.id).all()
-        return render_template("admin/superadmin_viewsession.html", title='View Session', is_view=True, sessions = sessions, is_superadmin=True)
+        return render_template("admin/superadmin_viewsession.html", title='View Sessions', is_view=True, sessions = sessions, is_superadmin=True)
     userId = current_user.id
     sessions = Session.query.filter_by(user_id = userId).all()
-    return render_template("admin/viewsession.html", title='View Session', is_view=True, sessions = sessions)
+    return render_template("admin/viewsession.html", title='View Sessions', is_view=True, sessions = sessions)
 
 
 # View a Session 
@@ -72,9 +72,9 @@ def viewSession(sessionid):
     
     participants = Participant.query.filter_by(session_id = session.id).all()
     if current_user.email == "emotionappmoodtrack@gmail.com":
-        return render_template("admin/viewresult.html", title='View Participants Results', is_view=True, session = session, participants = participants, is_superadmin=True)
+        return render_template("admin/viewresult.html", title='View Participant Results', is_view=True, session = session, participants = participants, is_superadmin=True)
     else:
-        return render_template("admin/viewresult.html", title='View Participants Results', is_view=True, session = session, participants = participants)
+        return render_template("admin/viewresult.html", title='View Participant Results', is_view=True, session = session, participants = participants)
 
 
 # Download a participant result
@@ -113,9 +113,9 @@ def downloadFile(sessionid, participantid):
     result.append(['Questions','Answer'])
     for i in range(len(postques)+ 2):
         if i == 0:
-            result.append(['Please state what your highest frequency emotion(s) and comment on them', postans[i]])
+            result.append(['Please comment on your highest frequency emotion(s).', postans[i]])
         elif i ==1: 
-            result.append(['Please state what your highest frequency intensiy/intensities and comment on them', postans[i]])
+            result.append(['Please comment on your highest intensity emotion(s).', postans[i]])
         else:
             result.append([postques[i-2],postans[i]])
 
@@ -151,9 +151,9 @@ def bulkDownloadAns(sessionid):
         if participant.stage_num == 5:
             for i in range(len(postans)):
                 if i ==0:
-                    result.append(['Please state what your highest frequency emotion(s) and comment on them', postans[i],participant.id])
+                    result.append(['Please comment on your highest frequency emotion(s).', postans[i],participant.id])
                 elif i == 1:
-                    result.append(['Please state what your highest frequency intensiy/intensities and comment on them', postans[i],participant.id])
+                    result.append(['Please comment on your highest intensity emotion(s).', postans[i],participant.id])
                 else:
                     result.append([postques[i-2],postans[i],participant.id])
 

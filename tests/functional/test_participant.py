@@ -71,7 +71,7 @@ def test_participant_stage12345(test_client,init_database):
     '''
     response = test_client.get('/session/1/1')
     assert response.status_code == 200
-    assert b'Pre Session Survey' in response.data
+    assert b'Pre-Session Survey' in response.data
     assert b'firstq(open)' in response.data
     assert b'secondq(mcq)' in response.data
 
@@ -99,7 +99,7 @@ def test_participant_stage12345(test_client,init_database):
     '''
     response = test_client.get('/session/1/1')
     assert response.status_code == 200
-    assert b"Click on the emotion you are feeling right now and indicate it's intensity." in response.data
+    assert b"Click on the emotion(s) you are feeling right now and indicate their intensity." in response.data
     assert b"Happy" in response.data
     assert b"Sad" in response.data
     assert b"Angry" in response.data
@@ -136,9 +136,9 @@ def test_participant_stage12345(test_client,init_database):
     '''
     response = test_client.get('/session/1/1')
     assert response.status_code == 200
-    assert b"Post Session Survey" in response.data
+    assert b"Post-Session Survey" in response.data
     assert b"Your highest frequency emotion(s) are as shown below:" in response.data
-    assert b"Your highest frequency intensity(s) are as shown below:" in response.data
+    assert b"Your highest intensity emotion(s) are as shown below:" in response.data
     assert b"Sad" in response.data
     assert b"Happy" in response.data
     assert b"firstq(open)(postsession)" in response.data
@@ -170,7 +170,7 @@ def test_participant_stage12345(test_client,init_database):
     '''
     response = test_client.get('/session/1/2')
     assert response.status_code == 200
-    assert b"Post Session Survey" in response.data
+    assert b"Post-Session Survey" in response.data
     assert b"Your highest frequency emotion(s) are as shown below:" in response.data
     assert b"-" in response.data
 

@@ -13,14 +13,16 @@
 <body>
 
     <div id='personalDetails'>
-        <p id='reminder'>Please remember your Personal ID Code below. It will be required to continue session or to
-            withdraw from research in
-            the future.</p>
+        <p id='reminder'>
+            Please remember your personal ID Code below. 
+            It will be required if you need to continue this session after closing it, 
+            or if you want to withdraw your responses from research in the future.
+        </p>
         <h2 id='id'>ID Code: {{participant.id}}</h2>
         <hr>
     </div>
-    <p id='instruction'>Click on the emotion you are feeling right now and indicate it's intensity.<br>
-        Maximum intensity is {{session.intensity}}</p>
+    <p id='instruction'>Click on the emotion(s) you are feeling right now and indicate their intensity.<br>
+        The minimum intensity is 1, and the maximum intensity is {{session.intensity}}.</p>
     <div id='bigContainer'>
         <!-- Emotion Blocks will appear here-->
     </div>

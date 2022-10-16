@@ -55,30 +55,30 @@
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
                     {% if session.published %}
-                    published
+                    Published
                     {% else %}
-                    <button class="btn btn-success" sessionid={{session.id}} onclick="publish(this)">publish</button>
+                    <button class="btn btn-success" sessionid={{session.id}} onclick="publish(this)">Publish</button>
                     {% endif%}
                 </p>
             </div>
             <div class="col-2 border d-flex">
                 <p style="margin:auto">
                     <a href="{{url_for('admin.copySession', id = session.id)}}"><button
-                            class="btn btn-warning">copy</button></a>
+                            class="btn btn-warning">Copy</button></a>
                 </p>
             </div>
             <div class="col-3 border d-flex">
                 <p class="editButton" style="margin:auto">
                     {% if session.published %}
-                    <button disabled aria-disabled="true" class="edit btn btn-secondary">edit</button>
+                    <button disabled aria-disabled="true" class="edit btn btn-secondary">Edit</button>
                     {% else %}
                     <a style="display: inline;" href="{{url_for('admin.editSession', id = session.id)}}"><button
-                            class="edit btn btn-info">edit</button></a>
+                            class="edit btn btn-info">Edit</button></a>
                     {% endif%}
                 </p>
                 <p style="margin:auto">
                     <button class="delete btn btn-secondary"data-bs-toggle="modal"
-                    data-bs-target="#exampleModal" onclick="delSession('{{session.id}}')">delete</button>
+                    data-bs-target="#exampleModal" onclick="delSession('{{session.id}}')">Delete</button>
                 </p>
             </div>
         </div>
@@ -179,7 +179,7 @@
         // adding warning 
         warning1 = "WARNING"
         warning2 = "Are you sure you want to to delete this session?"
-        warning3 = "There is no way to undo this"
+        warning3 = "There is no way to undo this."
 
         $(".modal-body").append('<div id = "warningBlk"><p id = "warning">' + warning1 + '</p></div>')
         $(".modal-body").append('<div><p>' + warning2 + '</p></div>')

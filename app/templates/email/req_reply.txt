@@ -1,9 +1,9 @@
-Dear {{ user.username }},
+Dear {{ user.first_name }},
 
 
 {% if results %}
 Congratulations, your sign up request to Emotion App has been approved. 
-You can now log in to create survey session.
+You can now log in to create survey sessions.
 
 {% else %}
 Sorry, your sign up request to Emotion App has been denied.
