@@ -1,0 +1,2347 @@
+{
+  "id": "bb6e0ba2-fd51-443a-b3f5-29b3b6aac084",
+  "version": "2.0",
+  "name": "EmotionApp (Pre Deployment)",
+  "url": "http://127.0.0.1:5000/login",
+  "tests": [{
+    "id": "12e2aeab-f19f-4d92-b2fa-90190648f3bd",
+    "name": "User Successfully Registers for Application",
+    "commands": [{
+      "id": "9c7eab40-f8e5-4f2f-adeb-fda8baf52f27",
+      "comment": "Head To Sign Up Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/signup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d19979da-7e5c-4a68-a575-7d0b68547c90",
+      "comment": "Enter First Name",
+      "command": "type",
+      "target": "id=firstname",
+      "targets": [
+        ["id=firstname", "id"],
+        ["name=firstname", "name"],
+        ["css=#firstname", "css:finder"],
+        ["xpath=//input[@id='firstname']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "testing"
+    }, {
+      "id": "78b03dfb-7f5e-438b-9e81-fb780a0520cb",
+      "comment": "Enter Last Name",
+      "command": "type",
+      "target": "id=lastname",
+      "targets": [
+        ["id=lastname", "id"],
+        ["name=lastname", "name"],
+        ["css=#lastname", "css:finder"],
+        ["xpath=//input[@id='lastname']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "tester"
+    }, {
+      "id": "2cb7e731-76ec-4402-8a1a-cd0ec3c9c761",
+      "comment": "Enter Username",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "tester123"
+    }, {
+      "id": "bd7a859c-64f2-4627-ade6-88a3f382e918",
+      "comment": "Enter ORCID",
+      "command": "type",
+      "target": "id=orcid",
+      "targets": [
+        ["id=orcid", "id"],
+        ["name=orcid", "name"],
+        ["css=#orcid", "css:finder"],
+        ["xpath=//input[@id='orcid']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "a123"
+    }, {
+      "id": "fa6aa969-7b86-4ced-a9fe-94b815b434d5",
+      "comment": "Enter Instituition",
+      "command": "type",
+      "target": "id=institution",
+      "targets": [
+        ["id=institution", "id"],
+        ["name=institution", "name"],
+        ["css=#institution", "css:finder"],
+        ["xpath=//input[@id='institution']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "uwa"
+    }, {
+      "id": "042a3097-3da4-4be8-979d-11e41dc5571f",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "89b4478d-a9b3-4433-babe-32881ab49174",
+      "comment": "Confirm Email",
+      "command": "type",
+      "target": "id=email2",
+      "targets": [
+        ["id=email2", "id"],
+        ["name=email2", "name"],
+        ["css=#email2", "css:finder"],
+        ["xpath=//input[@id='email2']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "d8564f08-9755-4b91-8c1e-8bdd8e0341ae",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "b3e27d0a-b9bc-4852-a809-c959031c1708",
+      "comment": "Confirm Password",
+      "command": "type",
+      "target": "id=password2",
+      "targets": [
+        ["id=password2", "id"],
+        ["name=password2", "name"],
+        ["css=#password2", "css:finder"],
+        ["xpath=//input[@id='password2']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "a99c0aea-145d-49ed-a8de-4edda752ddf3",
+      "comment": "Enter Reason For Using Application",
+      "command": "type",
+      "target": "id=reason",
+      "targets": [
+        ["id=reason", "id"],
+        ["name=reason", "name"],
+        ["css=#reason", "css:finder"],
+        ["xpath=//textarea[@id='reason']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.comemotionapptester@gmail.com"
+    }, {
+      "id": "da699aac-24e3-4487-af30-77f3ecb74348",
+      "comment": "Register ",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[11]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fe4dbe47-be3f-4506-8c9e-259ec138853c",
+    "name": "Super Admin Denies Sign Up Request",
+    "commands": [{
+      "id": "1c1e6a2b-429f-4c1d-b151-64192fe912e6",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3152342b-e9b6-495e-8579-3491c68f3a05",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00cac7fb-772b-4f64-a86a-03a4288bd6ca",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "27a97e2e-cc9e-4202-b6c8-6c17ea06d2fc",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "41a606f6-0e0b-43eb-a9dc-b25520c4fd74",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "51f504cb-178f-42c7-8db3-7e953453bb69",
+      "comment": "Head to Sign Up Request",
+      "command": "click",
+      "target": "linkText=Sign Up Requests",
+      "targets": [
+        ["linkText=Sign Up Requests", "linkText"],
+        ["css=li:nth-child(4) > .left", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Up Requests')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/signupreq')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Up Requests')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dc4c0c9a-c532-4335-bae3-8663411826a4",
+      "comment": "Deny Request",
+      "command": "click",
+      "target": "css=.delete",
+      "targets": [
+        ["css=.delete", "css:finder"],
+        ["xpath=//button[@onclick=\"denyUser('3')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='3']/div[9]/p/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Deny')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d2a4b3b2-5950-4ee8-9f09-c1dd32e695f7",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1fa5fd47-8b80-4b5a-bff5-74261bc89695",
+    "name": "Super Admin Deletes User",
+    "commands": [{
+      "id": "177dd224-d2be-4577-81f8-aff1917a43f0",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ebafcf6f-2bc5-45f5-81c5-d8b38012bced",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "82b1e8a0-bbca-4eab-8109-1ecc5e7e0496",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "6c349f76-e72a-403a-98a2-a863c26fc9d6",
+      "comment": "Enter password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "e3378f1a-89c9-4b3c-bf4e-a707275e11d7",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2261dab6-52c2-4a7e-b7f2-0209adea996d",
+      "comment": "Head to Sign Up Requests",
+      "command": "click",
+      "target": "linkText=Sign Up Requests",
+      "targets": [
+        ["linkText=Sign Up Requests", "linkText"],
+        ["css=li:nth-child(4) > .left", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Up Requests')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/signupreq')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Up Requests')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "98122972-ae47-4b01-ab53-4c00192e3c08",
+      "comment": "Approve",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@onclick=\"approveUser('3')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='3']/div[9]/p/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Approve')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "522241f3-6790-4f12-b48f-cdf858791069",
+      "comment": "Head to View Users",
+      "command": "click",
+      "target": "linkText=View Users",
+      "targets": [
+        ["linkText=View Users", "linkText"],
+        ["css=li:nth-child(3) > .left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Users')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewusers')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Users')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0fe083a7-46f2-4549-897c-4f146856b243",
+      "comment": "Delete",
+      "command": "click",
+      "target": "css=.delete",
+      "targets": [
+        ["css=.delete", "css:finder"],
+        ["xpath=//button[@onclick=\"delUser('3')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='3']/div[9]/p/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ca16f68-f6eb-4641-9ee5-30dc5cbdb6f8",
+      "comment": "Confirm Intent",
+      "command": "click",
+      "target": "id=confirmLabel",
+      "targets": [
+        ["id=confirmLabel", "id"],
+        ["css=#confirmLabel", "css:finder"],
+        ["xpath=//label[@id='confirmLabel']", "xpath:attributes"],
+        ["xpath=//div[@id='confirmationBlk']/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'I have read and confirmed my intent')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1b44092-1c9f-4926-9931-f61331eb2455",
+      "comment": "Delete",
+      "command": "click",
+      "target": "id=confirmDel",
+      "targets": [
+        ["id=confirmDel", "id"],
+        ["css=#confirmDel", "css:finder"],
+        ["xpath=//button[@id='confirmDel']", "xpath:attributes"],
+        ["xpath=//div[@id='exampleModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f7f4f21-e7a3-40a1-8482-e2f697ef1d3c",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/auth/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f67e4167-cdbf-46f8-b297-82caf5d024b1",
+    "name": "Super Admin Approves Sign Up Request",
+    "commands": [{
+      "id": "ec946720-7c39-49b1-ba0b-9b86c474142c",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b03b8bff-ba32-4c14-bb0e-1d6c7e7c733e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b20533a9-a1ea-4664-9c86-6d2ccd3e3e4e",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "e4918c2b-a5d9-4459-84ba-837868c40983",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "2e280a73-5488-403f-8179-a61b824679db",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "976f5013-0c77-44e0-9145-d67a40ed2b05",
+      "comment": "Head to sign up request page",
+      "command": "click",
+      "target": "linkText=Sign Up Requests",
+      "targets": [
+        ["linkText=Sign Up Requests", "linkText"],
+        ["css=li:nth-child(4) > .left", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Up Requests')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/signupreq')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Up Requests')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dc63a37f-685e-4b7c-a9ab-21e1abea24c8",
+      "comment": "Approve",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@onclick=\"approveUser('3')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='3']/div[9]/p/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Approve')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "81c6884c-9a65-45e6-9efc-a15e64b601b4",
+      "comment": "Head to View Users Page",
+      "command": "click",
+      "target": "linkText=View Users",
+      "targets": [
+        ["linkText=View Users", "linkText"],
+        ["css=li:nth-child(3) > .left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Users')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewusers')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Users')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef568cd8-f124-4606-be81-2df4e2814e5a",
+      "comment": "Check if User is in the System",
+      "command": "verifyElementPresent",
+      "target": "id=3",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7b84ad0b-c74e-4e6d-89a5-83b80750f63c",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/auth/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "4298a155-8923-400e-82ea-013ecf38ed77",
+    "name": "User Creates Session",
+    "commands": [{
+      "id": "eb6e930e-a64c-42af-b740-bf79c780b625",
+      "comment": "Head to login page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1ca705e9-45f8-4667-a13d-866864bbe32a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "97cc824d-8aa2-4014-a425-96c464f55cab",
+      "comment": "Enter email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "65eb4abe-7713-4956-87a7-a326649094e9",
+      "comment": "Enter password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "4b4d7616-1cdc-4c55-aebe-98d8295d5ace",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "66502158-935f-431a-9da4-16faef9a2d1c",
+      "comment": "Enter Title",
+      "command": "type",
+      "target": "id=title",
+      "targets": [
+        ["id=title", "id"],
+        ["css=#title", "css:finder"],
+        ["xpath=//input[@id='title']", "xpath:attributes"],
+        ["xpath=//div[@id='title_block']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Session 01"
+    }, {
+      "id": "4ad414b4-ab7c-4faf-acb0-7a4c477b704a",
+      "comment": "Enter Consent",
+      "command": "type",
+      "target": "id=consent",
+      "targets": [
+        ["id=consent", "id"],
+        ["css=#consent", "css:finder"],
+        ["xpath=//textarea[@id='consent']", "xpath:attributes"],
+        ["xpath=//div[@id='consent_block']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Consent"
+    }, {
+      "id": "58eba147-bd90-43ff-a54d-0d2f7edd29a8",
+      "comment": "Enter Pre Measuring Question",
+      "command": "type",
+      "target": "id=t1",
+      "targets": [
+        ["id=t1", "id"],
+        ["css=#t1", "css:finder"],
+        ["xpath=//textarea[@id='t1']", "xpath:attributes"],
+        ["xpath=//div[@id='1']/textarea", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/textarea", "xpath:position"]
+      ],
+      "value": "Open Q1"
+    }, {
+      "id": "aa28c265-5cc1-4c68-83a5-360c087f2a7b",
+      "comment": "Enter Emotions",
+      "command": "type",
+      "target": "id=emotion",
+      "targets": [
+        ["id=emotion", "id"],
+        ["css=#emotion", "css:finder"],
+        ["xpath=//textarea[@id='emotion']", "xpath:attributes"],
+        ["xpath=//div[@id='emotion_block']/textarea", "xpath:idRelative"],
+        ["xpath=//div[4]/textarea", "xpath:position"]
+      ],
+      "value": "Happy\\nAngry"
+    }, {
+      "id": "970a6ae0-f344-405d-be9e-5cd67b362ad4",
+      "comment": "Enter Intensity",
+      "command": "type",
+      "target": "id=intensity",
+      "targets": [
+        ["id=intensity", "id"],
+        ["css=#intensity", "css:finder"],
+        ["xpath=//input[@id='intensity']", "xpath:attributes"],
+        ["xpath=//div[@id='emotion_block']/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "8"
+    }, {
+      "id": "8b013d47-e505-41f7-8228-e2d0678675a2",
+      "comment": "Enter Post-Measuring Question",
+      "command": "type",
+      "target": "id=t2",
+      "targets": [
+        ["id=t2", "id"],
+        ["css=#t2", "css:finder"],
+        ["xpath=//textarea[@id='t2']", "xpath:attributes"],
+        ["xpath=//div[@id='2']/textarea", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/textarea", "xpath:position"]
+      ],
+      "value": "Open Q2"
+    }, {
+      "id": "54a18dcc-8d51-4ca7-a6ad-a45f13992658",
+      "comment": "Create Session",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//button[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9bf9d843-f550-445c-8285-3143ad8af7ec",
+      "comment": "Close Modal",
+      "command": "click",
+      "target": "id=closeModal",
+      "targets": [
+        ["id=closeModal", "id"],
+        ["css=#closeModal", "css:finder"],
+        ["xpath=//button[@id='closeModal']", "xpath:attributes"],
+        ["xpath=//div[@id='myModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div/div/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Close')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "61745cdd-18c1-4a67-bb45-89eae685d369",
+      "comment": "Head to View Session Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a9704bc-c792-4688-8bff-2dcf6863a301",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "52709b25-1217-489d-a1a6-4d429d3db5cc",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/auth/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e08b3de9-15e6-4165-b0c4-7733b33fb553",
+    "name": "User Copies Session",
+    "commands": [{
+      "id": "c9ac5da1-3dbe-4113-b985-23ca0bb6efcd",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0b1fde36-b15c-4ef4-85f3-da0e90994add",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2a83a1ea-0b01-412b-a34c-669dee369268",
+      "comment": "Enter email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "01d4e8ed-c80e-4530-9555-9ebf7ae1d31e",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "5a258b97-8a14-4ab8-9768-4d7d7ebe9dbe",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "23f767de-4aef-4b8d-a85f-622582852054",
+      "comment": "Head to View Session Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "03134c62-3a18-43bf-9553-d8fbe6d4f582",
+      "comment": "Click Copy",
+      "command": "click",
+      "target": "css=.btn-warning",
+      "targets": [
+        ["css=.btn-warning", "css:finder"],
+        ["xpath=//div[@id='1']/div[5]/p/a/button", "xpath:idRelative"],
+        ["xpath=//a/button", "xpath:position"],
+        ["xpath=//button[contains(.,'copy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c43f410f-a554-44c8-a417-96b4739910cd",
+      "comment": "Create Session",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//button[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae76ea4c-4fbb-4a9e-b170-1318dd6e3a8f",
+      "comment": "Close Modal",
+      "command": "click",
+      "target": "id=closeModal",
+      "targets": [
+        ["id=closeModal", "id"],
+        ["css=#closeModal", "css:finder"],
+        ["xpath=//button[@id='closeModal']", "xpath:attributes"],
+        ["xpath=//div[@id='myModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div/div/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Close')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "40e842da-64d4-4728-98a8-17cff3d22e83",
+      "comment": "Head To View Session Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e4fd3949-40a3-44a3-af8b-de910519a940",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=2",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4b097f51-a932-4068-a5ec-bad47fdd016b",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d5122ac2-c04b-49d0-8173-2446c606bbef",
+    "name": "User Edit Session",
+    "commands": [{
+      "id": "b519e6a2-de3c-478a-91e7-36bf7ebf2fa9",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/createsession",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ec1f363f-61c6-40d4-808d-7408ab14f9ae",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bff02402-3048-4dda-b495-e73e8edc3663",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "3c8c3cba-81fd-48b1-aea9-4b57a62a3353",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "cd80c1f8-88fb-45cb-bb08-9989c849962e",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "21eef3c8-4222-414a-8a85-f1972bf6f068",
+      "comment": "Head to View Session Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cef2c054-1b95-4e06-ad76-f0397c614668",
+      "comment": "Click Edit",
+      "command": "click",
+      "target": "xpath=//div[@id='2']/div[6]/p/a/button",
+      "targets": [
+        ["xpath=//div[@id='2']/div[6]/p/a/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[6]/p/a/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7975857e-6f6f-4073-9c4a-79fa3a15bfe6",
+      "comment": "Enter New Title",
+      "command": "type",
+      "target": "id=title",
+      "targets": [
+        ["id=title", "id"],
+        ["css=#title", "css:finder"],
+        ["xpath=//input[@id='title']", "xpath:attributes"],
+        ["xpath=//div[@id='title_block']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Session 02"
+    }, {
+      "id": "bcca93e5-104c-4a12-8fb6-0b2fba93f916",
+      "comment": "Update Session",
+      "command": "click",
+      "target": "id=update",
+      "targets": [
+        ["id=update", "id"],
+        ["css=#update", "css:finder"],
+        ["xpath=//button[@id='update']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Update Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2d511b5c-d21a-40f8-9017-633dcfbbf700",
+      "comment": "Close Modal",
+      "command": "click",
+      "target": "id=closeModal",
+      "targets": [
+        ["id=closeModal", "id"],
+        ["css=#closeModal", "css:finder"],
+        ["xpath=//button[@id='closeModal']", "xpath:attributes"],
+        ["xpath=//div[@id='myModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div/div/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Close')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2c0dee31-8e9e-4a1a-861d-6a54c984fb29",
+      "comment": "Head to View Session Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=li:nth-child(4) > .left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "317ea4e3-9016-4ceb-b9c0-b13dba5574df",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3b677de2-6891-40b5-914b-336c598d9d8f",
+    "name": "User Deletes Session",
+    "commands": [{
+      "id": "58f2a164-4898-4f4a-adda-39a553272577",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5ad52bf1-1985-4799-855a-310581e13322",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "83aac403-44d5-4364-831d-156e3604159b",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "e1f1076d-8b90-4943-8c8a-9bdd903ca74d",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "98c8d825-337a-47c3-af73-c743e67ca9a7",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "58da8ca3-a5a0-4e69-afc0-4017ed6e4f02",
+      "comment": "Head to View Session Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8fb676b-b9e7-43fc-9d20-f216271ab72a",
+      "comment": "Click Delete Button",
+      "command": "click",
+      "target": "xpath=//button[@onclick=\"delSession('2')\"]",
+      "targets": [
+        ["xpath=//button[@onclick=\"delSession('2')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='2']/div[6]/p[2]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[6]/p[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f58f0b2d-de28-4749-a83b-199860f95877",
+      "comment": "Confirm Intent",
+      "command": "click",
+      "target": "id=confirmLabel",
+      "targets": [
+        ["id=confirmLabel", "id"],
+        ["css=#confirmLabel", "css:finder"],
+        ["xpath=//label[@id='confirmLabel']", "xpath:attributes"],
+        ["xpath=//div[@id='confirmationBlk']/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'I have read and confirmed my intent')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a59ac556-9855-4e71-aa88-518e7b920c8f",
+      "comment": "Delete",
+      "command": "click",
+      "target": "id=confirmDel",
+      "targets": [
+        ["id=confirmDel", "id"],
+        ["css=#confirmDel", "css:finder"],
+        ["xpath=//button[@id='confirmDel']", "xpath:attributes"],
+        ["xpath=//div[@id='exampleModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "67295be8-a7f1-4c97-b8e8-94ac858176a9",
+      "comment": "Head Back to View Sessions",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "aef05e31-e38d-4f67-a0ae-32a8773029ba",
+      "comment": "",
+      "command": "verifyElementNotPresent",
+      "target": "id=2",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9966483f-2992-4a89-9a69-f968580f63b9",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f36fe5c1-6096-45a9-a351-cf85879aa342",
+    "name": "User Publishes Session",
+    "commands": [{
+      "id": "73fdfb29-7de1-4bda-98cb-8a71d365b779",
+      "comment": "Head to Login",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/createsession",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f1225ae8-3169-41aa-8335-edba2672e010",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "39fa681b-1dfc-4ba7-a556-1a84e64309fb",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "87fcb2c9-69a8-4313-a1b6-c35fe5eed11c",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "1f84149d-e90b-4b5e-a072-6ac6dd885898",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "68ae2e73-ddd5-4544-ab50-7a387913c820",
+      "comment": "Head to View Sessions Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b13ac83-ba66-468d-8263-4d5d78ec0157",
+      "comment": "Publish",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@onclick='publish(this)']", "xpath:attributes"],
+        ["xpath=//div[@id='1']/div[4]/p/button", "xpath:idRelative"],
+        ["xpath=//div[4]/p/button", "xpath:position"],
+        ["xpath=//button[contains(.,'publish')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9372fb3e-0535-41f9-9c16-dd7c7393b7b9",
+      "comment": "Click Session Name",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[@id='1']/div[3]/p/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Link')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cdc4a787-1496-4d18-baad-a34f62fc9805",
+      "comment": "Close Session",
+      "command": "click",
+      "target": "css=.btn-close",
+      "targets": [
+        ["css=.btn-close", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='exampleModal']/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b57c8ae9-a837-458b-9159-bccf10421e93",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "244b0951-3ec1-4693-acbd-6e87c40400b5",
+    "name": "Participant Can Complete Session",
+    "commands": [{
+      "id": "06700671-3998-49e5-8904-d0c6f40534ed",
+      "comment": "Head to Session Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/session/1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8dc0d6e2-1b5a-4130-b62a-7866abc2592b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bdb41c22-8238-4687-9f2a-d0e1a3d24f1b",
+      "comment": "Click Start Session",
+      "command": "click",
+      "target": "id=btn1",
+      "targets": [
+        ["id=btn1", "id"],
+        ["css=#btn1", "css:finder"],
+        ["xpath=//button[@id='btn1']", "xpath:attributes"],
+        ["xpath=//div[@id='main1']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Start Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "432aa319-2892-4a50-b247-a914e042bfa1",
+      "comment": "Accept Consent",
+      "command": "click",
+      "target": "id=closeModal",
+      "targets": [
+        ["id=closeModal", "id"],
+        ["css=#closeModal", "css:finder"],
+        ["xpath=//button[@id='closeModal']", "xpath:attributes"],
+        ["xpath=//div[@id='consentModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'I Agree')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f828bc0c-9720-4e72-a400-1cdb406e2a45",
+      "comment": "Enter Response to Pre-Measuring Question",
+      "command": "type",
+      "target": "id=openQ1",
+      "targets": [
+        ["id=openQ1", "id"],
+        ["css=#openQ1", "css:finder"],
+        ["xpath=//textarea[@id='openQ1']", "xpath:attributes"],
+        ["xpath=//div[@id='q1']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "ans"
+    }, {
+      "id": "00ab540c-fa46-4536-9e84-1187c1749445",
+      "comment": "Submit Response",
+      "command": "click",
+      "target": "css=.surveyBtn",
+      "targets": [
+        ["css=.surveyBtn", "css:finder"],
+        ["xpath=//button[@onclick=\"submitAns('1','1','2')\"]", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d58d7ba6-f8bf-4e6b-9ad6-460832b2c61e",
+      "comment": "Selecting Emotion",
+      "command": "click",
+      "target": "id=e1",
+      "targets": [
+        ["id=e1", "id"],
+        ["css=#e1", "css:finder"],
+        ["xpath=//div[@id='e1']", "xpath:attributes"],
+        ["xpath=//div[@id='bigContainer']/div/div/div", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd15ea4b-5237-46c3-8974-823da270360e",
+      "comment": "Submit Emotions",
+      "command": "click",
+      "target": "css=button:nth-child(1)",
+      "targets": [
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@onclick=\"submitEmotions('1','2')\"]", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit present emotion(s)')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5046dac-5942-4106-b725-c3e4b0154300",
+      "comment": "Finish Submiting All Emotions",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@onclick=\"finishSession('1','2')\"]", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Finish Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4424d77-bbce-436f-aa79-ee486a0a55b5",
+      "comment": "Answer Post-Measuring Q1",
+      "command": "type",
+      "target": "id=openQ1",
+      "targets": [
+        ["id=openQ1", "id"],
+        ["css=#openQ1", "css:finder"],
+        ["xpath=//textarea[@id='openQ1']", "xpath:attributes"],
+        ["xpath=//div[@id='q1']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "happy"
+    }, {
+      "id": "a97490da-df2b-44d5-98e3-2fa4682823b7",
+      "comment": "Answer Post-Measuring Q2",
+      "command": "type",
+      "target": "id=openQ2",
+      "targets": [
+        ["id=openQ2", "id"],
+        ["css=#openQ2", "css:finder"],
+        ["xpath=//textarea[@id='openQ2']", "xpath:attributes"],
+        ["xpath=//div[@id='q2']/textarea", "xpath:idRelative"],
+        ["xpath=//div[2]/textarea", "xpath:position"]
+      ],
+      "value": "happy"
+    }, {
+      "id": "507bba67-38c9-43e9-869a-ef46fa6921bd",
+      "comment": "Answer Post-Measuring Q3",
+      "command": "type",
+      "target": "id=openQ3",
+      "targets": [
+        ["id=openQ3", "id"],
+        ["css=#openQ3", "css:finder"],
+        ["xpath=//textarea[@id='openQ3']", "xpath:attributes"],
+        ["xpath=//div[@id='q3']/textarea", "xpath:idRelative"],
+        ["xpath=//div[3]/textarea", "xpath:position"]
+      ],
+      "value": "answer"
+    }, {
+      "id": "7cfc332e-e9fc-4e57-9c70-6f91f36b67e2",
+      "comment": "Submit",
+      "command": "click",
+      "target": "css=.surveyBtn",
+      "targets": [
+        ["css=.surveyBtn", "css:finder"],
+        ["xpath=//button[@onclick=\"submitAns('1','2','4')\"]", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5c39fadc-3bb7-4edd-b303-9c4b146cf655",
+    "name": "Participant can Continue Session",
+    "commands": [{
+      "id": "44dfef00-0add-4a4d-8995-8dd9a44f5c56",
+      "comment": "Head to Session",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/session/1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4ffe369-a8ea-44e6-afe2-583a8c113dff",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6eda1e37-c611-409b-9e5c-7c8937fbb3b7",
+      "comment": "Start Session",
+      "command": "click",
+      "target": "id=btn1",
+      "targets": [
+        ["id=btn1", "id"],
+        ["css=#btn1", "css:finder"],
+        ["xpath=//button[@id='btn1']", "xpath:attributes"],
+        ["xpath=//div[@id='main1']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Start Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f9cec204-d885-492e-8fb5-d5eee3ae6e5e",
+      "comment": "Agree To Consent",
+      "command": "click",
+      "target": "id=closeModal",
+      "targets": [
+        ["id=closeModal", "id"],
+        ["css=#closeModal", "css:finder"],
+        ["xpath=//button[@id='closeModal']", "xpath:attributes"],
+        ["xpath=//div[@id='consentModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'I Agree')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "454e7f24-6a74-432a-a711-77dc23ac7e57",
+      "comment": "Enter Answer for Pre-Measuring Question",
+      "command": "type",
+      "target": "id=openQ1",
+      "targets": [
+        ["id=openQ1", "id"],
+        ["css=#openQ1", "css:finder"],
+        ["xpath=//textarea[@id='openQ1']", "xpath:attributes"],
+        ["xpath=//div[@id='q1']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "82ac9a2f-e61e-42f9-b424-c0802b112c67",
+      "comment": "Submit Answer to Pre-Measuring Question",
+      "command": "click",
+      "target": "css=.surveyBtn",
+      "targets": [
+        ["css=.surveyBtn", "css:finder"],
+        ["xpath=//button[@onclick=\"submitAns('1','2','2')\"]", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8778b82e-8ccc-4383-941e-78d7a5363362",
+      "comment": "Head to Session Start Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/session/1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4a0fb1be-f754-46ed-8d5f-8b3baf7abe87",
+      "comment": "Click Continue Session",
+      "command": "click",
+      "target": "id=btn2",
+      "targets": [
+        ["id=btn2", "id"],
+        ["css=#btn2", "css:finder"],
+        ["xpath=//button[@id='btn2']", "xpath:attributes"],
+        ["xpath=//div[@id='main1']/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Continue Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5937717b-8fe4-4263-94cc-33eba3a7d233",
+      "comment": "Enter ID Code",
+      "command": "type",
+      "target": "id=participantId",
+      "targets": [
+        ["id=participantId", "id"],
+        ["css=#participantId", "css:finder"],
+        ["xpath=//input[@id='participantId']", "xpath:attributes"],
+        ["xpath=//div[@id='main2']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "6e04b30b-5afd-47a4-b5b9-ad5cb9385235",
+      "comment": "Click Continue",
+      "command": "click",
+      "target": "id=continue",
+      "targets": [
+        ["id=continue", "id"],
+        ["css=#continue", "css:finder"],
+        ["xpath=//button[@id='continue']", "xpath:attributes"],
+        ["xpath=//div[@id='main2']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continue')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c8a4e69-0d6f-4c1d-9f11-c2a811f21053",
+      "comment": "Select Emotion",
+      "command": "click",
+      "target": "id=e2",
+      "targets": [
+        ["id=e2", "id"],
+        ["css=#e2", "css:finder"],
+        ["xpath=//div[@id='e2']", "xpath:attributes"],
+        ["xpath=//div[@id='bigContainer']/div/div[2]/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "20b47514-aad1-4eb8-9224-8b3b1812b763",
+      "comment": "Submit Emotion",
+      "command": "click",
+      "target": "css=button:nth-child(1)",
+      "targets": [
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@onclick=\"submitEmotions('1','2')\"]", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit present emotion(s)')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "94cf1ca1-15d7-4caf-a6ba-2d59c6b568dc",
+      "comment": "Finish Stage 3",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@onclick=\"finishSession('1','2')\"]", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Finish Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f966bcd-4ae5-4215-b62c-64154b207938",
+      "comment": "Enter Response to Post-Measuring Q1",
+      "command": "type",
+      "target": "id=openQ1",
+      "targets": [
+        ["id=openQ1", "id"],
+        ["css=#openQ1", "css:finder"],
+        ["xpath=//textarea[@id='openQ1']", "xpath:attributes"],
+        ["xpath=//div[@id='q1']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "3687954f-abc9-474a-aac4-97cddcc2dad8",
+      "comment": "Enter Response to Post-Measuring Q2",
+      "command": "type",
+      "target": "id=openQ2",
+      "targets": [
+        ["id=openQ2", "id"],
+        ["css=#openQ2", "css:finder"],
+        ["xpath=//textarea[@id='openQ2']", "xpath:attributes"],
+        ["xpath=//div[@id='q2']/textarea", "xpath:idRelative"],
+        ["xpath=//div[2]/textarea", "xpath:position"]
+      ],
+      "value": "b"
+    }, {
+      "id": "a3f5f77a-c845-4df1-a44d-6860c75a0a1b",
+      "comment": "Enter Response to Post-Measuring Q3",
+      "command": "type",
+      "target": "id=openQ3",
+      "targets": [
+        ["id=openQ3", "id"],
+        ["css=#openQ3", "css:finder"],
+        ["xpath=//textarea[@id='openQ3']", "xpath:attributes"],
+        ["xpath=//div[@id='q3']/textarea", "xpath:idRelative"],
+        ["xpath=//div[3]/textarea", "xpath:position"]
+      ],
+      "value": "c"
+    }, {
+      "id": "3f3ecc8b-b578-4969-a3d7-9b9616b0d481",
+      "comment": "Submit",
+      "command": "click",
+      "target": "css=.surveyBtn",
+      "targets": [
+        ["css=.surveyBtn", "css:finder"],
+        ["xpath=//button[@onclick=\"submitAns('1','2','4')\"]", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e0f2b0f1-a953-4b1b-bd99-90635c342d32",
+    "name": "User Can View Session Responses",
+    "commands": [{
+      "id": "494cee0c-23d9-4968-a8e0-1fd0447b4378",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2d31759f-80ad-4cbf-a7e6-e5e103b7597c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4112ff13-086a-491a-ab13-77df1d89621d",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "ee04d8f7-97db-4649-8b22-c412ad57efa2",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "462bb25a-31b7-49c5-9c66-79faceba5eff",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5d27f38-232e-43d9-9573-fc42173f24d5",
+      "comment": "Head to View Sessions Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b98800e-c1f6-424c-bd19-adf273536597",
+      "comment": "Click Session Name",
+      "command": "click",
+      "target": "linkText=Session 01",
+      "targets": [
+        ["linkText=Session 01", "linkText"],
+        ["css=.fs-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Session 01')]", "xpath:link"],
+        ["xpath=//div[@id='1']/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/viewsession/1')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Session 01')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "09548e27-5475-4e8e-9687-fe71cf97f0bd",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b0326232-8ea7-47a4-b401-8d31c010af5b",
+    "name": "User Can Delete Session Responses",
+    "commands": [{
+      "id": "1ae3e291-32cd-4447-93b2-3a4f674ce20a",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ec88cb21-afb6-48d7-9af2-7be72ff271a4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9441ab21-409a-4e1f-b57d-4f7d86cc9877",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "51a231d4-7b75-4c69-b392-5b55dae2d5b9",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "64bc07a1-4b31-4a93-9d43-758dabff35ec",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "49be7f44-3063-406d-ae92-13045f59ca7a",
+      "comment": "Head to View Sessions Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b396eb3e-f2cb-498d-92ed-dd538dfaa21a",
+      "comment": "Click Session Name",
+      "command": "click",
+      "target": "linkText=Session 01",
+      "targets": [
+        ["linkText=Session 01", "linkText"],
+        ["css=.fs-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Session 01')]", "xpath:link"],
+        ["xpath=//div[@id='1']/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/viewsession/1')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Session 01')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "db7245ca-066d-4c45-8d31-e16e19e69fd1",
+      "comment": "Click Delete Button",
+      "command": "click",
+      "target": "xpath=//button[@onclick=\"delResult('1','2')\"]",
+      "targets": [
+        ["xpath=//button[@onclick=\"delResult('1','2')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='2']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a6e0caed-f91d-45c1-aeef-195e25152b26",
+      "comment": "Confirm Consent",
+      "command": "click",
+      "target": "id=confirmLabel",
+      "targets": [
+        ["id=confirmLabel", "id"],
+        ["css=#confirmLabel", "css:finder"],
+        ["xpath=//label[@id='confirmLabel']", "xpath:attributes"],
+        ["xpath=//div[@id='confirmationBlk']/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'I have read and confirmed my intent')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f942c0c-7d98-4b08-86aa-b3f9d476f003",
+      "comment": "Delete",
+      "command": "click",
+      "target": "id=confirmDel",
+      "targets": [
+        ["id=confirmDel", "id"],
+        ["css=#confirmDel", "css:finder"],
+        ["xpath=//button[@id='confirmDel']", "xpath:attributes"],
+        ["xpath=//div[@id='exampleModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5babe384-3b08-4347-be0a-1885c85de082",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "11014814-6278-4896-913b-1b8de71d14ac",
+    "name": "Super Admin Can Delete Session",
+    "commands": [{
+      "id": "129f7668-2ca1-414a-bd0e-148ae1e591e6",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c1f59a61-21ac-4e14-be8c-c164818f55c9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9a8a2632-443e-44e7-ac1a-0a37313814e3",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "2e8ed413-8dca-4b50-8ce3-04c5e8c77e7f",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "emotionappmoodtrack@gmail.com"
+    }, {
+      "id": "752bbe48-fa0f-4178-ae19-7e4fe504b88e",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d85322fa-220a-49f4-933f-1c3b37893a04",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7420886d-d3bf-451f-bd30-729530032017",
+      "comment": "Click Delete Button",
+      "command": "click",
+      "target": "css=.delete",
+      "targets": [
+        ["css=.delete", "css:finder"],
+        ["xpath=//button[@onclick=\"delSession('1')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='1']/div[5]/p/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d6e8156-3c8d-400d-9e08-23e30b9c1f21",
+      "comment": "Confirm Consent",
+      "command": "click",
+      "target": "id=confirmLabel",
+      "targets": [
+        ["id=confirmLabel", "id"],
+        ["css=#confirmLabel", "css:finder"],
+        ["xpath=//label[@id='confirmLabel']", "xpath:attributes"],
+        ["xpath=//div[@id='confirmationBlk']/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'I have read and confirmed my intent')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "63e39975-9a63-48e4-9a9a-4e33c31c9fa3",
+      "comment": "Delete",
+      "command": "click",
+      "target": "id=confirmDel",
+      "targets": [
+        ["id=confirmDel", "id"],
+        ["css=#confirmDel", "css:finder"],
+        ["xpath=//button[@id='confirmDel']", "xpath:attributes"],
+        ["xpath=//div[@id='exampleModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0b523681-f3bf-4def-a08d-629e2ad0a800",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "778d8535-1dd4-4ab6-b8ba-ab6f2a5ed68f",
+    "name": "Create Session (Input Validation)",
+    "commands": [{
+      "id": "f5c7f4d6-d6d5-4e16-98a1-364eedb60843",
+      "comment": "Head to Login Page",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "779b87b8-8a89-464c-a203-f098ce22adc8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4cf0bcad-628d-4a8f-9dc0-ef75c4442508",
+      "comment": "Enter Email",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "emotionapptester@gmail.com"
+    }, {
+      "id": "f1875e6f-7c04-4e0f-9b9f-64c8e8488ca8",
+      "comment": "Enter Password",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testing123"
+    }, {
+      "id": "82b65672-2ed1-4ab8-a097-083e9a1c4141",
+      "comment": "Login",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d33e97d2-862a-44bc-a9f2-c7fb5b9e77d5",
+      "comment": "Submit without any fields filled in",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//button[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "77fada11-78ae-4c21-9f81-28c1d1ea13d8",
+      "comment": "Enter name",
+      "command": "type",
+      "target": "id=title",
+      "targets": [
+        ["id=title", "id"],
+        ["css=#title", "css:finder"],
+        ["xpath=//input[@id='title']", "xpath:attributes"],
+        ["xpath=//div[@id='title_block']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "a3f6610f-2940-4748-b1a3-894756012d6a",
+      "comment": "Enter consent",
+      "command": "type",
+      "target": "id=consent",
+      "targets": [
+        ["id=consent", "id"],
+        ["css=#consent", "css:finder"],
+        ["xpath=//textarea[@id='consent']", "xpath:attributes"],
+        ["xpath=//div[@id='consent_block']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "4d6af9e0-8e5f-45cf-8079-1ccd9d8b6f16",
+      "comment": "Enter PreMeasuring Questions ",
+      "command": "type",
+      "target": "id=t1",
+      "targets": [
+        ["id=t1", "id"],
+        ["css=#t1", "css:finder"],
+        ["xpath=//textarea[@id='t1']", "xpath:attributes"],
+        ["xpath=//div[@id='1']/textarea", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/textarea", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "218598fe-9c3f-4a84-af73-35b92a62eee0",
+      "comment": "Enter Emotion",
+      "command": "type",
+      "target": "id=emotion",
+      "targets": [
+        ["id=emotion", "id"],
+        ["css=#emotion", "css:finder"],
+        ["xpath=//textarea[@id='emotion']", "xpath:attributes"],
+        ["xpath=//div[@id='emotion_block']/textarea", "xpath:idRelative"],
+        ["xpath=//div[4]/textarea", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "829edc8d-54b8-4f21-8eb4-81296521c0e0",
+      "comment": "Enter PostMeasuring Question",
+      "command": "type",
+      "target": "id=t2",
+      "targets": [
+        ["id=t2", "id"],
+        ["css=#t2", "css:finder"],
+        ["xpath=//textarea[@id='t2']", "xpath:attributes"],
+        ["xpath=//div[@id='2']/textarea", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/textarea", "xpath:position"]
+      ],
+      "value": "a"
+    }, {
+      "id": "88b4061b-5857-43f8-8011-9156f4561b6d",
+      "comment": "Enter Intensity out of range",
+      "command": "type",
+      "target": "id=intensity",
+      "targets": [
+        ["id=intensity", "id"],
+        ["css=#intensity", "css:finder"],
+        ["xpath=//input[@id='intensity']", "xpath:attributes"],
+        ["xpath=//div[@id='emotion_block']/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "5364b6c6-4f7b-443a-b96b-eefb451e0718",
+      "comment": "Submit with incorrect intensity",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//button[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2f296c43-46c5-42b5-99dc-8d9814d7cc37",
+      "comment": "Enter intensity within range",
+      "command": "type",
+      "target": "id=intensity",
+      "targets": [
+        ["id=intensity", "id"],
+        ["css=#intensity", "css:finder"],
+        ["xpath=//input[@id='intensity']", "xpath:attributes"],
+        ["xpath=//div[@id='emotion_block']/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "6"
+    }, {
+      "id": "0410b0b1-8aa0-4692-a3b5-30053a196201",
+      "comment": "Create Session",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//button[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create Session')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0ceb48f4-9d04-4103-82ee-83188ea33bef",
+      "comment": "Close notification",
+      "command": "click",
+      "target": "id=closeModal",
+      "targets": [
+        ["id=closeModal", "id"],
+        ["css=#closeModal", "css:finder"],
+        ["xpath=//button[@id='closeModal']", "xpath:attributes"],
+        ["xpath=//div[@id='myModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div/div/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Close')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea696ce2-eddb-4be6-9646-28cb9fa68c0d",
+      "comment": "Head to View Sessions Page",
+      "command": "click",
+      "target": "linkText=View Sessions",
+      "targets": [
+        ["linkText=View Sessions", "linkText"],
+        ["css=.left", "css:finder"],
+        ["xpath=//a[contains(text(),'View Sessions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/viewsessions')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Sessions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "98d1a2ff-0604-42ff-a41c-3cf06f7a97a8",
+      "comment": "Click Delete",
+      "command": "click",
+      "target": "css=.delete",
+      "targets": [
+        ["css=.delete", "css:finder"],
+        ["xpath=//button[@onclick=\"delSession('1')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='1']/div[6]/p[2]/button", "xpath:idRelative"],
+        ["xpath=//p[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "400c2298-b367-43ee-8c17-7f6a602edae6",
+      "comment": "Confirm Consent",
+      "command": "click",
+      "target": "id=confirmLabel",
+      "targets": [
+        ["id=confirmLabel", "id"],
+        ["css=#confirmLabel", "css:finder"],
+        ["xpath=//label[@id='confirmLabel']", "xpath:attributes"],
+        ["xpath=//div[@id='confirmationBlk']/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'I have read and confirmed my intent')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e24bc06c-553e-4982-bc4d-9f7ce062a5c3",
+      "comment": "Delete",
+      "command": "click",
+      "target": "id=confirmDel",
+      "targets": [
+        ["id=confirmDel", "id"],
+        ["css=#confirmDel", "css:finder"],
+        ["xpath=//button[@id='confirmDel']", "xpath:attributes"],
+        ["xpath=//div[@id='exampleModal']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e90e1271-38c0-4773-b6df-ce0562eaaefd",
+      "comment": "Logout",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=li:nth-child(2) > .right", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "b789f5e4-de26-4391-bb1e-f319bb4803cb",
+    "name": "01: Super Admin Denies Signup Request",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["12e2aeab-f19f-4d92-b2fa-90190648f3bd", "fe4dbe47-be3f-4506-8c9e-259ec138853c"]
+  }, {
+    "id": "1668084d-72ce-4763-b796-1ea6fce93faf",
+    "name": "03: Super Admin Approves Signup Request",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["12e2aeab-f19f-4d92-b2fa-90190648f3bd", "f67e4167-cdbf-46f8-b297-82caf5d024b1"]
+  }, {
+    "id": "647726e3-795e-450b-ac1b-5d7c90001826",
+    "name": "02: Super Admin Deletes User",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["12e2aeab-f19f-4d92-b2fa-90190648f3bd", "1fa5fd47-8b80-4b5a-bff5-74261bc89695"]
+  }, {
+    "id": "4b8378cc-f57d-486e-8684-41d8b26858b4",
+    "name": "04: User Creates & Manipulates Session",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["4298a155-8923-400e-82ea-013ecf38ed77", "e08b3de9-15e6-4165-b0c4-7733b33fb553", "d5122ac2-c04b-49d0-8173-2446c606bbef", "f36fe5c1-6096-45a9-a351-cf85879aa342", "3b677de2-6891-40b5-914b-336c598d9d8f"]
+  }, {
+    "id": "85bb8145-e795-494b-ba36-3513a3cb590d",
+    "name": "05: Participation Platform",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["244b0951-3ec1-4693-acbd-6e87c40400b5", "5c39fadc-3bb7-4edd-b303-9c4b146cf655"]
+  }, {
+    "id": "22819372-6bbf-4b83-84e4-2c74e3c7a59f",
+    "name": "06: User Can View and Delete Results",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["e0f2b0f1-a953-4b1b-bd99-90635c342d32", "b0326232-8ea7-47a4-b401-8d31c010af5b"]
+  }, {
+    "id": "a97c0ea9-391c-4bef-aec7-cfd0b64fa186",
+    "name": "07: Super Admin Can Delete Session",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["11014814-6278-4896-913b-1b8de71d14ac"]
+  }, {
+    "id": "bc21407f-bdf2-48c2-8ab5-a7fdc41ff2d4",
+    "name": "08: Input Validation",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["778d8535-1dd4-4ab6-b8ba-ab6f2a5ed68f"]
+  }],
+  "urls": ["http://127.0.0.1:5000/auth/signup", "http://127.0.0.1:5000/auth/login", "http://127.0.0.1:5000/viewusers", "http://127.0.0.1:5000/auth/login?next=%2Fcreatesession", "http://127.0.0.1:5000/viewsessions", "http://127.0.0.1:5000/createsession", "http://127.0.0.1:5000/login", "http://127.0.0.1:5000/session/1"],
+  "plugins": []
+}
