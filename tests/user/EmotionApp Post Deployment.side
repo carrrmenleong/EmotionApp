@@ -1,7 +1,7 @@
 {
   "id": "bb6e0ba2-fd51-443a-b3f5-29b3b6aac084",
   "version": "2.0",
-  "name": "EmotionApp (Pre Deployment)",
+  "name": "EmotionApp (Post Deployment)",
   "url": "http://127.0.0.1:5000/login",
   "tests": [{
     "id": "12e2aeab-f19f-4d92-b2fa-90190648f3bd",
@@ -10,7 +10,7 @@
       "id": "9c7eab40-f8e5-4f2f-adeb-fda8baf52f27",
       "comment": "Head To Sign Up Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/signup",
+      "target": "https://emotionapp.fly.dev/signup",
       "targets": [],
       "value": ""
     }, {
@@ -164,7 +164,7 @@
       "id": "1c1e6a2b-429f-4c1d-b151-64192fe912e6",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -199,7 +199,7 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//input[2]", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "nicola2022emotionAPP"
     }, {
       "id": "41a606f6-0e0b-43eb-a9dc-b25520c4fd74",
       "comment": "Login",
@@ -242,7 +242,7 @@
       "value": ""
     }, {
       "id": "d2a4b3b2-5950-4ee8-9f09-c1dd32e695f7",
-      "comment": "Log Out",
+      "comment": "Logout",
       "command": "click",
       "target": "linkText=Log Out",
       "targets": [
@@ -262,7 +262,7 @@
       "id": "177dd224-d2be-4577-81f8-aff1917a43f0",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -297,7 +297,7 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//input[2]", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "nicola2022emotionAPP"
     }, {
       "id": "e3378f1a-89c9-4b3c-bf4e-a707275e11d7",
       "comment": "Login",
@@ -415,7 +415,7 @@
       "id": "ec946720-7c39-49b1-ba0b-9b86c474142c",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -450,7 +450,7 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//input[2]", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "nicola2022emotionAPP"
     }, {
       "id": "2e280a73-5488-403f-8179-a61b824679db",
       "comment": "Login",
@@ -506,13 +506,6 @@
       ],
       "value": ""
     }, {
-      "id": "ef568cd8-f124-4606-be81-2df4e2814e5a",
-      "comment": "Check if User is in the System",
-      "command": "verifyElementPresent",
-      "target": "id=3",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "7b84ad0b-c74e-4e6d-89a5-83b80750f63c",
       "comment": "Logout",
       "command": "click",
@@ -534,7 +527,7 @@
       "id": "eb6e930e-a64c-42af-b740-bf79c780b625",
       "comment": "Head to login page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -703,13 +696,6 @@
       ],
       "value": ""
     }, {
-      "id": "3a9704bc-c792-4688-8bff-2dcf6863a301",
-      "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=1",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "52709b25-1217-489d-a1a6-4d429d3db5cc",
       "comment": "Logout",
       "command": "click",
@@ -731,7 +717,7 @@
       "id": "c9ac5da1-3dbe-4113-b985-23ca0bb6efcd",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -848,13 +834,6 @@
       ],
       "value": ""
     }, {
-      "id": "e4fd3949-40a3-44a3-af8b-de910519a940",
-      "comment": "",
-      "command": "verifyElementPresent",
-      "target": "id=2",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "4b097f51-a932-4068-a5ec-bad47fdd016b",
       "comment": "Logout",
       "command": "click",
@@ -876,7 +855,7 @@
       "id": "b519e6a2-de3c-478a-91e7-36bf7ebf2fa9",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/createsession",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -1025,7 +1004,7 @@
       "id": "58f2a164-4898-4f4a-adda-39a553272577",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -1170,7 +1149,7 @@
       "id": "73fdfb29-7de1-4bda-98cb-8a71d365b779",
       "comment": "Head to Login",
       "command": "open",
-      "target": "http://127.0.0.1:5000/createsession",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -1293,7 +1272,7 @@
       "id": "06700671-3998-49e5-8904-d0c6f40534ed",
       "comment": "Head to Session Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/session/1",
+      "target": "https://emotionapp.fly.dev/session/1",
       "targets": [],
       "value": ""
     }, {
@@ -1451,7 +1430,7 @@
       "id": "44dfef00-0add-4a4d-8995-8dd9a44f5c56",
       "comment": "Head to Session",
       "command": "open",
-      "target": "http://127.0.0.1:5000/session/1",
+      "target": "https://emotionapp.fly.dev/session/1",
       "targets": [],
       "value": ""
     }, {
@@ -1514,10 +1493,17 @@
       ],
       "value": ""
     }, {
+      "id": "698656c1-4e13-4010-ac60-28c49c88c490",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5000/login",
+      "targets": [],
+      "value": ""
+    }, {
       "id": "8778b82e-8ccc-4383-941e-78d7a5363362",
       "comment": "Head to Session Start Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/session/1",
+      "target": "https://emotionapp.fly.dev/session/1",
       "targets": [],
       "value": ""
     }, {
@@ -1561,94 +1547,6 @@
         ["xpath=//button[contains(.,'Continue')]", "xpath:innerText"]
       ],
       "value": ""
-    }, {
-      "id": "1c8a4e69-0d6f-4c1d-9f11-c2a811f21053",
-      "comment": "Select Emotion",
-      "command": "click",
-      "target": "id=e2",
-      "targets": [
-        ["id=e2", "id"],
-        ["css=#e2", "css:finder"],
-        ["xpath=//div[@id='e2']", "xpath:attributes"],
-        ["xpath=//div[@id='bigContainer']/div/div[2]/div", "xpath:idRelative"],
-        ["xpath=//div[2]/div", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "20b47514-aad1-4eb8-9224-8b3b1812b763",
-      "comment": "Submit Emotion",
-      "command": "click",
-      "target": "css=button:nth-child(1)",
-      "targets": [
-        ["css=button:nth-child(1)", "css:finder"],
-        ["xpath=//button[@onclick=\"submitEmotions('1','2')\"]", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Submit present emotion(s)')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "94cf1ca1-15d7-4caf-a6ba-2d59c6b568dc",
-      "comment": "Finish Stage 3",
-      "command": "click",
-      "target": "css=button:nth-child(2)",
-      "targets": [
-        ["css=button:nth-child(2)", "css:finder"],
-        ["xpath=//button[@onclick=\"finishSession('1','2')\"]", "xpath:attributes"],
-        ["xpath=//button[2]", "xpath:position"],
-        ["xpath=//button[contains(.,'Finish Session')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "9f966bcd-4ae5-4215-b62c-64154b207938",
-      "comment": "Enter Response to Post-Measuring Q1",
-      "command": "type",
-      "target": "id=openQ1",
-      "targets": [
-        ["id=openQ1", "id"],
-        ["css=#openQ1", "css:finder"],
-        ["xpath=//textarea[@id='openQ1']", "xpath:attributes"],
-        ["xpath=//div[@id='q1']/textarea", "xpath:idRelative"],
-        ["xpath=//textarea", "xpath:position"]
-      ],
-      "value": "a"
-    }, {
-      "id": "3687954f-abc9-474a-aac4-97cddcc2dad8",
-      "comment": "Enter Response to Post-Measuring Q2",
-      "command": "type",
-      "target": "id=openQ2",
-      "targets": [
-        ["id=openQ2", "id"],
-        ["css=#openQ2", "css:finder"],
-        ["xpath=//textarea[@id='openQ2']", "xpath:attributes"],
-        ["xpath=//div[@id='q2']/textarea", "xpath:idRelative"],
-        ["xpath=//div[2]/textarea", "xpath:position"]
-      ],
-      "value": "b"
-    }, {
-      "id": "a3f5f77a-c845-4df1-a44d-6860c75a0a1b",
-      "comment": "Enter Response to Post-Measuring Q3",
-      "command": "type",
-      "target": "id=openQ3",
-      "targets": [
-        ["id=openQ3", "id"],
-        ["css=#openQ3", "css:finder"],
-        ["xpath=//textarea[@id='openQ3']", "xpath:attributes"],
-        ["xpath=//div[@id='q3']/textarea", "xpath:idRelative"],
-        ["xpath=//div[3]/textarea", "xpath:position"]
-      ],
-      "value": "c"
-    }, {
-      "id": "3f3ecc8b-b578-4969-a3d7-9b9616b0d481",
-      "comment": "Submit",
-      "command": "click",
-      "target": "css=.surveyBtn",
-      "targets": [
-        ["css=.surveyBtn", "css:finder"],
-        ["xpath=//button[@onclick=\"submitAns('1','2','4')\"]", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Submit')]", "xpath:innerText"]
-      ],
-      "value": ""
     }]
   }, {
     "id": "e0f2b0f1-a953-4b1b-bd99-90635c342d32",
@@ -1657,7 +1555,7 @@
       "id": "494cee0c-23d9-4968-a8e0-1fd0447b4378",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -1682,7 +1580,7 @@
       "value": "emotionapptester@gmail.com"
     }, {
       "id": "ee04d8f7-97db-4649-8b22-c412ad57efa2",
-      "comment": "Enter Password",
+      "comment": "testing123",
       "command": "type",
       "target": "id=password",
       "targets": [
@@ -1692,7 +1590,7 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//input[2]", "xpath:position"]
       ],
-      "value": "testing123"
+      "value": "nicola2022emotionAPP"
     }, {
       "id": "462bb25a-31b7-49c5-9c66-79faceba5eff",
       "comment": "Login",
@@ -1757,7 +1655,7 @@
       "id": "1ae3e291-32cd-4447-93b2-3a4f674ce20a",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -1895,7 +1793,7 @@
       "id": "129f7668-2ca1-414a-bd0e-148ae1e591e6",
       "comment": "",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
@@ -1930,7 +1828,7 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//input[2]", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "nicola2022emotionAPP"
     }, {
       "id": "752bbe48-fa0f-4178-ae19-7e4fe504b88e",
       "comment": "",
@@ -2021,7 +1919,7 @@
       "id": "f5c7f4d6-d6d5-4e16-98a1-364eedb60843",
       "comment": "Head to Login Page",
       "command": "open",
-      "target": "http://127.0.0.1:5000/login",
+      "target": "https://emotionapp.fly.dev/login",
       "targets": [],
       "value": ""
     }, {
