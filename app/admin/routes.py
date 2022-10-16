@@ -113,9 +113,9 @@ def downloadFile(sessionid, participantid):
     result.append(['Questions','Answer'])
     for i in range(len(postques)+ 2):
         if i == 0:
-            result.append(['Please state your highest frequency emotion(s) and comment on them.', postans[i]])
+            result.append(['Please comment on your highest frequency emotion(s).', postans[i]])
         elif i ==1: 
-            result.append(['Please state your highest intensity emotion(s) and comment on them.', postans[i]])
+            result.append(['Please comment on your highest intensity emotion(s).', postans[i]])
         else:
             result.append([postques[i-2],postans[i]])
 
@@ -151,9 +151,9 @@ def bulkDownloadAns(sessionid):
         if participant.stage_num == 5:
             for i in range(len(postans)):
                 if i ==0:
-                    result.append(['Please state your highest frequency emotion(s) and comment on them.', postans[i],participant.id])
+                    result.append(['Please comment on your highest frequency emotion(s).', postans[i],participant.id])
                 elif i == 1:
-                    result.append(['Please state your highest intensity emotion(s) and comment on them.', postans[i],participant.id])
+                    result.append(['Please comment on your highest intensity emotion(s).', postans[i],participant.id])
                 else:
                     result.append([postques[i-2],postans[i],participant.id])
 
