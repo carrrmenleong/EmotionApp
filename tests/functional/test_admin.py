@@ -1,5 +1,6 @@
-from app.models import Session
 import json
+from app.models import Session
+from flask import url_for
 
 def test_logged_in_as_superadmin(test_client, init_database, login_superadmin):
     """
@@ -78,6 +79,26 @@ def test_logged_in_as_admin(test_client,init_database,login_default_user):
     assert b'View Sessions' in response.data
     assert b'Logout' in response.data
 
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/createsession' page is posted (POST)
+    THEN check the response is valid
+    """
+    response = test_client.post('/createsession',
+                                json=json.dumps(
+                                    {'id':1,
+                                    'sessionTitle':'session1a',
+                                    'consent': True,
+                                    'emotions':'Anxious',
+                                    'intensity':'10',
+                                    'preQuestions': 'preQues1',
+                                    'postQuestions': 'postQues1'
+                                    }
+                                ),
+                                follow_redirects = True
+                                )
+    assert response.status_code == 201
+    response.headers['Location'] == url_for('admin.createsession') 
 
 def test_approve_user(test_client, init_database, login_superadmin):
     """
@@ -195,3 +216,36 @@ def test_delete_result(test_client, init_database, login_superadmin):
                                 )
     assert response.status_code == 200
     assert b'success' in response.data
+
+
+def test_bulk_download(test_client, init_database, login_superadmin):
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/download/emotions/<int:sessionid>' page is requested (GET)
+    THEN check the response is valid
+    """
+    response = test_client.get('/download/emotions/1')
+    assert b'Timestamp,Emotion,Intensity,Participant ID\r\n' in response.data
+
+
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/download/ans/<int:sessionid>' page is requested (GET)
+    THEN check the response is valid
+    """
+    
+    response = test_client.get('/download/ans/1')
+    s1 = Session.query.filter_by(id=1)
+    
+    response_json = response.json()  
+    assert b'Question,Answer,Participant ID' in response.data
+
+
+def test_download_a_participant_result(test_client, init_database, login_superadmin):
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/download/<int:sessionid>/<int:participantid>' page is requested (GET)
+    THEN check the response is valid
+    """
+    response = test_client.get('/download/1/1')
+    response_json = response.json()  
