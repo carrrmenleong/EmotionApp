@@ -206,6 +206,12 @@ def deleteResult():
     
     return('success')
 
+# About us
+#----------------------------------------------------------
+@bp.route('/aboutus', methods =['GET'])
+@login_required
+def aboutus():
+    return render_template("admin/aboutus.html", title='About Us', is_aboutus =True)
 
 # View Users
 #----------------------------------------------------------

@@ -45,6 +45,13 @@
                 <li><a href="#" class = 'right'>{{ current_user.username }}</a></li>
                 <li><a href="{{ url_for('auth.logout') }}" class = 'right'>Log Out</a></li>
                 
+                <!-- About us -->
+                {% if is_aboutus is defined %}
+                <li><a href="{{url_for('admin.aboutus')}}" class ="leftActive" >About Us</a></li>
+                {% else %}
+                <li><a href="{{url_for('admin.aboutus')}}" class ="left" >About Us</a></li>
+                {% endif %}
+
                 <!-- Create Session for admin / View Users for superadmin-->
                 {% if is_superadmin is defined %} 
                     {% if is_viewuser is defined %} 
