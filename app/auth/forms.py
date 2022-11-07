@@ -18,7 +18,7 @@ class SignupForm(FlaskForm):
     email2 = StringField('Confirm Email', validators=[DataRequired(), Email(), EqualTo('email')])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    reason = TextAreaField('Reason for using this app (minimum 100 words)', validators=[DataRequired(), Length(min=100)])
+    reason = TextAreaField('Reason for using this app (minimum 100 characters)', validators=[DataRequired(), Length(min=100)])
     submit = SubmitField('Register')
 
     def validate_email(self, email):
