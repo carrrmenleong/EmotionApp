@@ -97,7 +97,6 @@
     // function to validate inputs
     function validateInput(){
         var main_test = []
-        var letterNumber = /[0-9a-zA-Z]/
         var all_ques = document.getElementsByClassName('questionBlk')
 
         for (var i = 0; i< all_ques.length; i++){
@@ -107,7 +106,7 @@
                 var blk = document.getElementById('q' + (i + 1))
                 var input = document.getElementById('openQ' + (i + 1)).value
                 var para = document.getElementById('error' + (i+ 1))
-                if (input.match(letterNumber) == null){
+                if (input.replace(/ /g,'') == ""){
                     para.innerHTML = "Please enter your response!"
                     blk.style.border = "solid red"
                     blk.style.borderRadius  = '15px'
