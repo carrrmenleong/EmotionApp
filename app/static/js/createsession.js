@@ -78,7 +78,6 @@ function retrieve_consent() {
 //prequestions
 function retrieve_questions(type) {
 
-    var letterNumber = /[0-9a-zA-Z]/
     var questions = []
     if (type == "pre"){
         var all = document.getElementsByClassName('preQ')
@@ -101,7 +100,7 @@ function retrieve_questions(type) {
                 // check if option is uncessary 
                 for (j = 0; j<temp.length; j++){
                     var option = temp[j]
-                    if (option.match(letterNumber) != null){
+                    if (option.replace(/ /g,'') != ""){
                         temp2.push(option)
                     }
                 }
@@ -134,13 +133,12 @@ function retrieve_questions(type) {
 function retrieve_emotions(){
     emotions = document.getElementById('emotion').value
     var all = emotions.split('\n')
-    var letterNumber = /[0-9a-zA-Z]/
     var final = ""
     var temp = []
     // removing empty new lines
     for (i =0; i< all.length; i++){
         var emotion = all[i]
-        if(emotion.match(letterNumber) != null){
+        if(emotion.replace(/ /g,'') != ""){
             temp.push(emotion)
         }
     }
@@ -171,11 +169,6 @@ function retrieve_intensity() {
 // function to check if there is all input
 function validateInput(){
 
-    // initializing variables 
-    var letterNumber = /[0-9a-zA-Z]/
-    var number = /[0-9]/
-    var letter = /[a-zA-z]/
-
     // retrieving input
     var title = document.getElementById('title').value
     var consent = document.getElementById('consent').value
@@ -184,36 +177,34 @@ function validateInput(){
     var all_pre = document.getElementsByClassName('preQ')
     var all_post = document.getElementsByClassName('postQ')
 
-    // checking if input has been filled in
-    var test_title = title.match(letterNumber)
-    var test_consent = consent.match(letterNumber)
-    var test_emotions = emotions.match(letter)
-    var test_intensity = intensity.match(number)
-
     // for title
     var title_input = document.getElementById('title')
-    var title_label = document.getElementById('title_error')    
-    if (test_title == null){
+    var title_label = document.getElementById('title_error')   
+    if (title.replace(/ /g,'') == ""){
         title_label.innerHTML = "Please Enter a Title for your session!"
         title_label.style.visibility = 'visible'
         title_input.style.border = "solid red"
+        test_title = false
     }
     else{
         title_label.style.visibility = 'hidden'
         title_input.style.border = "none"
+        test_title = true
     }
 
     // for consent
     var consent_input = document.getElementById('consent')
     var consent_label = document.getElementById('consent_error')
-    if (test_consent == null){   
+    if (consent.replace(/ /g,'') == ""){   
         consent_label.innerHTML = "Please enter the Consent Agreement for your session!"
         consent_label.style.visibility = 'visible'
         consent_input.style.border = "solid red"
+        test_consent = false
     }
     else{
         consent_label.style.visibility = 'hidden'
         consent_input.style.border = "none"
+        test_consent = true
     }
     
     // for prequestion
@@ -223,7 +214,7 @@ function validateInput(){
             var id = all_pre[i].id.split('t')[1]
             var pre_input = document.getElementById('t' + id)
             var pre_label = document.getElementById('preq_error' + id)
-            if(all_pre[i].value.match(letterNumber) == null){
+            if(all_pre[i].value.replace(/ /g,'') == ""){
                 pre_label.innerHTML = "Please enter the Prequestion for your session!"
                 pre_label.style.visibility = 'visible'
                 pre_input.style.border = "solid red"
@@ -249,21 +240,23 @@ function validateInput(){
     // for emotions
     var emotions_input = document.getElementById('emotion')
     var emotions_label = document.getElementById('emotions_error')
-    if (test_emotions == null){
+    if (emotions.replace(/ /g,'') == ""){
         
         emotions_label.innerHTML = "Please enter the Emotion(s) for your session!"
         emotions_label.style.visibility = 'visible'
         emotions_input.style.border = "solid red"
+        test_emotions = false
     }
     else{
         emotions_label.style.visibility = 'hidden'
         emotions_input.style.border = "none"
+        test_emotions = true
     }
 
     // for intensity
     var intensity_input = document.getElementById('intensity')
     var intensity_label = document.getElementById('intensity_error')
-    if (test_intensity == null || intensity < 3 || intensity > 12){
+    if (intensity < 3 || intensity > 12){
         intensity_label.innerHTML = "Please enter a number from 3-12 as the Intensity for your session!"
         intensity_label.style.visibility = 'visible'
         intensity_input.style.border = "solid red"
@@ -282,7 +275,7 @@ function validateInput(){
             var id = all_post[i].id.split('t')[1]
             var post_input = document.getElementById('t' + id)
             var post_label = document.getElementById('postq_error' + id)
-            if(all_post[i].value.match(letterNumber) == null){
+            if(all_post[i].value.replace(/ /g,'') == ""){
                 post_label.innerHTML = "Please enter the Postquestion for your session!"
                 post_label.style.visibility = 'visible'
                 post_input.style.border = "solid red"
