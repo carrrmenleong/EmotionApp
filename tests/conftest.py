@@ -69,7 +69,7 @@ def init_database(test_client):
                 username = 'Superadmin',
                 orcid = 'H1234',
                 institution = 'UWA',
-                email = 'emotionappmoodtrack@gmail.com',
+                email = 'emotionapp2022@gmail.com',
                 reason = "dummy reasons",
                 approved = True)
     user3.set_password('1234')
@@ -198,7 +198,7 @@ def login_default_user(test_client):
 @pytest.fixture(scope='function')
 def login_superadmin(test_client):
     test_client.post('/login',
-                     data=dict(email='emotionappmoodtrack@gmail.com', password='1234'),
+                     data=dict(email='emotionapp2022@gmail.com', password='1234'),
                      follow_redirects=True)
 
     yield  # this is where the testing happens!

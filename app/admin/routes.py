@@ -19,7 +19,7 @@ import json
 @login_required
 def createsession():
     if request.method == 'GET':
-        if current_user.email == "emotionappmoodtrack@gmail.com":
+        if current_user.email == "emotionapp2022@gmail.com":
             return redirect(url_for('admin.viewusers'))
         return render_template("admin/createsession.html", title='Create Session', is_create=True)
     else:
@@ -51,7 +51,7 @@ def createsession():
 @bp.route('/viewsessions', methods=['GET'])
 @login_required
 def viewsessions():
-    if current_user.email == "emotionappmoodtrack@gmail.com":
+    if current_user.email == "emotionapp2022@gmail.com":
         sessions = db.session.query(Session, User).filter(Session.user_id == User.id).all()
         return render_template("admin/superadmin_viewsession.html", title='View Sessions', is_view=True, sessions = sessions, is_superadmin=True)
     userId = current_user.id
@@ -67,11 +67,11 @@ def viewSession(sessionid):
     session = Session.query.filter_by(id=sessionid).first_or_404()
 
     # Restrict access to superadmin and creator of the current session only
-    if current_user.email != "emotionappmoodtrack@gmail.com" and session.user_id != current_user.id:
+    if current_user.email != "emotionapp2022@gmail.com" and session.user_id != current_user.id:
         return render_template("errors/404.html")
     
     participants = Participant.query.filter_by(session_id = session.id).all()
-    if current_user.email == "emotionappmoodtrack@gmail.com":
+    if current_user.email == "emotionapp2022@gmail.com":
         return render_template("admin/viewresult.html", title='View Participant Results', is_view=True, session = session, participants = participants, is_superadmin=True)
     else:
         return render_template("admin/viewresult.html", title='View Participant Results', is_view=True, session = session, participants = participants)
@@ -84,7 +84,7 @@ def downloadFile(sessionid, participantid):
     session = Session.query.filter_by(id=sessionid).first_or_404()
 
     # Restrict access to superadmin and creator of the current session only
-    if current_user.email != "emotionappmoodtrack@gmail.com" and session.user_id != current_user.id:
+    if current_user.email != "emotionapp2022@gmail.com" and session.user_id != current_user.id:
         return render_template("errors/404.html")
     
     participant = Participant.query.filter_by(id = participantid).first_or_404()
@@ -119,7 +119,7 @@ def downloadFile(sessionid, participantid):
         else:
             result.append([postques[i-2],postans[i]])
 
-    return excel.make_response_from_array(result, "csv", file_name=f"participant{participant.id} result")
+    return excel.make_response_from_array(result, "xlsx", file_name=f"participant{participant.id} result")
 
 
 # Bulk download participant results (Questions)
@@ -129,7 +129,7 @@ def bulkDownloadAns(sessionid):
     session = Session.query.filter_by(id=sessionid).first_or_404()
 
     # Restrict access to superadmin and creator of the current session only
-    if current_user.email != "emotionappmoodtrack@gmail.com" and session.user_id != current_user.id:
+    if current_user.email != "emotionapp2022@gmail.com" and session.user_id != current_user.id:
         return render_template("errors/404.html")
 
     preques = json.loads(session.pre_ques)
@@ -157,7 +157,7 @@ def bulkDownloadAns(sessionid):
                 else:
                     result.append([postques[i-2],postans[i],participant.id])
 
-    return excel.make_response_from_array(result, "csv", file_name="Bulk Results (Questions)")
+    return excel.make_response_from_array(result, "xlsx", file_name="Bulk Results (Questions)")
 
 
 # Bulk download participant results (Emotions)
@@ -167,7 +167,7 @@ def bulkDownloadEmotions(sessionid):
     session = Session.query.filter_by(id=sessionid).first_or_404()
 
     # Restrict access to superadmin and creator of the current session only
-    if current_user.email != "emotionappmoodtrack@gmail.com" and session.user_id != current_user.id:
+    if current_user.email != "emotionapp2022@gmail.com" and session.user_id != current_user.id:
         return render_template("errors/404.html")
 
     result = [['Timestamp','Emotion','Intensity','Participant ID']]
@@ -176,7 +176,7 @@ def bulkDownloadEmotions(sessionid):
     for response in responses:
         result.append([response.timestamp,response.emotion,response.intensity,response.participant_id])
 
-    return excel.make_response_from_array(result, "csv", file_name="Bulk Results (Emotions)")
+    return excel.make_response_from_array(result, "xlsx", file_name="Bulk Results (Emotions)")
 
 
 # Delete participant results (Emotions)
@@ -191,7 +191,7 @@ def deleteResult():
     session = Session.query.filter_by(id=sessionId).first_or_404()
 
     # Restrict access to superadmin and creator of the current session only
-    if current_user.email != "emotionappmoodtrack@gmail.com" and session.user_id != current_user.id:
+    if current_user.email != "emotionapp2022@gmail.com" and session.user_id != current_user.id:
         return bad_request("Action not allowed")
 
     # delete participants of the session from participant table
@@ -218,7 +218,7 @@ def aboutus():
 @bp.route('/viewusers', methods=['GET'])
 @login_required
 def viewusers():
-    if current_user.email == "emotionappmoodtrack@gmail.com":
+    if current_user.email == "emotionapp2022@gmail.com":
         sessions = Session.query.all()
         users = User.query.all()
         admin = current_user
@@ -231,7 +231,7 @@ def viewusers():
 @bp.route('/signupreq', methods=['GET'])
 @login_required
 def signupreq():
-    if current_user.email == "emotionappmoodtrack@gmail.com":
+    if current_user.email == "emotionapp2022@gmail.com":
         users = User.query.all()
         return render_template("admin/approve_users.html", title="Sign Up Requests", is_superadmin = True, is_signupreq = True, users = users)
     else:
@@ -271,7 +271,7 @@ def deleteSession():
     session = Session.query.filter_by(id=selectedId).first_or_404()
 
     # Restrict access to superadmin and creator of the current session only
-    if current_user.email != "emotionappmoodtrack@gmail.com" and session.user_id != current_user.id:
+    if current_user.email != "emotionapp2022@gmail.com" and session.user_id != current_user.id:
         return bad_request("Action not allowed")
 
     # delete session from session table
@@ -341,7 +341,7 @@ def deleteUser():
     selectedUserId = json.loads(temp)
 
     # Restrict access to superadmin only
-    if current_user.email != "emotionappmoodtrack@gmail.com":
+    if current_user.email != "emotionapp2022@gmail.com":
         return bad_request("Action not allowed")
 
     sessions = Session.query.filter_by(user_id = selectedUserId).all()
@@ -376,7 +376,7 @@ def denyUser():
     userId = json.loads(temp)
 
     # Restrict access to superadmin only
-    if current_user.email != "emotionappmoodtrack@gmail.com":
+    if current_user.email != "emotionapp2022@gmail.com":
         return bad_request("Action not allowed")
     
     # email sign up review results to user
@@ -401,7 +401,7 @@ def approveUser():
     userId = json.loads(temp)
 
     # Restrict access to superadmin only
-    if current_user.email != "emotionappmoodtrack@gmail.com":
+    if current_user.email != "emotionapp2022@gmail.com":
         return bad_request("Action not allowed")
     
     # email sign up review results to user

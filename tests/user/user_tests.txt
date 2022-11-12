@@ -2,7 +2,7 @@ User Test Cases
 - user tests are done using selenium IDE
 - ensure super admin has been created
 - for pre deployment ensure super admin is signed up with
-	- email: emotionappmoodtrack@gmail.com
-	- password: emotionappmoodtrack@gmail.com
+	- email: emotionapp2022@gmail.com
+	- password: emotionapp2022@gmail.com
 - there are 7 suites that have been created that tests all test cases
 - ensure that the 7 suites are run in order
