@@ -278,14 +278,16 @@ def deleteSession():
     target = Session.query.get(selectedId)
     db.session.delete(target)
 
-    # delete participants of the session from participant table
-    delete_p = Participant.__table__.delete().where(Participant.session_id == selectedId)
-    db.session.execute(delete_p)
-
     # delete response of the session from response table
     delete_r = Response.__table__.delete().where(Response.session_id == selectedId)
     db.session.execute(delete_r)
 
+
+    # delete participants of the session from participant table
+    delete_p = Participant.__table__.delete().where(Participant.session_id == selectedId)
+    db.session.execute(delete_p)
+
+    
     db.session.commit()
     
     return('success')
@@ -347,13 +349,15 @@ def deleteUser():
     sessions = Session.query.filter_by(user_id = selectedUserId).all()
     for session in sessions:
         sessionId = session.id
+        
+        # delete response of the session from response table
+        delete_r = Response.__table__.delete().where(Response.session_id == sessionId)
+        db.session.execute(delete_r)
+        
         # delete participants of the session from participant table
         delete_p = Participant.__table__.delete().where(Participant.session_id == sessionId)
         db.session.execute(delete_p)
 
-        # delete response of the session from response table
-        delete_r = Response.__table__.delete().where(Response.session_id == sessionId)
-        db.session.execute(delete_r)
     
     # delete sessions created by the user
     delete_s = Session.__table__.delete().where(Session.user_id == selectedUserId)
