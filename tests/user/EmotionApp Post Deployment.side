@@ -186,7 +186,7 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//div/input", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "emotionapp2022@gmail.com"
     }, {
       "id": "27a97e2e-cc9e-4202-b6c8-6c17ea06d2fc",
       "comment": "Enter Password",
@@ -284,7 +284,7 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//div/input", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "emotionapp2022@gmail.com"
     }, {
       "id": "6c349f76-e72a-403a-98a2-a863c26fc9d6",
       "comment": "Enter password",
@@ -437,7 +437,7 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//div/input", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "emotionapp2022@gmail.com"
     }, {
       "id": "e4918c2b-a5d9-4459-84ba-837868c40983",
       "comment": "Enter Password",
@@ -1815,7 +1815,7 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//div/input", "xpath:position"]
       ],
-      "value": "emotionappmoodtrack@gmail.com"
+      "value": "emotionapp2022@gmail.com"
     }, {
       "id": "2e8ed413-8dca-4b50-8ce3-04c5e8c77e7f",
       "comment": "",
