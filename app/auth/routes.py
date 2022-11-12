@@ -17,7 +17,7 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         # Superadmin account is approved upon signup
-        if form.email.data.lower() == "emotionappmoodtrack@gmail.com":
+        if form.email.data.lower() == "emotionapp2022@gmail.com":
             user = User(first_name=form.firstname.data, last_name=form.lastname.data, username=form.username.data, orcid=form.orcid.data, institution=form.institution.data, \
             email=form.email.data.lower(), reason=form.reason.data, approved=True)
         else:
