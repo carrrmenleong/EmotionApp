@@ -1,4 +1,4 @@
-# fly.toml file generated for emotionapp on 2022-10-13T16:46:08+08:00
+# fly.toml file generated for emotionapp on 2022-11-12T14:02:47+08:00
 
 app = "emotionapp"
 kill_signal = "SIGINT"
