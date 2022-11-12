@@ -119,7 +119,7 @@ def downloadFile(sessionid, participantid):
         else:
             result.append([postques[i-2],postans[i]])
 
-    return excel.make_response_from_array(result, "csv", file_name=f"participant{participant.id} result")
+    return excel.make_response_from_array(result, "xlsx", file_name=f"participant{participant.id} result")
 
 
 # Bulk download participant results (Questions)
@@ -157,7 +157,7 @@ def bulkDownloadAns(sessionid):
                 else:
                     result.append([postques[i-2],postans[i],participant.id])
 
-    return excel.make_response_from_array(result, "csv", file_name="Bulk Results (Questions)")
+    return excel.make_response_from_array(result, "xlsx", file_name="Bulk Results (Questions)")
 
 
 # Bulk download participant results (Emotions)
@@ -176,7 +176,7 @@ def bulkDownloadEmotions(sessionid):
     for response in responses:
         result.append([response.timestamp,response.emotion,response.intensity,response.participant_id])
 
-    return excel.make_response_from_array(result, "csv", file_name="Bulk Results (Emotions)")
+    return excel.make_response_from_array(result, "xlsx", file_name="Bulk Results (Emotions)")
 
 
 # Delete participant results (Emotions)
