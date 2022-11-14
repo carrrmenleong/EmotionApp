@@ -42,6 +42,17 @@ a {
     padding:1%;
 }
 
+.topnav p{
+    padding-left: 1%;
+    font-weight: bold;
+    font-size: 35px;
+    color: black;
+    padding: 1%;
+    float: right;
+    font-size: large;
+    cursor: default;
+}
+
 .topnav a.right {
     float: right;
     font-size: large;
