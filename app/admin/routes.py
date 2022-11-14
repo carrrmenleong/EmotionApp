@@ -211,7 +211,10 @@ def deleteResult():
 @bp.route('/aboutus', methods =['GET'])
 @login_required
 def aboutus():
-    return render_template("admin/aboutus.html", title='About Us', is_aboutus =True)
+    if current_user.email == "emotionapp2022@gmail.com":
+        return render_template("admin/aboutus.html", title='About Us', is_aboutus =True,is_superadmin=True)
+    else:
+        return render_template("admin/aboutus.html", title='About Us', is_aboutus =True)
 
 # View Users
 #----------------------------------------------------------
