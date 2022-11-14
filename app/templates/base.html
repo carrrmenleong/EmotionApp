@@ -11,77 +11,80 @@
     <!-- To use Bootstrap 5.2.0 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel = 'stylesheet' href = '../static/css/base.css'>
+    <link rel='stylesheet' href='../static/css/base.css'>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="../../static/images/favicon.png">
 
     <!-- To use Jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- navbar-->
     {% block navbar %}
     <div class="topnav">
-        <div id = "appName"> EmotionApp </div>
+        <div id="appName"> EmotionApp </div>
         <ul>
             {% if current_user.is_anonymous %}
-                <!-- Log In -->
-                {% if is_signin is not defined %}
-                <li><a href="{{ url_for('auth.login') }}" class = 'right'>Log In</a></li>
-                {% else %}
-                <li><a href="{{ url_for('auth.login') }}" class = 'rightActive'>Log In</a></li>
-                {% endif %}
-
-                <!-- Sign Up-->
-                {% if is_signup is not defined %}
-                <li><a href="{{ url_for('auth.signup') }}" class = 'right' >Sign Up</a></li>
-                {% else %}
-                <li><a href="{{ url_for('auth.signup') }}" class = 'rightActive' >Sign Up</a></li>
-                {% endif%}
+            <!-- Log In -->
+            {% if is_signin is not defined %}
+            <li><a href="{{ url_for('auth.login') }}" class='right'>Log In</a></li>
             {% else %}
-                <li><a href="#" class = 'right'>{{ current_user.username }}</a></li>
-                <li><a href="{{ url_for('auth.logout') }}" class = 'right'>Log Out</a></li>
-                
-                <!-- About us -->
-                {% if is_aboutus is defined %}
-                <li><a href="{{url_for('admin.aboutus')}}" class ="leftActive" >About Us</a></li>
-                {% else %}
-                <li><a href="{{url_for('admin.aboutus')}}" class ="left" >About Us</a></li>
-                {% endif %}
+            <li><a href="{{ url_for('auth.login') }}" class='rightActive'>Log In</a></li>
+            {% endif %}
 
-                <!-- Create Session for admin / View Users for superadmin-->
-                {% if is_superadmin is defined %} 
-                    {% if is_viewuser is defined %} 
-                    <li><a href="{{url_for('admin.viewusers')}}" class ="leftActive" >View Users</a></li>
-                    {% else %}
-                    <li><a href="{{url_for('admin.viewusers')}}" class ="left" >View Users</a></li>
-                    {% endif %}
-                {% else %}
-                    {% if is_create is defined %}
-                    <li><a href="{{url_for('admin.createsession')}}" class = 'leftActive'>Create Session</a></li>
-                    {% else %}
-                    <li><a href="{{url_for('admin.createsession')}}" class = 'left'>Create Session</a></li>
-                    {% endif %}
-                {% endif %}
-                
-                <!-- Sign Up Request for superadmin only -->
-                {% if is_superadmin is defined %}
-                    {% if is_signupreq is defined %}
-                    <li><a href="{{url_for('admin.signupreq')}}" class ="leftActive" >Sign Up Requests</a></li>
-                    {% else %}
-                    <li><a href="{{url_for('admin.signupreq')}}" class ="left" >Sign Up Requests</a></li>
-                    {% endif %}
-                {% endif %}
+            <!-- Sign Up-->
+            {% if is_signup is not defined %}
+            <li><a href="{{ url_for('auth.signup') }}" class='right'>Sign Up</a></li>
+            {% else %}
+            <li><a href="{{ url_for('auth.signup') }}" class='rightActive'>Sign Up</a></li>
+            {% endif%}
+            {% else %}
+            <li>
+                <p class='right'>{{ current_user.username }}</p>
+            </li>
+            <li><a href="{{ url_for('auth.logout') }}" class='right'>Log Out</a></li>
 
-                <!-- View Session(s)-->
-                {% if is_view is defined %}
-                <li><a href="{{url_for('admin.viewsessions')}}" class = 'leftActive'>View Sessions</a></li>
-                {% else %}
-                <li><a href="{{url_for('admin.viewsessions')}}" class ="left" >View Sessions</a></li>
-                {% endif %}
+            <!-- About us -->
+            {% if is_aboutus is defined %}
+            <li><a href="{{url_for('admin.aboutus')}}" class="leftActive">About Us</a></li>
+            {% else %}
+            <li><a href="{{url_for('admin.aboutus')}}" class="left">About Us</a></li>
+            {% endif %}
+
+            <!-- Create Session for admin / View Users for superadmin-->
+            {% if is_superadmin is defined %}
+            {% if is_viewuser is defined %}
+            <li><a href="{{url_for('admin.viewusers')}}" class="leftActive">View Users</a></li>
+            {% else %}
+            <li><a href="{{url_for('admin.viewusers')}}" class="left">View Users</a></li>
+            {% endif %}
+            {% else %}
+            {% if is_create is defined %}
+            <li><a href="{{url_for('admin.createsession')}}" class='leftActive'>Create Session</a></li>
+            {% else %}
+            <li><a href="{{url_for('admin.createsession')}}" class='left'>Create Session</a></li>
+            {% endif %}
+            {% endif %}
+
+            <!-- Sign Up Request for superadmin only -->
+            {% if is_superadmin is defined %}
+            {% if is_signupreq is defined %}
+            <li><a href="{{url_for('admin.signupreq')}}" class="leftActive">Sign Up Requests</a></li>
+            {% else %}
+            <li><a href="{{url_for('admin.signupreq')}}" class="left">Sign Up Requests</a></li>
+            {% endif %}
+            {% endif %}
+
+            <!-- View Session(s)-->
+            {% if is_view is defined %}
+            <li><a href="{{url_for('admin.viewsessions')}}" class='leftActive'>View Sessions</a></li>
+            {% else %}
+            <li><a href="{{url_for('admin.viewsessions')}}" class="left">View Sessions</a></li>
+            {% endif %}
             {% endif %}
 
         </ul>
@@ -91,7 +94,9 @@
     {% if messages %}
     <ul>
         {% for message in messages %}
-        <div class = 'flash'><li>{{ message }}</li></div>
+        <div class='flash'>
+            <li>{{ message }}</li>
+        </div>
         {% endfor %}
     </ul>
     {% endif %}
