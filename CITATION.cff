@@ -1,0 +1,20 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Fraschini
+    given-names: Nicola
+    orcid: https://orcid.org/0000-0002-9353-6319
+  - family-names: Sampson
+    given-names: Richard J.
+    orcid: https://orcid.org/0000-0002-9068-317X
+  - family-names: Leong
+    given-names: Carmen
+  - family-names: Tan
+    given-names: Mandeal
+  - family-names: Goh
+    given-names: Wai Yee
+  - family-names: O'Connor
+    given-names: Bryce
+title: EmotionApp: First Release
+version: v1.0.0
+date-released: 2022-11-24
