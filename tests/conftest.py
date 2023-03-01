@@ -3,6 +3,7 @@ from app import create_app, db
 from app.models import User, Session, Participant, Response
 from datetime import datetime
 import json
+from flask import current_app
 
 
 @pytest.fixture(scope='module')
@@ -69,7 +70,7 @@ def init_database(test_client):
                 username = 'Superadmin',
                 orcid = 'H1234',
                 institution = 'UWA',
-                email = 'emotionapp2022@gmail.com',
+                email = current_app.config['MAIL_USERNAME'],
                 reason = "dummy reasons",
                 approved = True)
     user3.set_password('1234')
@@ -198,7 +199,7 @@ def login_default_user(test_client):
 @pytest.fixture(scope='function')
 def login_superadmin(test_client):
     test_client.post('/login',
-                     data=dict(email='emotionapp2022@gmail.com', password='1234'),
+                     data=dict(email=current_app.config['MAIL_USERNAME'], password='1234'),
                      follow_redirects=True)
 
     yield  # this is where the testing happens!
