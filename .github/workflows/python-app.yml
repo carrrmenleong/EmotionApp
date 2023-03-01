@@ -38,3 +38,6 @@ jobs:
     - name: Test with pytest
       run: |
         python -m pytest -v --disable-warnings --cov=app --cov-report html
+      env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+
