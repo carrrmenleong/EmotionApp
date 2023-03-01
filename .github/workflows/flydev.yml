@@ -1,4 +1,4 @@
-name: Fly Deploy
+name: Fly Deploy (Dev)
 on:
   push:
     branches:
@@ -14,3 +14,4 @@ jobs:
       - run: flyctl deploy --config ./fly_dev.toml --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
