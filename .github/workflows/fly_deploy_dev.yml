@@ -1,4 +1,7 @@
 name: Fly Deploy (Dev)
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  MAIL_USERNAME: 'emotionappdev2022@gmail.com'
 on:
   push:
     branches:
@@ -9,11 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: development
     steps:
+      - name: Print name
+        run: echo "Hello $MAIL_USERNAME"
       - uses: actions/checkout@v3
-        with: 
-          ref: development
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --config ./fly_dev.toml --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          MAIL_USERNAME: $ emotionappdev2022@gmail.com
+      
+        
