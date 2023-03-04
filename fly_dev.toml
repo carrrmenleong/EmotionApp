@@ -10,6 +10,7 @@ processes = []
 
 [env]
   PORT = "8080"
+  MAIL_USERNAME = "emotionappdev2022@gmail.com"
 
 [experimental]
   auto_rollback = true
