@@ -16,6 +16,8 @@ jobs:
         run: echo "Hello $MAIL_USERNAME"
       - name: Print env
         run: printenv
+      - name: Run test
+        run: python test.py
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --config ./fly_dev.toml
