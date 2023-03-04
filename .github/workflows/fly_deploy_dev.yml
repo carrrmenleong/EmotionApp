@@ -22,4 +22,5 @@ jobs:
       - run: printenv
       - run: pip install python-dotenv
       - run: python test.py
+      - run: flyctl deploy --config ./fly_dev.toml
       
